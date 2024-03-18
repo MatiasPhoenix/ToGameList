@@ -1,4 +1,4 @@
-import { AggiungiElementoComponent } from './../aggiungi-elemento/aggiungi-elemento.component';
+import { AggiungiElementoComponent } from '../../aggiungi-elemento/aggiungi-elemento.component';
 import { Component } from '@angular/core';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 

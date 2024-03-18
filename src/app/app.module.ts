@@ -5,12 +5,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './Componenti/todo-list/todo-list.component';
-import { ProfiloComponent } from './Componenti/profilo/profilo.component';
-import { AttivitaGiornaliereComponent } from './Componenti/attivita-giornaliere/attivita-giornaliere.component';
-import { BarraInferioreComponent } from './Componenti/barra-inferiore/barra-inferiore.component';
-import { InGameComponent } from './Componenti/in-game/in-game.component';
-import { DashboardComponent } from './Componenti/dashboard/dashboard.component';
+import { TodoListComponent } from './Componenti/SezioniApp/todo-list/todo-list.component';
+import { ProfiloComponent } from './Componenti/SezioneGame/profilo/profilo.component';
+import { AttivitaGiornaliereComponent } from './Componenti/SezioniApp/attivita-giornaliere/attivita-giornaliere.component';
+import { BarraInferioreComponent } from './Componenti/SezioneGame/barra-inferiore/barra-inferiore.component';
+import { InGameComponent } from './Componenti/SezioneGame/in-game/in-game.component';
+import { DashboardComponent } from './Componenti/SezioniApp/dashboard/dashboard.component';
 import { AggiungiElementoComponent } from './Componenti/aggiungi-elemento/aggiungi-elemento.component';
 
 @NgModule({

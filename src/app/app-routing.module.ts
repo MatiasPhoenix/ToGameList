@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TodoListComponent } from './Componenti/todo-list/todo-list.component';
-import { AttivitaGiornaliereComponent } from './Componenti/attivita-giornaliere/attivita-giornaliere.component';
-import { ProfiloComponent } from './Componenti/profilo/profilo.component';
-import { DashboardComponent } from './Componenti/dashboard/dashboard.component';
+import { TodoListComponent } from './Componenti/SezioniApp/todo-list/todo-list.component';
+import { AttivitaGiornaliereComponent } from './Componenti/SezioniApp/attivita-giornaliere/attivita-giornaliere.component';
+import { ProfiloComponent } from './Componenti/SezioneGame/profilo/profilo.component';
+import { DashboardComponent } from './Componenti/SezioniApp/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},

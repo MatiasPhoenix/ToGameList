@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { IToDoItem } from '../../../Models/i-to-do-item';
 import Swal from 'sweetalert2';
-import { IToDoItem } from '../../Models/i-to-do-item';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  selector: 'app-todo-list',
+  templateUrl: './todo-list.component.html',
+  styleUrl: './todo-list.component.scss'
 })
-export class DashboardComponent {
+export class TodoListComponent {
+
 
   toDoList: IToDoItem[] = [];
 
@@ -37,4 +38,5 @@ export class DashboardComponent {
       }
       });
     }
+
 }
