@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { AttivitaGiornaliereComponent } from './Componenti/attivita-giornaliere/
 import { BarraInferioreComponent } from './Componenti/barra-inferiore/barra-inferiore.component';
 import { InGameComponent } from './Componenti/in-game/in-game.component';
 import { DashboardComponent } from './Componenti/dashboard/dashboard.component';
+import { AggiungiElementoComponent } from './Componenti/aggiungi-elemento/aggiungi-elemento.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,13 @@ import { DashboardComponent } from './Componenti/dashboard/dashboard.component';
     BarraInferioreComponent,
     InGameComponent,
     DashboardComponent,
+    AggiungiElementoComponent,
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [
     provideClientHydration()
