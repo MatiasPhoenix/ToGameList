@@ -12,6 +12,8 @@ import { BarraInferioreComponent } from './Componenti/SezioneGame/barra-inferior
 import { InGameComponent } from './Componenti/SezioneGame/in-game/in-game.component';
 import { DashboardComponent } from './Componenti/SezioniApp/dashboard/dashboard.component';
 import { AggiungiElementoComponent } from './Componenti/aggiungi-elemento/aggiungi-elemento.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { AggiungiElementoComponent } from './Componenti/aggiungi-elemento/aggiun
     BrowserModule,
     AppRoutingModule,
     SweetAlert2Module.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration()
