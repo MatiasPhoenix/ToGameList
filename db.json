@@ -4,6 +4,21 @@
       "id": 1,
       "task": "prova 2",
       "completed": false
+    },
+    {
+      "id": 2,
+      "task": "Scriviamo testo",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "task": "me-auto",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "task": "io hacker",
+      "completed": false
     }
   ]
 }

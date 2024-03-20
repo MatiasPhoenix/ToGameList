@@ -15,6 +15,7 @@ import { AggiungiElementoComponent } from './Componenti/aggiungi-elemento/aggiun
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     InGameComponent,
     DashboardComponent,
     AggiungiElementoComponent,
+
 
   ],
   imports: [
