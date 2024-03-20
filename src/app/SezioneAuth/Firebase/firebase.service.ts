@@ -26,7 +26,11 @@ export class FirebaseService {
       return this.http.delete(`${url}/${id}.json`)
     }
 
+
 //Sezione Attività giornaliere
+attivitaFinitaFirebase(url: string, id: string) {
+  return this.http.patch(`${url}/${id}.json`, { completed: true });
+}
 
 
 }

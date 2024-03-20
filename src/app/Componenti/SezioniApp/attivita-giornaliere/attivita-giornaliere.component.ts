@@ -86,11 +86,11 @@ export class AttivitaGiornaliereComponent {
 
   //Metodo complete Attività giornaliere (non cancella, considera completo l'incarico)
   completaTodo(id : number){
-    console.log('Bravo! chai completato l\'attività ' + id + '!');
+    console.log('Bravo! chai completato l\'attività ' + id + 'di oggi!');
     // this.cancellaElemento(id);
   }
 
- //Metodo per l'utente, SweetAlert che permette aggiungere elemento ad Attività giornaliere
+  //Metodo per l'utente, SweetAlert che permette aggiungere elemento ad Attività giornaliere
   openSwal() {
     Swal.fire({
       title: 'Aggiungi elemento',
@@ -119,5 +119,35 @@ export class AttivitaGiornaliereComponent {
       }
       });
   }
+
+  attivitaFinita(completed: boolean) {
+    this.firebase.caricaTodoList(this.url + '.json')
+      .subscribe((data: any) => {
+        if (data) {
+          const keys = Object.keys(data);
+          for (const key of keys) {
+            const item = data[key];
+            if (!item.completed) {
+              console.log('PRIMO stato booleano ' + item.completed);
+              this.firebase.attivitaFinitaFirebase(this.url, key)
+                .subscribe(() => {
+                  console.log('Stato completato aggiornato con successo');
+                }, (error) => {
+                  console.error('Errore durante l\'aggiornamento dello stato completato:', error);
+                });
+              break;
+            } else {
+              console.log('Hai già completato questa attività ->' + item.completed);
+            }
+          }
+        } else {
+          console.error('Errore: dati non ricevuti correttamente dal database.');
+        }
+      }, (error) => {
+        console.error('Errore durante il caricamento dei dati dal database:', error);
+      });
+  }
+
+
 
 }
