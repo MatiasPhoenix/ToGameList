@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ToGameList": {
+    "togamelist": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -40,7 +40,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -75,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ToGameList:build:production"
+              "buildTarget": "togamelist:build:production"
             },
             "development": {
-              "buildTarget": "ToGameList:build:development"
+              "buildTarget": "togamelist:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ToGameList:build"
+            "buildTarget": "togamelist:build"
           }
         },
         "test": {
@@ -107,6 +109,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "togamelist:build:production",
+              "serveTarget": "togamelist:serve:production"
+            },
+            "development": {
+              "buildTarget": "togamelist:build:development",
+              "serveTarget": "togamelist:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

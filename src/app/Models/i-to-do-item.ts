@@ -1,5 +1,5 @@
 export interface IToDoItem {
-  id        : number;
+  id        : string;
   task      : string;
   completed : boolean;
   contatore? : number;

@@ -54,7 +54,7 @@ export class TodoListComponent implements OnInit {
   }
 
   //Metodo delete dal DB per todoList (solo delete, non completa l'incarico)
-  cancellaElemento(id: number) {
+  cancellaElemento(id: string) {
     const itemId = id;
     this.firebase.caricaTodoList(this.url+'.json')
       .subscribe((data: any) => {
@@ -87,7 +87,7 @@ export class TodoListComponent implements OnInit {
   }
 
   //Metodo delete/complete todoList (cancella DB e considera completo l'incarico)
-  completaTodo(id : number){
+  completaTodo(id : string){
     console.log('Bravo! chai completato la todoList ' + id + '!');
     this.cancellaElemento(id);
   }
@@ -105,7 +105,7 @@ export class TodoListComponent implements OnInit {
 
       preConfirm: (val) => {
           const newToDoItem: IToDoItem = {
-          id         : this.toDoList.length + 1,
+          id         : this.generateRandomId(),
           task       : val,
           completed  : false
         };
@@ -121,5 +121,15 @@ export class TodoListComponent implements OnInit {
       }
       });
   }
+
+  //Metodo che crea id alfanumerico random
+  generateRandomId(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomId = '';
+    for (let i = 0; i < 4; i++) {
+      randomId += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return randomId;
+   }
 
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "togamelist-e79bb": {
+      "hosting": {
+        "togamelist": [
+          "togamelist-e79bb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "togamelist-e79bb"
+  }
+}

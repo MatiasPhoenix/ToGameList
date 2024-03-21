@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ToGameList": "node dist/to-game-list/server/server.mjs"
+    "serve:ssr:togamelist": "node dist/to-game-list/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
     "@angular/core": "^17.0.0",
+    "@angular/fire": "^17.0.1",
     "@angular/forms": "^17.0.0",
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
@@ -25,6 +26,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "express": "^4.18.2",
+    "firebase": "^10.9.0",
     "lowdb": "^7.0.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.6",
