@@ -18,7 +18,9 @@ export class AttivitaGiornaliereComponent {
     private firebase  : FirebaseService,
     ) {}
 
-  dataUpdate!  : string
+  newData      : number = 0;
+  dataUpdate!  : number
+  idDB!        : string
   currentUser! : IUser
   newAttivita! : IToDoItem
   attivitaList : IToDoItem[] = [];
@@ -26,17 +28,17 @@ export class AttivitaGiornaliereComponent {
   urlUpdate    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/updateGiornaliero'
 
   ngOnInit() {
-  this.getTodoList()
-  }
-
-  dataUpgrade(data : string){
-
+    this.getTodoList()
+    this.testGiorno();
   }
 
 
+
+//Sezione metodi dedicati alle attività giornaliere
+//metodi -> modifica, aggiorna, cancella e DB
 
   //Metodo crea oggetto Attività giornaliere con POST -> DB
-  todoFactory() {
+  todoFactory(){
    this.firebase.aggiungiTodoList(
     this.url + '.json',
     {
@@ -61,7 +63,7 @@ export class AttivitaGiornaliereComponent {
   }
 
   //Metodo delete dal DB per Attività giornaliere (solo delete, non completa l'incarico)
-  cancellaElemento(id: string) {
+  cancellaElemento(id: string){
     const itemId = id;
     this.firebase.caricaTodoList(this.url+'.json')
       .subscribe((data: any) => {
@@ -124,7 +126,7 @@ export class AttivitaGiornaliereComponent {
   }
 
   //Metodo che completa(o ripristina) l'attività del giorno, senza cancellarla
-  attivitaFinita(id: string) {
+  attivitaFinita(id: string){
     this.firebase.caricaTodoList(this.url + '.json')
       .subscribe((data: any) => {
 
@@ -166,7 +168,7 @@ export class AttivitaGiornaliereComponent {
   }
 
   //Metodo generatore casuale di id
-  generateRandomId(): string {
+  generateRandomId(): string{
    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    let randomId = '';
    for (let i = 0; i < 4; i++) {
@@ -177,7 +179,117 @@ export class AttivitaGiornaliereComponent {
 
   //Piccolo metodo che ricarica la pagina
   //Utile per "aggiornamenti di stato" rapidi
-  reloadPage() {
+  reloadPage(){
     window.location.reload();
   }
+
+
+//Sezione con metodi per verifiche giornaliere,
+//ripristino attività e confronto dati DB
+
+  //Metodo che crea oggetto con una data in DB
+  //da usare nella creazione del profilo SOLO UNA VOLTA
+  dataPost(){
+    let oggi = this.dataGiornaliera()
+    this.firebase.dataPost(this.urlUpdate + '.json', oggi)
+      .subscribe(data => {})
+  }
+
+  //Metodo che prende il giorno sotto forma di numero dal DB
+  //Serve per i confronti e per riprisitinare ogni giorno le attività giornaliere
+  //Modifica variabile dataUpdate--
+  localDataGet(){
+    this.dataUpdate = 0;
+
+    this.firebase.dataGet(this.urlUpdate + '.json')
+      .subscribe((data: any) => {
+        const values = Object.values(data);
+
+      if (values.length > 0) {
+        const firstValue = values[0];
+
+        if (typeof firstValue === 'number') {
+          let testGiorno = this.dataGiornaliera()
+
+          if (testGiorno === firstValue){
+            this.dataUpdate = firstValue;
+
+        }else{
+        }
+        } else {
+          console.error('Il primo valore dell\'array non è di tipo number:', firstValue);
+        }
+      } else {
+        console.error('Nessun valore trovato nell\'oggetto restituito:', data);
+      }
+      });
+  }
+
+  //Metodo che stabilisce che giorno è, sotto forma di numero
+  dataGiornaliera(){
+    const data = new Date;
+    return data.getDay()
+  }
+
+  //Metodo che confronta le date(numeri) per verificare il passare dei giorni
+  testGiorno(){
+    this.newData = this.dataGiornaliera();
+    this.localDataGet();
+    this.idDBGiornaliero()
+    console.log('data -----> ' + this.dataUpdate);
+    console.log('data -----> ' + this.newData);
+
+    if (this.dataUpdate !== this.newData){
+
+      this.dataUpdate = this.newData
+      this.ripristinoAttivita();
+      this.dataPatchLocale()
+      console.log('Il giorno era diverso, oggi è -> ' + this.dataUpdate);
+      console.log('-e sono state ripristinate tutte le attività-' );
+    }else{
+      console.log(this.newData + " " + this.dataUpdate);
+
+      console.log('-Adesso è lo stesso giorno ovunque-' );
+      console.log('-e sono state ripristinate tutte le attività-' );
+
+    }
+  }
+
+  //Metodo che ripristina tutte le attività quando cambia il giorno
+  ripristinoAttivita(){
+    for (let i = 0; i < this.attivitaList.length; i++) {
+      let att = this.attivitaList[i];
+      if (att.completed === true) {
+        this.attivitaFinita(att.id);
+        console.log(att.id + ' modificato');
+      }else{
+      console.log("no problemo jefe!");
+      }
+    }
+  }
+
+  //Metodo che modifica data in DB
+  dataPatchLocale(){
+    const newValue = this.dataGiornaliera();
+
+    this.firebase.dataPatch(this.urlUpdate, this.idDB, newValue)
+      .subscribe(() => {
+        console.log('Campo aggiornato con successo.');
+      }, error => {
+        console.error('Errore durante l\'aggiornamento del campo:', error);
+      });
+  }
+
+  //Metodo che prende id dall'oggetto in DB
+  //così da modificarlo facilmente
+  idDBGiornaliero(){
+    this.firebase.dataGet(this.urlUpdate + '.json')
+      .subscribe((data) => {
+        const chiave = Object.keys(data)[0];
+        this.idDB = chiave;
+        console.log('Chiave dell\'oggetto del DB ->', chiave);
+      })
+  }
+
+
 }

@@ -1,11 +1,19 @@
 
 <div class="">
-<div class="bg-dark py-1 text-center text-danger">
+<div class="contenitorePG bg-dark py-1 text-center text-danger" [style.padding-bottom.px]="marginSizeTop">
   <p>Riempitore di spazio bla bla bla</p>
   <p>Riempitore di spazio bla bla bla</p>
   <p>Riempitore di spazio bla bla bla</p>
-
+  <div class="cuboPg bg-black" [style.margin-left.px]="marginSize" >o.o</div>
 
 
 </div>
+
+</div>
+<div class="text-center mt-5">
+
+  <button (click)="moveSx()"><-</button>
+  <button (click)="moveUp()">^</button>
+  <button (click)="moveDown()">v</button>
+  <button (click)="moveDx()">-></button>
 </div>

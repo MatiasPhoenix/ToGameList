@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+interface DataToUpdate {
+  [key: string]: any;
+}
 @Injectable({
   providedIn: 'root'
 })
+
 export class FirebaseService {
 
   constructor(
     private http  : HttpClient
     ){}
+
 
 //Sezione ToDo-List
 
@@ -43,7 +48,7 @@ export class FirebaseService {
 //Sezione aggiornamento del giorno
 
     //Aggiunge elemento Data a DB
-    dataPost(url: string, data: any) {
+    dataPost(url: string, data: number) {
       return this.http.post(url, data);
     }
 
@@ -53,9 +58,12 @@ export class FirebaseService {
     }
 
     //Modifica elemento Data dal DB
-    datePatch(url: string, id: string, data: string) {
-      return this.http.patch(`${url}/${id}.json`, data);
+    dataPatch(url: string, itemId: string, newValue: number) {
+      const dataToUpdate: DataToUpdate = {};
+      dataToUpdate[itemId] = newValue;
+      return this.http.patch(`${url}.json`, dataToUpdate);
     }
+
 
 
 
