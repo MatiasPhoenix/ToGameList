@@ -141,7 +141,7 @@ export class AttivitaGiornaliereComponent {
               if (!item.completed) {
                 this.firebase.attivitaFinitaFirebase(this.url, key)
                   .subscribe(() => {
-                    this.reloadPage()
+                    this.getTodoList()
                     console.log('Stato completato aggiornato con successo per il task:', item.task);
                   }, (error) => {
                     console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
@@ -149,7 +149,7 @@ export class AttivitaGiornaliereComponent {
               } else {
                 this.firebase.ripristinaAttivitaFirebase(this.url, key)
                   .subscribe(() => {
-                    this.reloadPage()
+                    this.getTodoList()
                     console.log('Stato completato aggiornato con successo per il task:', item.task);
                   }, (error) => {
                     console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
