@@ -14,29 +14,29 @@
   </div>
 
 
-  <div class="dashboard2 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="attivitaGiornaliere">
-
-    <span class="fw-bold titoloSezione">
-      SEZIONE ATTIVITA' GIORNALIERE
-    </span>
-
-    <span *ngFor="let numero of [numeroAbitudini]; index as i">
-      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
-        elementi nella todo list, non dimenticarlo!</span>
-    </span>
-
-  </div>
-
-
   <div class="dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="abitudini">
 
     <span class="fw-bold titoloSezione">
       SEZIONE ABITUDINI
     </span>
 
+    <span *ngFor="let numero of [numeroAbitudini]; index as i">
+      <span class="fst-italic sezioneTesto">Ricordati delle <span class="fw-bold">{{numero}}</span>
+        abitudini che vuoi nelle tue giornate!</span>
+    </span>
+
+  </div>
+
+
+  <div class="dashboard2 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="attivitaGiornaliere">
+
+    <span class="fw-bold titoloSezione">
+      SEZIONE ATTIVITA' GIORNALIERE
+    </span>
+
     <span *ngFor="let numero of [numeroAttGiornaliere]; index as i">
-      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
-        elementi nella todo list, non dimenticarlo!</span>
+      <span class="fst-italic sezioneTesto">Oggi nuovo giorno! Ancora <span class="fw-bold">{{numero}}</span>
+        attività da svolgere, metticela tutta!</span>
     </span>
 
   </div>
