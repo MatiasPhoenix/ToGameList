@@ -19,10 +19,10 @@ export class AttivitaGiornaliereComponent {
     ) {}
 
   newData      : number = 0;
-  dataUpdate!  : number
-  idDB!        : string
-  currentUser! : IUser
-  newAttivita! : IToDoItem
+  dataUpdate!  : number;
+  idDB!        : string;
+  currentUser! : IUser;
+  newAttivita! : IToDoItem;
   attivitaList : IToDoItem[] = [];
   url          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/attivitaGiornaliere'
   urlUpdate    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/updateGiornaliero'

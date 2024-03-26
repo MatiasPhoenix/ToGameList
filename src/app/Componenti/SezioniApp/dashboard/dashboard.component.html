@@ -1,8 +1,39 @@
 <div class="container mt-5 d-flex flex-column justify-content-center align-items-center text-center">
 
-  <div class="dashboard1 mt-5">sezione todolist</div>
-  <div class="dashboard2 mt-5">sezione atti giornaliere</div>
-  <div class="dashboard3 mt-5">sezione abitudini</div>
+  <div class="dashboard1 mt-5 d-flex flex-column py-3" >
+
+    <span class="fw-bold">SEZIONE TODOLIST</span>
+
+    <span *ngFor="let numero of [numeroTodo]; index as i">
+      <span class="fst-italic">Ci sono ancora {{numero}}
+        elementi nella todo list, non dimenticarlo!</span>
+    </span>
+
+  </div>
+
+
+  <div class="dashboard2 mt-5 d-flex flex-column py-3">
+
+    <span class="fw-bold">SEZIONE ATTIVITA' GIORNALIERE</span>
+
+    <span *ngFor="let numero of [numeroAbitudini]; index as i">
+      <span class="fst-italic">Ci sono ancora {{numero}}
+        elementi nella todo list, non dimenticarlo!</span>
+    </span>
+
+  </div>
+
+
+  <div class="dashboard3 mt-5 d-flex flex-column py-3">
+
+    <span class="fw-bold">SEZIONE ABITUDINI</span>
+
+    <span *ngFor="let numero of [numeroAttGrionaliere]; index as i">
+      <span class="fst-italic">Ci sono ancora {{numero}}
+        elementi nella todo list, non dimenticarlo!</span>
+    </span>
+
+  </div>
 
 </div>
 
