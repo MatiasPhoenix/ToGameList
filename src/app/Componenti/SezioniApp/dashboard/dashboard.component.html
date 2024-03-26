@@ -1,35 +1,41 @@
 <div class="container mt-5 d-flex flex-column justify-content-center align-items-center text-center">
 
-  <div class="dashboard1 mt-5 d-flex flex-column py-3" >
+  <div class="dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="todoList">
 
-    <span class="fw-bold">SEZIONE TODOLIST</span>
+    <span class="fw-bold titoloSezione">
+      SEZIONE TODOLIST
+    </span>
 
     <span *ngFor="let numero of [numeroTodo]; index as i">
-      <span class="fst-italic">Ci sono ancora {{numero}}
+      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
         elementi nella todo list, non dimenticarlo!</span>
     </span>
 
   </div>
 
 
-  <div class="dashboard2 mt-5 d-flex flex-column py-3">
+  <div class="dashboard2 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="attivitaGiornaliere">
 
-    <span class="fw-bold">SEZIONE ATTIVITA' GIORNALIERE</span>
+    <span class="fw-bold titoloSezione">
+      SEZIONE ATTIVITA' GIORNALIERE
+    </span>
 
     <span *ngFor="let numero of [numeroAbitudini]; index as i">
-      <span class="fst-italic">Ci sono ancora {{numero}}
+      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
         elementi nella todo list, non dimenticarlo!</span>
     </span>
 
   </div>
 
 
-  <div class="dashboard3 mt-5 d-flex flex-column py-3">
+  <div class="dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3" routerLink="abitudini">
 
-    <span class="fw-bold">SEZIONE ABITUDINI</span>
+    <span class="fw-bold titoloSezione">
+      SEZIONE ABITUDINI
+    </span>
 
-    <span *ngFor="let numero of [numeroAttGrionaliere]; index as i">
-      <span class="fst-italic">Ci sono ancora {{numero}}
+    <span *ngFor="let numero of [numeroAttGiornaliere]; index as i">
+      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
         elementi nella todo list, non dimenticarlo!</span>
     </span>
 

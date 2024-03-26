@@ -25,19 +25,18 @@ export class DashboardComponent {
   arrayAbitudiniList    : IToDoItem[] = [];
   urlAbitudini          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/abitudini'
 
-  numeroAttGrionaliere! : number;
+  numeroAttGiornaliere! : number;
   arrayAttGiorList      : IToDoItem[] = [];
   urlAttiGiornaliere    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/attivitaGiornaliere'
 
 
   ngOnInit(){
     this.getListTodo()
-    this.getListAbitudini()
     this.getListAttGior()
-    console.log(this.arrayTodoList,this.arrayAttGiorList,this.arrayAbitudiniList);
-
+    this.getListAbitudini()
   }
 
+//Metodi che caricano su array locali, tutte le informazioni dei DB
   getListTodo(){
     this.firebase.caricaTodoList(this.urlTodoList+'.json')
       .subscribe((data:any) => {
@@ -59,7 +58,7 @@ export class DashboardComponent {
       .subscribe((data:any) => {
       this.arrayAttGiorList = Object.keys(data)
       .map((key)=> {return data[key]})
-      this.numeroAttGrionaliere = this.arrayAttGiorList.length;
+      this.numeroAttGiornaliere = this.arrayAttGiorList.length;
     })
   }
 }
