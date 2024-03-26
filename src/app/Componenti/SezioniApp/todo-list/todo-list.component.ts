@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 
 import Swal from 'sweetalert2';
 import { FactoryTarget } from '@angular/compiler';
+import { DoesZapCodeSpaceFlag } from 'v8';
 
 
 @Component({
@@ -131,5 +132,68 @@ export class TodoListComponent implements OnInit {
     }
     return randomId;
    }
+
+
+//Metodi per modificare testo del elemento
+   modificaAttivitaButton(id: string) {
+    Swal.fire({
+      title: 'Modifica questo elemento',
+      input: 'text',
+      inputPlaceholder: 'Modifica todo list',
+      showCancelButton: true,
+      confirmButtonText: 'Modifica',
+      cancelButtonText: 'Annulla',
+      showLoaderOnConfirm: true,
+
+      preConfirm: (val) => {
+        this.modificaAttivita(id, val)
+      }
+      }).then((result) => {
+
+      if (result.isConfirmed) {
+        console.log('Elemento aggiunto');
+      }
+      });
+  }
+  modificaAttivita(id: string, testo : string) {
+    this.firebase.caricaTodoList(this.url + '.json')
+      .subscribe((data: any) => {
+
+        if (data) {
+          const keys = Object.keys(data);
+          for (const key of keys) {
+            const item = data[key];
+
+            if (item.id === id) {
+              console.log('Messaggio -->', item.id);
+
+              if (!item.completed) {
+                this.firebase.aggiornaTodoList(this.url, key, item.task = testo)
+                  .subscribe(() => {
+                    this.getTodoList()
+                    console.log('Stato completato aggiornato con successo per il task:', item.task);
+                  }, (error) => {
+                    console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
+                  });
+              } else {
+                this.firebase.ripristinaAttivitaFirebase(this.url, key)
+                  .subscribe(() => {
+                    this.getTodoList()
+                    console.log('Stato completato aggiornato con successo per il task:', item.task);
+                  }, (error) => {
+                    console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
+                  });
+                console.log('Hai già completato questa attività per il task:', item.task);
+              }
+              break;
+            }
+          }
+        } else {
+          console.error('Errore: dati non ricevuti correttamente dal database.');
+        }
+      }, (error) => {
+        console.error('Errore durante il caricamento dei dati dal database:', error);
+      });
+  }
 
 }

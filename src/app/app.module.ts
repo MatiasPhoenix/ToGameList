@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { AbitudiniComponent } from './Componenti/SezioniApp/abitudini/abitudini.component';
 
 
 
@@ -31,6 +32,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
     InGameComponent,
     DashboardComponent,
     AggiungiElementoComponent,
+    AbitudiniComponent,
 
 
   ],

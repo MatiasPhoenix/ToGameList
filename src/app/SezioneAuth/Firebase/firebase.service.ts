@@ -64,7 +64,16 @@ export class FirebaseService {
       return this.http.patch(`${url}.json`, dataToUpdate);
     }
 
+//Sezione Abitudini
 
+    //Aggiorna abitudine
+    aggiornaAbitudine(url: string, id: string, numero: number){ {
+      return this.http.patch(`${url}/${id}.json`, { contatore: numero });
+    }}
+
+    aggiornaTodoList(url: string, id: string, testo: string){ {
+      return this.http.patch(`${url}/${id}.json`, { task: testo });
+    }}
 
 
 }

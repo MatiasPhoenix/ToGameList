@@ -1,17 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../SezioneAuth/Firebase/firebase.service';
+import { HttpClient } from '@angular/common/http';
 import { IUser } from '../../../Models/i-user';
 import { IToDoItem } from '../../../Models/i-to-do-item';
 import Swal from 'sweetalert2';
-
+import { log } from 'console';
 
 @Component({
-  selector: 'app-attivita-giornaliere',
-  templateUrl: './attivita-giornaliere.component.html',
-  styleUrl: './attivita-giornaliere.component.scss'
+  selector: 'app-abitudini',
+  templateUrl: './abitudini.component.html',
+  styleUrl: './abitudini.component.scss'
 })
-export class AttivitaGiornaliereComponent {
+export class AbitudiniComponent {
 
   constructor(
     private http      : HttpClient,
@@ -24,7 +24,7 @@ export class AttivitaGiornaliereComponent {
   currentUser! : IUser
   newAttivita! : IToDoItem
   attivitaList : IToDoItem[] = [];
-  url          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/attivitaGiornaliere'
+  url          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/abitudini'
   urlUpdate    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/updateGiornaliero'
 
   ngOnInit() {
@@ -110,7 +110,8 @@ export class AttivitaGiornaliereComponent {
           const newAttivitaTemp: IToDoItem = {
           id         : this.generateRandomId(),
           task       : val,
-          completed  : false
+          completed  : false,
+          contatore  : 0
         };
         this.newAttivita = newAttivitaTemp;
         this.attivitaList.push(this.newAttivita);
@@ -125,7 +126,7 @@ export class AttivitaGiornaliereComponent {
       });
   }
 
-  //Metodo che completa(o ripristina) l'attività del giorno, senza cancellarla
+  //Metodo che completa una volta l'abitidune, senza cancellarla, aggiungendo un +1 al contatore
   attivitaFinita(id: string){
     this.firebase.caricaTodoList(this.url + '.json')
       .subscribe((data: any) => {
@@ -139,7 +140,49 @@ export class AttivitaGiornaliereComponent {
               console.log('Messaggio -->', item.id);
 
               if (!item.completed) {
-                this.firebase.attivitaFinitaFirebase(this.url, key)
+                this.firebase.aggiornaAbitudine(this.url, key, item.contatore + 1)
+                  .subscribe(() => {
+                    this.getTodoList()
+                    console.log('Stato completato aggiornato con successo per il task:', item.task);
+                  }, (error) => {
+                    console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
+                  });
+              } else {
+                this.firebase.ripristinaAttivitaFirebase(this.url, key)
+                  .subscribe(() => {
+                    this.getTodoList()
+                    console.log('Stato completato aggiornato con successo per il task:', item.task);
+                  }, (error) => {
+                    console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
+                  });
+                console.log('Hai già completato questa attività per il task:', item.task);
+              }
+              break;
+            }
+          }
+        } else {
+          console.error('Errore: dati non ricevuti correttamente dal database.');
+        }
+      }, (error) => {
+        console.error('Errore durante il caricamento dei dati dal database:', error);
+      });
+  }
+
+  //Metodo che ripristina l'abitudine, senza cancellarla
+  ripristinaAbitudini(id: string){
+    this.firebase.caricaTodoList(this.url + '.json')
+      .subscribe((data: any) => {
+
+        if (data) {
+          const keys = Object.keys(data);
+          for (const key of keys) {
+            const item = data[key];
+
+            if (item.id === id) {
+              console.log('Messaggio -->', item.id);
+
+              if (!item.completed) {
+                this.firebase.aggiornaAbitudine(this.url, key, item.contatore = 0)
                   .subscribe(() => {
                     this.getTodoList()
                     console.log('Stato completato aggiornato con successo per il task:', item.task);
@@ -259,8 +302,8 @@ export class AttivitaGiornaliereComponent {
   ripristinoAttivita(){
     for (let i = 0; i < this.attivitaList.length; i++) {
       let att = this.attivitaList[i];
-      if (att.completed === true) {
-        this.attivitaFinita(att.id);
+      if (att.completed === false) {
+        this.ripristinaAbitudini(att.id);
         console.log(att.id + ' modificato');
       }else{
       console.log("no problemo jefe!");
@@ -291,7 +334,7 @@ export class AttivitaGiornaliereComponent {
       })
   }
 
-//Metodi per modificare testo del elemento
+  //Metodi per modificare testo del elemento
   modificaAttivitaButton(id: string) {
     Swal.fire({
       title: 'Modifica questo elemento',
@@ -324,7 +367,7 @@ export class AttivitaGiornaliereComponent {
             if (item.id === id) {
               console.log('Messaggio -->', item.id);
 
-              if (!item.completed || item.completed) {
+              if (!item.completed) {
                 this.firebase.aggiornaTodoList(this.url, key, item.task = testo)
                   .subscribe(() => {
                     this.getTodoList()
@@ -352,5 +395,6 @@ export class AttivitaGiornaliereComponent {
         console.error('Errore durante il caricamento dei dati dal database:', error);
       });
   }
+
 
 }
