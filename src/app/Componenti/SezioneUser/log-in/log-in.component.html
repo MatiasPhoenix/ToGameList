@@ -1,18 +1,27 @@
-<h2>Pagina di Login</h2>
-<form [formGroup]="userForm" class="container" (ngSubmit)="onSubmit(userForm)">
+ <div class="pagLogIn">
 
-  <div class="form-group mb-2" [ngClass]="{'has-error': userForm.get('email')?.invalid && userForm.get('email')?.touched}">
-    <label for="inputEmail">Email</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Scrivi tua email" formControlName="email">
-    <small id="emailHelp" class="form-text text-muted">Scrivi la tua email.</small>
-    <div class="alert alert-danger" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">Email non valida</div>
+  <h2 class="text-center mb-4">Login</h2>
+  <form [formGroup]="userForm" class="container login" (ngSubmit)="onSubmit(userForm)">
+
+    <div class="form-group mb-2" [ngClass]="{'has-error': userForm.get('email')?.invalid && userForm.get('email')?.touched}">
+      <label for="inputEmail">Email</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Scrivi tua email" formControlName="email">
+      <small id="emailHelp" class="form-text text-muted">Scrivi la tua email.</small>
+      <div class="alert alert-danger" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">Email non valida</div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="inputPassword">Password</label>
+      <input type="password" class="form-control" id="Password1" placeholder="Password" formControlName="password">
+    </div>
+
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary">Fai LogIn</button>
+    </div>
+  </form>
+
+  <div class="text-center mt-3">
+    <button type="submit" [routerLink]="'/register'" class="btn btn-primary">Registrati</button>
   </div>
 
-  <div class="form-group mb-2">
-    <label for="inputPassword">Password</label>
-    <input type="password" class="form-control" id="Password1" placeholder="Password" formControlName="password">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+</div>

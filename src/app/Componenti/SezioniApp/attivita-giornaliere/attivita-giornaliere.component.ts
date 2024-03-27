@@ -183,7 +183,6 @@ export class AttivitaGiornaliereComponent implements OnInit {
     window.location.reload();
   }
 
-
 //Sezione con metodi per verifiche giornaliere,
 //ripristino attività e confronto dati DB
 

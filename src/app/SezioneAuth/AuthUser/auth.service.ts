@@ -24,12 +24,13 @@ export class AuthService {
 
   createUser(email : string, id : string, token: string, expirationDate: Date){
     this.user = new User(email, id, token, expirationDate);
-    this.isLoggedIn = true;
+    return this.isLoggedIn = true;
   }
 
   signUp(email: string, password: string){
     return this.http.post(this.urlSignUp, {email: email, password: password, returnSecureToken: true});
   }
+
   signIn(email: string, password: string){
     return this.http.post(this.urlSignIn, {email: email, password: password, returnSecureToken: true});
   }
@@ -37,5 +38,13 @@ export class AuthService {
   logOut(){
     this.isLoggedIn = false;
     localStorage.removeItem('user');
+  }
+
+  userLoggedIn(): boolean {
+    if (this.isLoggedIn === true){
+      return true;
+    }else {
+      return false;
+    }
   }
 }

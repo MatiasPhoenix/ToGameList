@@ -25,4 +25,8 @@ export class AppComponent {
   goLogOut(){
     this.authservice.logOut();
   }
+
+  isLoggedIn(){
+    return this.authservice.userLoggedIn()
+  }
 }

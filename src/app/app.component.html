@@ -1,6 +1,6 @@
 <div class="m-1">
 
-  <div class="game">
+  <div *ngIf="isLoggedIn()" class="game">
     <app-in-game>
     </app-in-game>
   </div>
@@ -10,9 +10,9 @@
     </router-outlet>
   </div>
 
-  <div class="footer bg-primary">
+  <div *ngIf="isLoggedIn()" class="footer bg-primary">
     <app-barra-inferiore>
     </app-barra-inferiore>
   </div>
-<button (click)="goLogOut()">LogOut</button>
+
 </div>
