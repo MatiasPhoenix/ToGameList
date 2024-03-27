@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../AuthUser/auth.service';
 
 interface DataToUpdate {
   [key: string]: any;
@@ -11,7 +12,8 @@ interface DataToUpdate {
 export class FirebaseService {
 
   constructor(
-    private http  : HttpClient
+    private http              : HttpClient,
+    private authService  : AuthService
     ){}
 
 
@@ -19,60 +21,61 @@ export class FirebaseService {
 
     //Aggiunge elemento todoList
     aggiungiTodoList(url : string, body : {}){
-      return this.http.post(url, body);
+      return this.http.post(`${url}?auth=${this.authService.user.token}`, body);
     }
 
     //Carica elementi todoList dal DB
     caricaTodoList(url : string){
-      return this.http.get(url);
+      return this.http.get(`${url}?auth=${this.authService.user.token}`);
     }
 
     //Cancella elemento todoList
     cancellaTodoList(url : string, id : string){
-      return this.http.delete(`${url}/${id}.json`)
+      return this.http.delete(`${url}/${id}.json?auth=${this.authService.user.token}`);
     }
 
 
 //Sezione Attività giornaliere
 
-    //Completa attività giornaliera
-    attivitaFinitaFirebase(url: string, id: string){ {
-      return this.http.patch(`${url}/${id}.json`, { completed: true });
-    }}
+    // Completa attività giornaliera
+attivitaFinitaFirebase(url: string, id: string) {
+  return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, { completed: true });
+}
 
-    //Ripristina attività giornaliera
-    ripristinaAttivitaFirebase(url: string, id: string){ {
-      return this.http.patch(`${url}/${id}.json`, { completed: false });
-    }}
+// Ripristina attività giornaliera
+ripristinaAttivitaFirebase(url: string, id: string) {
+  return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, { completed: false });
+}
+
 
 //Sezione aggiornamento del giorno
 
     //Aggiunge elemento Data a DB
     dataPost(url: string, data: number) {
-      return this.http.post(url, data);
+      return this.http.post(`${url}.json?auth=${this.authService.user.token}`, data);
     }
 
     //Carica elemento Data dal DB
     dataGet(url : string){
-      return this.http.get(url);
+      return this.http.get(`${url}.json?auth=${this.authService.user.token}`);
     }
 
     //Modifica elemento Data dal DB
     dataPatch(url: string, itemId: string, newValue: number) {
       const dataToUpdate: DataToUpdate = {};
       dataToUpdate[itemId] = newValue;
-      return this.http.patch(`${url}.json`, dataToUpdate);
+      return this.http.patch(`${url}.json?auth=${this.authService.user.token}`, dataToUpdate);
     }
 
 //Sezione Abitudini
 
     //Aggiorna abitudine
     aggiornaAbitudine(url: string, id: string, numero: number){ {
-      return this.http.patch(`${url}/${id}.json`, { contatore: numero });
+      return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, { contatore: numero });
     }}
 
     aggiornaTodoList(url: string, id: string, testo: string){ {
-      return this.http.patch(`${url}/${id}.json`, { task: testo });
+      return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, { task: testo });
     }}
 
 

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../SezioneAuth/Firebase/firebase.service';
 import { IUser } from '../../../Models/i-user';
 import { IToDoItem } from '../../../Models/i-to-do-item';
 import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './attivita-giornaliere.component.html',
   styleUrl: './attivita-giornaliere.component.scss'
 })
-export class AttivitaGiornaliereComponent {
+export class AttivitaGiornaliereComponent implements OnInit {
 
   constructor(
     private http      : HttpClient,
@@ -28,11 +29,9 @@ export class AttivitaGiornaliereComponent {
   urlUpdate    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/updateGiornaliero'
 
   ngOnInit() {
-    this.getTodoList()
+    this.getTodoList();
     this.testGiorno();
   }
-
-
 
 //Sezione metodi dedicati alle attività giornaliere
 //metodi -> modifica, aggiorna, cancella e DB
@@ -149,6 +148,7 @@ export class AttivitaGiornaliereComponent {
               } else {
                 this.firebase.ripristinaAttivitaFirebase(this.url, key)
                   .subscribe(() => {
+
                     this.getTodoList()
                     console.log('Stato completato aggiornato con successo per il task:', item.task);
                   }, (error) => {
@@ -200,27 +200,35 @@ export class AttivitaGiornaliereComponent {
   //Modifica variabile dataUpdate--
   localDataGet(){
     this.dataUpdate = 0;
+    // console.log('eccomi');
 
-    this.firebase.dataGet(this.urlUpdate + '.json')
-      .subscribe((data: any) => {
-        const values = Object.values(data);
+    this.firebase.dataGet(this.urlUpdate)
+    .subscribe((data) => {
+      const values = Object.values(data);
+      // console.log('eccomi di nuovo ' + values);
 
       if (values.length > 0) {
         const firstValue = values[0];
-
+        // console.log('eccomi di nuovo ' + firstValue);
         if (typeof firstValue === 'number') {
-          let testGiorno = this.dataGiornaliera()
+          let questoTestGiorno = this.dataGiornaliera()
 
-          if (testGiorno === firstValue){
-            this.dataUpdate = firstValue;
+          // console.log('eccomi di nuovo ' + firstValue + ' numero di oggi ->' +testGiorno);
+          if (questoTestGiorno === firstValue){
+            console.log('......testGiorno e firstValue sono uguali ' + this.dataUpdate + ' ' + firstValue);
+
+            return this.dataUpdate = firstValue;
 
         }else{
+          // console.log('fo na sega');
+          // console.log(this.dataUpdate);
+
         }
         } else {
-          console.error('Il primo valore dell\'array non è di tipo number:', firstValue);
+          return console.error('Il primo valore dell\'array non è di tipo number:', firstValue);
         }
       } else {
-        console.error('Nessun valore trovato nell\'oggetto restituito:', data);
+        return console.error('Nessun valore trovato nell\'oggetto restituito:', data);
       }
       });
   }
@@ -236,8 +244,8 @@ export class AttivitaGiornaliereComponent {
     this.newData = this.dataGiornaliera();
     this.localDataGet();
     this.idDBGiornaliero()
-    console.log('data -----> ' + this.dataUpdate);
-    console.log('data -----> ' + this.newData);
+    // console.log('data -----> ' + this.dataUpdate);
+    // console.log('data -----> ' + this.newData);
 
     if (this.dataUpdate !== this.newData){
 
@@ -245,7 +253,7 @@ export class AttivitaGiornaliereComponent {
       this.ripristinoAttivita();
       this.dataPatchLocale()
       console.log('Il giorno era diverso, oggi è -> ' + this.dataUpdate);
-      console.log('-e sono state ripristinate tutte le attività-' );
+
     }else{
       console.log(this.newData + " " + this.dataUpdate);
 
@@ -261,7 +269,7 @@ export class AttivitaGiornaliereComponent {
       let att = this.attivitaList[i];
       if (att.completed === true) {
         this.attivitaFinita(att.id);
-        console.log(att.id + ' modificato');
+        // console.log(att.id + ' modificato');
       }else{
       console.log("no problemo jefe!");
       }
@@ -274,7 +282,7 @@ export class AttivitaGiornaliereComponent {
 
     this.firebase.dataPatch(this.urlUpdate, this.idDB, newValue)
       .subscribe(() => {
-        console.log('Campo aggiornato con successo.');
+        // console.log('Campo aggiornato con successo.');
       }, error => {
         console.error('Errore durante l\'aggiornamento del campo:', error);
       });
@@ -283,11 +291,11 @@ export class AttivitaGiornaliereComponent {
   //Metodo che prende id dall'oggetto in DB
   //così da modificarlo facilmente
   idDBGiornaliero(){
-    this.firebase.dataGet(this.urlUpdate + '.json')
+    this.firebase.dataGet(this.urlUpdate)
       .subscribe((data) => {
         const chiave = Object.keys(data)[0];
-        this.idDB = chiave;
-        console.log('Chiave dell\'oggetto del DB ->', chiave);
+        return this.idDB = chiave;
+        // console.log('Chiave dell\'oggetto del DB ->', chiave);
       })
   }
 

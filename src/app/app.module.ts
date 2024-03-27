@@ -19,6 +19,11 @@ import { AbitudiniComponent } from './Componenti/SezioniApp/abitudini/abitudini.
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogInComponent } from './Componenti/SezioneUser/log-in/log-in.component';
 import { RegisterComponent } from './Componenti/SezioneUser/register/register.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 
 @NgModule({
@@ -34,6 +39,7 @@ import { RegisterComponent } from './Componenti/SezioneUser/register/register.co
     AbitudiniComponent,
     LogInComponent,
     RegisterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,10 @@ import { RegisterComponent } from './Componenti/SezioneUser/register/register.co
     SweetAlert2Module.forRoot(),
     HttpClientModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule,
     provideFirebaseApp(() => initializeApp({"projectId":"togamelist-e79bb","appId":"1:260277503096:web:073431a08c534fcfe0998d","databaseURL":"https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"togamelist-e79bb.appspot.com","apiKey":"AIzaSyCl4f_xm7FLbou4mufnYCRmWeh708Dgpw0","authDomain":"togamelist-e79bb.firebaseapp.com","messagingSenderId":"260277503096"})),
     provideDatabase(() => getDatabase()),
     provideFunctions(() => getFunctions()),

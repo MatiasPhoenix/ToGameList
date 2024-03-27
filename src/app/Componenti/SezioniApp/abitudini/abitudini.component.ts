@@ -244,7 +244,7 @@ export class AbitudiniComponent {
   localDataGet(){
     this.dataUpdate = 0;
 
-    this.firebase.dataGet(this.urlUpdate + '.json')
+    this.firebase.dataGet(this.urlUpdate)
       .subscribe((data: any) => {
         const values = Object.values(data);
 
@@ -326,7 +326,7 @@ export class AbitudiniComponent {
   //Metodo che prende id dall'oggetto in DB
   //così da modificarlo facilmente
   idDBGiornaliero(){
-    this.firebase.dataGet(this.urlUpdate + '.json')
+    this.firebase.dataGet(this.urlUpdate)
       .subscribe((data) => {
         const chiave = Object.keys(data)[0];
         this.idDB = chiave;
