@@ -15,6 +15,15 @@ export class InGameComponent implements OnInit  {
   paddingSx         : number = 7;
   marginSize        : number = 830;
   marginSizeTop     : number = 30;
+
+//In battaglia
+  applyMargin       : boolean = false;
+  applyMarginEnemy  : boolean = false;
+
+//Avatar sprites
+  avatarStandards   : boolean = true;
+  avatarAttacco     : boolean = false;
+
   isVisible         : boolean = true;
   battleGround      : boolean = true;
   charAndScenario   : boolean = false;
@@ -41,6 +50,42 @@ export class InGameComponent implements OnInit  {
     }else{
       return this.charAndScenario = true;
     }
+  }
+
+  attackMove(){
+    if(this.applyMargin == false){
+      this.avatarStandards = false;
+      this.avatarAttacco = true;
+      setTimeout(() => {
+        this.applyMarginEnemy = true;
+      }, 150);
+      setTimeout(() => {
+        this.avatarStandards = true;
+        this.avatarAttacco = false;
+        this.applyMargin = false;
+      }, 500);
+      setTimeout(() => {
+        this.applyMarginEnemy = false;
+      }, 200);
+      return this.applyMargin = true;
+    }else{
+      return console.log('fatti na sega');
+    }
+  }
+
+  pgColpito(){
+    setTimeout(() => {
+      this.applyMargin = false;
+    }, 500);
+    setTimeout(() => {
+      this.applyMargin = false;
+    }, 500);
+    setTimeout(() => {
+      this.applyMargin = false;
+    }, 500);
+    setTimeout(() => {
+      this.applyMargin = false;
+    }, 500);
   }
 
   moveSx(){

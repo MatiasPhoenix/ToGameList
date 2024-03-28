@@ -54,9 +54,19 @@
           <p>PUNTI AZIONE: <span>5</span></p>
           <p>ALTRA ROBA:<span>5</span></p>
         </div>
-        <div class="align-self-center col-12">
-          <button (click)="toBattle()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
-        </div>
+
+        <ng-template *ngIf="charAndScenario; then combattimento else torniamoACasa"></ng-template>
+        <ng-template #combattimento>
+          <div class="align-self-center col-12">
+            <button (click)="toBattle()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
+          </div>
+        </ng-template>
+        <ng-template #torniamoACasa>
+          <div class="align-self-center col-12">
+            <button (click)="toBattle()" class="py-5 btn btn-success">Torniamo a casa</button>
+          </div>
+        </ng-template>
+
       </div>
 
     </div>
@@ -66,39 +76,47 @@
 
 
 <!-- CAMPO DI BATTAGLIA -->
-<div *ngIf="battleGround" class="container battleGround py-3">
-  <div class="scenarioBattaglia d-flex text-center justify-content-between">
-    <div class="align-self-center">
+
+<div *ngIf="battleGround" class="container d-flex battleGround py-3 ps-4">
+
+  <div class="menu"></div>
+
+  <div class="">
+
+    <div class="scenarioBattaglia d-flex text-center justify-content-between">
       <!-- PERSONAGGIO -->
-      <img *ngIf="!charAndScenario"
-      src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
-       sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
-       Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
-       icGFudHNUb25lMiI6Ijk5MzMzMiIsInRvcFRvbmUiOiIxNTFmMzIiLCJ0b3BUb25lMiI6Ijk5MzMzMiIsIndpbmdzVG9uZSI6ImMzOTQ3NyIsIndpbmdzVG9uZTIiOiJlNWFjYTIiLCJzaG9
-       lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
-       0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
-       iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
-      alt="" class="personaggioInBattaglia">
+      <div class="align-self-center">
+        <img *ngIf="avatarStandards"
+          src="../../../../assets/AvatarSTANDARD.png"
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'custom-margin': applyMargin }">
+
+        <img *ngIf="avatarAttacco"
+          src="../../../../assets/AvatarCOMBATATTACCO.png"
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'custom-margin': applyMargin }">
+      </div>
+
+      <div class="align-self-center">
+        <!-- NEMICO -->
+        <img *ngIf="!charAndScenario"
+      src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
+      CJFeWVzIjoiMjgiLCJNb3V0aCI6IjE3IiwiU2hvZXMiOiI1IiwiR2xvdmVzIjoiNyIsIlBhbnRzIjoiMyIsIlRvcCI6IjE2IiwiQmVsdCI6IjEiLCJKYW
+      NrZXQiOiIzIiwiQ2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImhhaXJUb25lIjoiYmViZWJlIiwicGFudHNUb25
+      lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
+      MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
+        alt="" class="nemicoInBattaglia" [ngClass]="{ 'custom-enemy': applyMarginEnemy }">
+      </div>
+    </div>
+    <div class="battleButtons d-flex justify-content-center">
+      <button (click)="attackMove()" class="mx-3 mt-3">Attacca</button>
+      <button class="mx-3 mt-3">Difendi</button>
+      <button class="mx-3 mt-3">FattiNaSega</button>
     </div>
 
-    <div class="align-self-center">
-      <!-- NEMICO -->
-      <img *ngIf="!charAndScenario"
-      src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJDYXBlQmFjayI6IjMiLCJCb2R5IjoiMyIsIkV5ZXMiOiIyOCIsIk1vdXRoIjoiMTciLCJ
-      TaG9lcyI6IjUiLCJHbG92ZXMiOiI3IiwiUGFudHMiOiIzIiwiVG9wIjoiMTYiLCJCZWx0IjoiMSIsIkphY2tldCI6IjMiLCJDYXBlIjoiNCIsIk5lY2siOiIzIiwiSGFpci
-      I6IjE2IiwiR2xhc3NlcyI6IjEzIiwiaGFpclRvbmUiOiJiZWJlYmUiLCJwYW50c1RvbmUiOiI4MzA1MDUiLCJwYW50c1RvbmUyIjoiZWYwMDAwIiwidG9wVG9uZSI6IjU1N
-      TU1NSIsIndpbmdzVG9uZSI6IjlmMGIyMyIsIndpbmdzVG9uZTIiOiIwNTAyMzciLCJjYXBlVG9uZSI6IjJhNDQxMCIsImJlbHRUb25lIjoiOWYwYjIzIiwiamFja2V0VG9u
-      ZSI6IjgzMDUwNSJ9/1/show.png"
-      alt="" class="nemicoInBattaglia">
-    </div>
   </div>
-  <div class="battleButtons d-flex text-center">
-    <button>Attacca</button>
-    <button>Difendi</button>
-    <button>FattiNaSega</button>
-  </div>
+
+  <div class="menu"></div>
+
 </div>
-
 
 <!-- <div class="text-center mt-5">
 
