@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../auth.guard';
 import { FirebaseService } from '../../../SezioneAuth/Firebase/firebase.service';
 import { IUser } from './../../../Models/i-user';
 import { IToDoItem } from '../../../Models/i-to-do-item';
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FactoryTarget } from '@angular/compiler';
 import { DoesZapCodeSpaceFlag } from 'v8';
+import { AuthService } from '../../../SezioneAuth/AuthUser/auth.service';
+import { keyBy } from 'lodash';
 
 
 @Component({
@@ -17,18 +20,30 @@ import { DoesZapCodeSpaceFlag } from 'v8';
 export class TodoListComponent implements OnInit {
 
   constructor(
-    private http      : HttpClient,
-    private firebase  : FirebaseService,
+    private http        : HttpClient,
+    private firebase    : FirebaseService,
+    private authService : AuthService,
     ) {}
 
-  currentUser! : IUser
-  newTodoList! : IToDoItem
+  currentUser! : IUser;
+  newTodoList! : IToDoItem;
   toDoList     : IToDoItem[] = [];
-  url          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/todoList'
+  // userIdLogIn! : string;
+  url          : string = `https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/todoList`;
 
   ngOnInit() {
   this.getTodoList()
+  // this.userId()
   }
+
+  // userId() {
+  //   const thisUserId = this.authService.takeUser();
+  //   return this.userIdLogIn = thisUserId.id;
+  // }
+  // curioso() {
+  //   console.log(this.userIdLogIn);
+
+  // }
 
   //Metodo crea oggetto todoList con POST -> DB
   todoFactory() {

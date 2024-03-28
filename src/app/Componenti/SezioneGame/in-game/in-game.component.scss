@@ -2,55 +2,26 @@
   position: relative;
   background-image: url(../../../../assets/SfondoCampo.jpg);
   background-size:contain;
-  height: 170px;
+  height: 310px;
+}
+.personaggio {
+  margin-top: 135px;
+  width: 150px;
+  height: 150px;
 }
 
-.cuboPg {
-  position: absolute;
-  width: 35px;
-  height: 45px;
-  transition: all 0.4s ease;
-}
+.room{
+  background-image: url(../../../../assets/Stanza.jpeg);
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position: center;
+  height: 290px;
 
-.cappelloPg {
-  background: #6435d1;
-  width: 70px;
-  height: 25px;
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
 }
-
-.testoCappello {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-.dialogo{
-  background-color: white;
-  height: 100px;
-  max-width: 350px;
-  position: absolute;
-  top: -85px;
-  right: -1550%;
-  transform: translateX(-50%);
-  padding-left: 15px;
-  padding-right: 15px;
-  color: black;
+.blackBG{
+  background-color: black;
+  width: 400px;
+  background-position: center;
+  height: 290px;
   border-radius: 10px 10px 10px 10px;
-}
-.dialogo2{
-  position: relative;
-  top: -0%;
-  left: -10%;
-  max-width: 10px;
-  max-height: 10px;
-  transform: translate(-50%, -50%);
-  color: rgba(0, 0, 0, 0);
-  background-color: white;
-  border-radius: 10px 0px 10px 0px;
 }

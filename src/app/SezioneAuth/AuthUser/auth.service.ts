@@ -47,4 +47,8 @@ export class AuthService {
       return false;
     }
   }
+
+  takeUser(){
+    return this.user;
+  }
 }

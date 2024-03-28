@@ -9,15 +9,21 @@ import { log } from 'console';
   styleUrl: './in-game.component.scss'
 })
 export class InGameComponent implements OnInit  {
-constructor(){}
+  constructor(){}
 
   paddingDx         : number = 0
   paddingSx         : number = 7;
-  marginSize        : number = 30;
+  marginSize        : number = 830;
   marginSizeTop     : number = 30;
+  isVisible         : boolean = true;
 
   ngOnInit(){
+    // setTimeout(() => {
+    //   this.isVisible = false;
+    // }, 5000);
   }
+
+
 
 
   moveSx(){
