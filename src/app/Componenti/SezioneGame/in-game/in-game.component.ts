@@ -16,6 +16,8 @@ export class InGameComponent implements OnInit  {
   marginSize        : number = 830;
   marginSizeTop     : number = 30;
   isVisible         : boolean = true;
+  battleGround      : boolean = true;
+  charAndScenario   : boolean = false;
 
   ngOnInit(){
     // setTimeout(() => {
@@ -23,8 +25,23 @@ export class InGameComponent implements OnInit  {
     // }, 5000);
   }
 
+  toBattle(){
+    if(this.battleGround == false){
+      this.pgToBattle()
+      return this.battleGround = true;
+    }else{
+      this.pgToBattle()
+      return this.battleGround = false;
+    }
+  }
 
-
+  pgToBattle(){
+    if(this.charAndScenario == true){
+      return this.charAndScenario = false;
+    }else{
+      return this.charAndScenario = true;
+    }
+  }
 
   moveSx(){
     if(this.marginSize > 0){

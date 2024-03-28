@@ -28,11 +28,15 @@ export class AttivitaGiornaliereComponent implements OnInit {
   url          : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/attivitaGiornaliere'
   urlUpdate    : string = 'https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/updateGiornaliero'
 
-  ngOnInit() {
+  ngOnInit()        {
     this.getTodoList();
     this.testGiorno();
   }
 
+  porcodio()
+  {
+    this.testGiorno();
+  }
 //Sezione metodi dedicati alle attività giornaliere
 //metodi -> modifica, aggiorna, cancella e DB
 
@@ -243,8 +247,8 @@ export class AttivitaGiornaliereComponent implements OnInit {
     this.newData = this.dataGiornaliera();
     this.localDataGet();
     this.idDBGiornaliero()
-    // console.log('data -----> ' + this.dataUpdate);
-    // console.log('data -----> ' + this.newData);
+    console.log('data -----> ' + this.dataUpdate);
+    console.log('data -----> ' + this.newData);
 
     if (this.dataUpdate !== this.newData){
 

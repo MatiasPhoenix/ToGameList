@@ -11,6 +11,7 @@ export class AuthService {
     private http  : HttpClient
     ){}
 
+
   user!             : User;
   isLoggedIn        = false;
   APIKey            = 'AIzaSyCl4f_xm7FLbou4mufnYCRmWeh708Dgpw0'

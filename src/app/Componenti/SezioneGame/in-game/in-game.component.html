@@ -1,28 +1,101 @@
 
 <div class="contenitorePG py-1 text-center text-danger" >
   <div class="bg-black container py-1 text-center text-danger" >
-    <div class="blackBG ">
+    <div class="blackBG d-flex">
 
-     <div class="room container ">
-       <img src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
+      <ng-template *ngIf="charAndScenario; then giorno else notte"></ng-template>
+      <ng-template #giorno>
+        <div class="roomGiorno container col-12 me-3">
+        <img *ngIf="charAndScenario"
+               src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
+               sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
+               Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
+               icGFudHNUb25lMiI6Ijk5MzMzMiIsInRvcFRvbmUiOiIxNTFmMzIiLCJ0b3BUb25lMiI6Ijk5MzMzMiIsIndpbmdzVG9uZSI6ImMzOTQ3NyIsIndpbmdzVG9uZTIiOiJlNWFjYTIiLCJzaG9
+               lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
+               0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
+               iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
+        alt="" class="personaggio">
+        </div>
+      </ng-template>
+      <ng-template #notte>
+        <div class="roomNotte container col-12 me-3">
+        <img *ngIf="charAndScenario"
+               src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
+               sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
+               Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
+               icGFudHNUb25lMiI6Ijk5MzMzMiIsInRvcFRvbmUiOiIxNTFmMzIiLCJ0b3BUb25lMiI6Ijk5MzMzMiIsIndpbmdzVG9uZSI6ImMzOTQ3NyIsIndpbmdzVG9uZTIiOiJlNWFjYTIiLCJzaG9
+               lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
+               0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
+               iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
+        alt="" class="personaggio">
+        </div>
+      </ng-template>
+
+
+     <div class="latoPersonaggio d-flex justify-content-between col-12 align-self-center">
+       <div class="barrePersonaggio col-12">
+          <p class="">Livello personaggio</p>
+          <div class="pb-3">
+            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
+            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
+            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
+            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
+            <img class="cuoreLife pe-1" src="../../../../assets/MezzoCuore.png" alt="cuore">
+          </div>
+          <p class="">Barra della stanchezza</p>
+          <p class="">Barra del mana</p>
+          <p class="textos">
+            Forza:     <span class="pe-4">     3</span>
+            Armatura:  <span class="pe-4">     4</span>
+            Velocità:  <span class="pe-4">     4</span>
+          </p>
+        </div>
+        <div class="latoPersonaggio statistiche col-6 align-self-center ms-4">
+          <p>PUNTI AZIONE: <span>5</span></p>
+          <p>ALTRA ROBA:<span>5</span></p>
+        </div>
+        <div class="align-self-center col-12">
+          <button (click)="toBattle()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- CAMPO DI BATTAGLIA -->
+<div *ngIf="battleGround" class="container battleGround py-3">
+  <div class="scenarioBattaglia d-flex text-center justify-content-between">
+    <div class="align-self-center">
+      <!-- PERSONAGGIO -->
+      <img *ngIf="!charAndScenario"
+      src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
        sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
        Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
        icGFudHNUb25lMiI6Ijk5MzMzMiIsInRvcFRvbmUiOiIxNTFmMzIiLCJ0b3BUb25lMiI6Ijk5MzMzMiIsIndpbmdzVG9uZSI6ImMzOTQ3NyIsIndpbmdzVG9uZTIiOiJlNWFjYTIiLCJzaG9
        lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
        0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
        iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
-       alt="" class="personaggio">
-     </div>
-     <div class="statistiche">
-      <p>Barra della vita</p>
-      <p>Barra della stanchezza</p>
-      <p>Barra del mana</p>
-     </div>
-     <div class="statistiche">
-
-     </div>
-
+      alt="" class="personaggioInBattaglia">
     </div>
+
+    <div class="align-self-center">
+      <!-- NEMICO -->
+      <img *ngIf="!charAndScenario"
+      src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJDYXBlQmFjayI6IjMiLCJCb2R5IjoiMyIsIkV5ZXMiOiIyOCIsIk1vdXRoIjoiMTciLCJ
+      TaG9lcyI6IjUiLCJHbG92ZXMiOiI3IiwiUGFudHMiOiIzIiwiVG9wIjoiMTYiLCJCZWx0IjoiMSIsIkphY2tldCI6IjMiLCJDYXBlIjoiNCIsIk5lY2siOiIzIiwiSGFpci
+      I6IjE2IiwiR2xhc3NlcyI6IjEzIiwiaGFpclRvbmUiOiJiZWJlYmUiLCJwYW50c1RvbmUiOiI4MzA1MDUiLCJwYW50c1RvbmUyIjoiZWYwMDAwIiwidG9wVG9uZSI6IjU1N
+      TU1NSIsIndpbmdzVG9uZSI6IjlmMGIyMyIsIndpbmdzVG9uZTIiOiIwNTAyMzciLCJjYXBlVG9uZSI6IjJhNDQxMCIsImJlbHRUb25lIjoiOWYwYjIzIiwiamFja2V0VG9u
+      ZSI6IjgzMDUwNSJ9/1/show.png"
+      alt="" class="nemicoInBattaglia">
+    </div>
+  </div>
+  <div class="battleButtons d-flex text-center">
+    <button>Attacca</button>
+    <button>Difendi</button>
+    <button>FattiNaSega</button>
   </div>
 </div>
 

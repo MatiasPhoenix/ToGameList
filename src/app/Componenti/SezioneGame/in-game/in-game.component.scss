@@ -4,24 +4,84 @@
   background-size:contain;
   height: 310px;
 }
+.latoPersonaggio{
+  border: 10px ridge #ffaf50;
+  background-color: rgb(219, 199, 160);
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 5% 5% 5% 5%;
+}
 .personaggio {
   margin-top: 135px;
   width: 150px;
   height: 150px;
 }
 
-.room{
+
+.textos{
+  color: black;
+}
+
+.roomGiorno{
   background-image: url(../../../../assets/Stanza.jpeg);
   background-repeat:no-repeat;
   background-size:contain;
   background-position: center;
   height: 290px;
-
 }
+.roomNotte{
+  background-image: url(../../../../assets/StanzaNotte.png);
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position: center;
+  height: 290px;
+}
+
 .blackBG{
   background-color: black;
   width: 400px;
   background-position: center;
   height: 290px;
   border-radius: 10px 10px 10px 10px;
+}
+
+.barrePersonaggio{
+  color: white;
+
+}
+
+.cuoreLife{
+  max-height: 30px;
+}
+
+.battleGround{
+  height: 800px;
+  background-color: antiquewhite;
+  border: 21px ridge #ffaf50;
+}
+
+.scenarioBattaglia{
+  border: 23px ridge #380d0d;
+  background-image: url(../../../../assets/EsternoNotte.png);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  height: 500px;
+  width: 727px;
+  margin: auto;
+}
+.personaggioInBattaglia{
+  margin-top: 100px;
+  margin-left: 100px;
+  width: 150px;
+  height: 150px;
+}
+.nemicoInBattaglia{
+  margin-top: 100px;
+  margin-right: 100px;
+  width: 150px;
+  height: 150px;
+}
+.battleButtons{
+  margin: auto;
 }
