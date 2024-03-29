@@ -35,12 +35,10 @@
      <div class="latoPersonaggio d-flex justify-content-between col-12 align-self-center">
        <div class="barrePersonaggio col-12">
           <p class="">Livello personaggio</p>
-          <div class="pb-3">
-            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
-            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
-            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
-            <img class="cuoreLife pe-1" src="../../../../assets/cuoreIntero.png" alt="cuore">
-            <img class="cuoreLife pe-1" src="../../../../assets/MezzoCuore.png" alt="cuore">
+          <div class=" d-flex justify-content-center">
+            <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
+              <img class="cuoreLife" [src]="avatarLife" alt="">
+            </div>
           </div>
           <p class="">Barra della stanchezza</p>
           <p class="">Barra del mana</p>
@@ -58,12 +56,12 @@
         <ng-template *ngIf="charAndScenario; then combattimento else torniamoACasa"></ng-template>
         <ng-template #combattimento>
           <div class="align-self-center col-12">
-            <button (click)="toBattle()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
+            <button (click)="chooseCamaign()" class="py-3 btn btn-danger">Adventure Time!</button>
           </div>
         </ng-template>
         <ng-template #torniamoACasa>
           <div class="align-self-center col-12">
-            <button (click)="toBattle()" class="py-5 btn btn-success">Torniamo a casa</button>
+            <button (click)="toBattle(); svuotaBattleground()" class="py-5 btn btn-success">Torniamo a casa</button>
           </div>
         </ng-template>
 
@@ -74,94 +72,115 @@
 </div>
 
 <!-- SELEZIONE MISSIONE -->
-<div>
+<div *ngIf="menuCampaign" class="container d-flex flex-column text-center menuOptions py-3 ps-4">
+  <h1 class="mt-2 mb-5">SCEGLI LA TUA AVVENTURA</h1>
+  <div class="d-flex container flex-column ">
 
+    <div class="d-flex justify-content-center">
+
+      <div class="chooseEnemy me-3">
+        <img (click)="enemyChooseGoblin()" src="../../../../assets/GoblinStandard.png"
+        alt="" class="chooseEnemyChoice">
+      </div>
+      <div class="chooseEnemy me-3">
+        <img (click)="enemyChooseMiniBoss()" src="http://www.avatarsinpixels.com/minipix/eyJXaW5
+      ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
+      CJFeWVzIjoiMjgiLCJNb3V0aCI6IjE3IiwiU2hvZXMiOiI1IiwiR2xvdmVzIjoiNyI
+      sIlBhbnRzIjoiMyIsIlRvcCI6IjE2IiwiQmVsdCI6IjEiLCJKYWNrZXQiOiIzIiwiQ
+      2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImh
+      haXJUb25lIjoiYmViZWJlIiwicGFudHNUb25lIjoiODMwNTA1IiwicGFudHNUb25lM
+      iI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjM
+      iLCJ3aW5nc1RvbmUyIjoiMDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0V
+      G9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
+        alt="" class="chooseEnemyChoice">
+      </div>
+
+    </div>
+    <div class="d-flex justify-content-center">
+      <p class="testoMissioni me-4">Piccola avventura con 2 combattimenti facili.</p>
+      <p class="testoMissioni">Battaglia contro nemico più forte.</p>
+    </div>
+  </div>
+  <div>
+    <button (click)="chooseCamaign()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
+  </div>
 </div>
-<!-- CAMPO DI BATTAGLIA -->
 
-<div *ngIf="battleGround" class="container d-flex battleGround py-3 ps-4">
+<!-- CAMPO DI BATTAGLIA -->
+<div *ngIf="!battleGround" class="container d-flex battleGround py-3 ps-4">
 
   <div class="menu text-center"><p class="mt-4">Stamina: {{ staminaPoints }}</p></div>
 
   <div class="">
 
-    <div class="scenarioBattaglia d-flex text-center justify-content-between">
-      <!-- PERSONAGGIO -->
-      <div class="align-self-center">
-        <img *ngIf="avatarStandards"
-          src="../../../../assets/AvatarSTANDARD.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
+    <div class="scenarioBattaglia d-flex flex-column ">
+        <div class="d-flex text-center justify-content-between">
+<!-- AREA PERSONAGGIO -->
+          <div class="">
+            <img *ngIf="avatarStandards"
+              src="../../../../assets/AvatarSTANDARD.png"
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
 
-        <img *ngIf="avatarAttacco"
-          src="../../../../assets/AvatarCOMBATATTACCO.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
+            <img *ngIf="avatarAttacco"
+              src="../../../../assets/AvatarCOMBATATTACCO.png"
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
 
-        <img *ngIf="avatarDefense"
-          src="../../../../assets/AvatarCombatDIFESA.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce, 'avatarHitDefense': avatarHitDefense }">
+            <img *ngIf="avatarDefense"
+              src="../../../../assets/AvatarCombatDIFESA.png"
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce, 'avatarHitDefense': avatarHitDefense }">
 
-        <img *ngIf="avatarDamage"
-          src="../../../../assets/AvatarCOMBATDANNO.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
-        <p class="avatarDefenseText" *ngIf="!iCantDefense">Non ho PA!!</p>
-      </div>
+            <img *ngIf="avatarDamage"
+              src="../../../../assets/AvatarCOMBATDANNO.png"
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
+          </div>
 
-      <div class="align-self-center">
-        <!-- NEMICO -->
-        <img *ngIf="!charAndScenario"
+<!-- AREA NEMICO -->
+
+          <div class="">
+            <!-- AVVENTURA GOBLIN -->
+            <img *ngIf="enemyGoblinStandard"
+            src="../../../../assets/GoblinStandard.png"
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+            <img *ngIf="enemyGoblinSkirmisher"
+            src="../../../../assets/GoblinStandard.png"
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+          <!-- MINI BOSS -->
+            <img *ngIf="enemyMiniBoss"
       src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
       CJFeWVzIjoiMjgiLCJNb3V0aCI6IjE3IiwiU2hvZXMiOiI1IiwiR2xvdmVzIjoiNyIsIlBhbnRzIjoiMyIsIlRvcCI6IjE2IiwiQmVsdCI6IjEiLCJKYW
       NrZXQiOiIzIiwiQ2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImhhaXJUb25lIjoiYmViZWJlIiwicGFudHNUb25
       lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
       MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
-        alt="" class="nemicoInBattaglia" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
-        <p class="enemyDefenseText" *ngIf="!enemyDefense">MI DIFENDOOO!!!</p>
-        <p class="enemyDefenseText" *ngIf="!bothDefense">Codardo, attaccami!!!</p>
-        <p class="enemyDefenseText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
-      </div>
-    </div>
-    <div class="battleButtons d-flex justify-content-center">
-      <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
-      <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
-      <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
-      <button class="mx-3 mt-3">FattiNaSega</button>
-    </div>
-    <div>
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+          </div>
+        </div>
 
-      <!-- <button (click)="enemyNewAction()">Scegli una parola casuale</button> -->
+        <!-- DIALOGHI AVATAR -->
+        <div class="col-12 d-flex justify-content-start align-items-start">
+          <p class="avatarDefenseText " *ngIf="!iCantDefense">Mi servono PA!!</p>
+        </div>
+        <!-- DIALOGHI NEMICI -->
+        <div class="col-12 d-flex justify-content-end align-items-end">
+          <p class="enemyDefenseText enemyText" *ngIf="!enemyDefense">MI DIFENDOOO!!!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!bothDefense">Codardo, attaccami!!!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!enemyDefenseGoblin">IO BLOCCA!!!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!bothDefenseGoblin">Waaaagh!!!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!versusConcencGoblin">Che tu fai?!</p>
+        </div>
+
     </div>
+
+      <div class="battleButtons d-flex justify-content-center">
+        <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
+        <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
+        <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
+
+
+      </div>
+
   </div>
 
   <div class="menu text-center"><p class="mt-4">Nemico-> {{ newEnemyAction }}</p></div>
 
 </div>
-
-<!-- <div class="text-center mt-5">
-
-  <button (click)="moveSx()"><-</button>
-  <button (click)="moveUp()">^</button>
-  <button (click)="moveDown()">v</button>
-  <button (click)="moveDx()">-></button>
-  <div>
-    <button (click)="reset()">Reset</button>
-  </div>
-</div> -->
-
-<!--
-<div class="cuboPg bg-black"
-    [style.left.px]="marginSize"
-    [style.bottom.px]="marginSizeTop"
-    [style.padding-left.px]="paddingSx"
-    [style.padding-right.px]="paddingDx">
-
-
-      <div class="dialogo" *ngIf="isVisible">
-      <p class="">Benvenuto a ToGameList!</p>
-      <div class="dialogo2">....</div>
-    </div>
-
-    <div class="cappelloPg">
-      <p class="testoCappello">cappello</p>
-    </div>
-    <span>o.o</span>
-  </div> -->

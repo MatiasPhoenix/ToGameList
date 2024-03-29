@@ -54,6 +54,12 @@
   max-height: 30px;
 }
 
+.menuOptions{
+  height: 800px;
+  background-color: antiquewhite;
+  border: 21px ridge #ffaf50;
+}
+
 .battleGround{
   height: 800px;
   background-color: antiquewhite;
@@ -61,6 +67,7 @@
 }
 
 .scenarioBattaglia{
+  padding-top: 100px;
   border: 23px ridge #380d0d;
   background-image: url(../../../../assets/EsternoNotte.png);
   background-repeat: no-repeat;
@@ -82,6 +89,12 @@
   width: 150px;
   height: 150px;
 }
+.nemicoInBattagliaGoblin{
+  margin-top: 100px;
+  margin-left: 90px;
+  width: 150px;
+  height: 150px;
+}
 .battleButtons{
   margin: auto;
 }
@@ -91,6 +104,22 @@
 }
 
 //Alla battaglia!
+.chooseEnemy{
+  background-image: url(../../../../assets/EsternoNotte.png);
+  border: 15px ridge #380d0d;
+  width: 150px;
+}
+.chooseEnemyChoice{
+  cursor: pointer;
+  width: 120px;
+}
+.testoMissioni{
+  margin-right: 20px;
+  width: 140px;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 .avatarAttack {
   margin-left: 130px;
   margin-top: 100px;
@@ -99,6 +128,11 @@
 
 .enemyHit {
   margin-right: 110px;
+  margin-top: 100px;
+  transition: margin 0.05s ease;
+}
+.enemyHitGoblin {
+  margin-left: 100px;
   margin-top: 100px;
   transition: margin 0.05s ease;
 }
@@ -121,11 +155,14 @@
 }
 
 .enemyDefenseText{
-  margin-right: 90px;
+  // margin-right: 90px;
   color: rgb(197, 97, 97);
   text-shadow: 4px 4px 2px rgba(123,10,10,0.6);
   font-weight: bolder;
   font-size: 1.3rem;
+}
+.enemyText{
+  margin-right: 95px;
 }
 .avatarDefenseText{
   margin-left: 100px;
