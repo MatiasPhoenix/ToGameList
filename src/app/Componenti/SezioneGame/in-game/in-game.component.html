@@ -109,7 +109,15 @@
 <!-- CAMPO DI BATTAGLIA -->
 <div *ngIf="!battleGround" class="container d-flex battleGround py-3 ps-4">
 
-  <div class="menu text-center"><p class="mt-4">Stamina: {{ staminaPoints }}</p></div>
+  <div class="menu text-center">
+    <p class="mt-4">Stamina: {{ staminaPoints }}</p>
+    <div></div>
+    <div class="d-flex flex-column justify-content-start align-items-start ms-3">
+      <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
+        <img class="cuoreLife" [src]="avatarLife" alt="">
+      </div>
+    </div>
+  </div>
 
   <div class="">
 
@@ -140,10 +148,10 @@
             <!-- AVVENTURA GOBLIN -->
             <img *ngIf="enemyGoblinStandard"
             src="../../../../assets/GoblinStandard.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
             <img *ngIf="enemyGoblinSkirmisher"
             src="../../../../assets/GoblinStandard.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
           <!-- MINI BOSS -->
             <img *ngIf="enemyMiniBoss"
       src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
@@ -151,7 +159,7 @@
       NrZXQiOiIzIiwiQ2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImhhaXJUb25lIjoiYmViZWJlIiwicGFudHNUb25
       lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
       MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
           </div>
         </div>
 
@@ -181,6 +189,13 @@
 
   </div>
 
-  <div class="menu text-center"><p class="mt-4">Nemico-> {{ newEnemyAction }}</p></div>
+  <div class="menu text-center">
+    <p class="mt-4">Nemico-> {{ newEnemyAction }}</p>
+    <div class="d-flex flex-column justify-content-end align-items-end me-3">
+      <div class="pb-3" *ngFor="let enemyLife of enemyLifeArray">
+        <img class="cuoreLife" [src]="enemyLife" alt="">
+      </div>
+    </div>
+  </div>
 
 </div>

@@ -16,12 +16,12 @@ export class InGameComponent implements OnInit  {
 
 //In battaglia
   avatarColpisce          : boolean = false;
-  enemyCopito             : boolean = false;
+  enemyColpito            : boolean = false;
   enemyAttack             : boolean = false;
   enemyMistery            : boolean = true;
   enemyGoblinStandard     : boolean = false;
   enemyGoblinSkirmisher   : boolean = false;
-  enemyMiniBoss           : boolean = true;
+  enemyMiniBoss           : boolean = false;
   iCantDefense            : boolean = true;
   avatarHitDefense        : boolean = false;
 
@@ -48,7 +48,7 @@ export class InGameComponent implements OnInit  {
 //Gestione sezioni
   disableButton           : boolean = false;
   isVisible               : boolean = true;
-  battleGround            : boolean = false;
+  battleGround            : boolean = true;
   charAndScenario         : boolean = true;
   menuCampaign            : boolean = false;
   playerVictory!          : boolean;
@@ -107,7 +107,8 @@ export class InGameComponent implements OnInit  {
       this.avatarStandards = false;
       this.avatarAttacco = true;
       setTimeout(() => {
-        this.enemyCopito = true;
+        this.enemyColpito = true;
+        this.enemyTakeDamage()
       }, 150);
       setTimeout(() => {
         this.avatarStandards = true;
@@ -115,7 +116,7 @@ export class InGameComponent implements OnInit  {
         this.avatarColpisce = false;
       }, 500);
       setTimeout(() => {
-        this.enemyCopito = false;
+        this.enemyColpito = false;
       }, 200);
       return this.avatarColpisce = true;
     }else{
@@ -132,7 +133,8 @@ export class InGameComponent implements OnInit  {
       this.avatarStandards = false;
       this.avatarAttacco = true;
       setTimeout(() => {
-        this.enemyCopito = true;
+        this.enemyColpito = true;
+        this.enemyTakeDamage()
       }, 150);
       setTimeout(() => {
         this.avatarStandards = true;
@@ -140,7 +142,7 @@ export class InGameComponent implements OnInit  {
         this.avatarColpisce = false;
       }, 500);
       setTimeout(() => {
-        this.enemyCopito = false;
+        this.enemyColpito = false;
       }, 200);
       return this.avatarColpisce = true;
     }else{
@@ -388,6 +390,9 @@ export class InGameComponent implements OnInit  {
 
 //METODI DELLE CAMPAGNA
   enemyChooseGoblin(){
+    this.enemyMaxLife = 4;
+    this.enemyBattleLife = 4;
+    this.lifeMetodEnemy()
     this.chooseCamaign()
     if (this.enemyGoblinStandard == false) {
       return this.enemyGoblinStandard = true;
@@ -398,6 +403,9 @@ export class InGameComponent implements OnInit  {
   }
 
   enemyChooseMiniBoss(){
+    this.enemyMaxLife = 6;
+    this.enemyBattleLife = 6;
+    this.lifeMetodEnemy()
     this.chooseCamaign()
     if (this.enemyMiniBoss == false) {
       return this.enemyMiniBoss = true;
@@ -417,8 +425,10 @@ export class InGameComponent implements OnInit  {
   }
 
   loseScreen : boolean = false;
+  victoryScreen : boolean = false;
+
   avatarMaxLife :number = 10;
-  enemyMaxLife :number = 10;
+  enemyMaxLife! :number;
 
   avatarBattleLife! :number;
   enemyBattleLife! :number;
@@ -430,6 +440,7 @@ export class InGameComponent implements OnInit  {
   cuoreFerito = "../../../../assets/cuoreFerito.png";
   cuoreVuoto = "../../../../assets/cuoreVuoto.png";
 
+  //CALCOLO DANNI AVATAR
   lifeMetod(){
     this.avatarLifeArray.splice(0, this.avatarLifeArray.length);
     let cuoriMancantiAvatar = (this.avatarMaxLife - this.avatarBattleLife);
@@ -447,7 +458,6 @@ export class InGameComponent implements OnInit  {
       }
       this.avatarLose()
     }
-
   }
   avatarTakeDamage(){
     this.avatarBattleLife -= 1;
@@ -461,6 +471,39 @@ export class InGameComponent implements OnInit  {
       this.loseScreen = true;
     }, 2000);
   }
+  avatarWin(){
+    setTimeout(() => {
+      this.victoryScreen = true;
+    }, 2000);
+  }
+
+   //CALCOLO DANNI NEMICO
+   lifeMetodEnemy(){
+    this.enemyLifeArray.splice(0, this.enemyLifeArray.length);
+    let cuoriMancantiEnemy = (this.enemyMaxLife - this.enemyBattleLife);
+
+    if (this.enemyBattleLife != 0) {
+      for (let index = 0; index < this.enemyBattleLife; index++) {
+        this.enemyLifeArray.push(this.cuoreIntero);
+      }
+      for (let index = 0; index < cuoriMancantiEnemy; index++) {
+        this.enemyLifeArray.push(this.cuoreVuoto);
+      }
+    }else{
+      for (let index = 0; index < cuoriMancantiEnemy; index++) {
+        this.enemyLifeArray.push(this.cuoreVuoto);
+      }
+
+    }
+  }
+  enemyTakeDamage(){
+    this.enemyBattleLife -= 1;
+    this.lifeMetodEnemy();
+  }
+  setLifeEnemy(){
+    this.avatarBattleLife = this.avatarMaxLife;
+  }
+
 
 
 
