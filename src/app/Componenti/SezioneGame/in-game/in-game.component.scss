@@ -91,16 +91,49 @@
 }
 
 //Alla battaglia!
-.custom-margin {
+.avatarAttack {
   margin-left: 130px;
   margin-top: 100px;
   transition: margin 0.2s ease;
 }
 
-.custom-enemy {
+.enemyHit {
   margin-right: 110px;
   margin-top: 100px;
   transition: margin 0.05s ease;
+}
+.avatarHitDefense{
+  margin-left: 105px;
+  margin-top: 100px;
+  transition: margin 0.10s ease;
+}
+
+.avatarHit{
+  margin-left: 70px;
+  margin-top: 90px;
+  transition: margin 0.16s ease;
+}
+
+.enemyAttack{
+  margin-right: 130px;
+  margin-top: 100px;
+  transition: margin 0.04s ease;
+}
+
+.enemyDefenseText{
+  margin-right: 90px;
+  color: rgb(197, 97, 97);
+  text-shadow: 4px 4px 2px rgba(123,10,10,0.6);
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+.avatarDefenseText{
+  margin-left: 100px;
+  margin-top: 0px;
+  color: rgb(197, 97, 97);
+  text-shadow: 4px 4px 2px rgba(123,10,10,0.6);
+  font-weight: bolder;
+  font-size: 1.3rem;
 }
 
 

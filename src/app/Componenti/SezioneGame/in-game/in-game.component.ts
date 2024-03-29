@@ -11,27 +11,45 @@ import { log } from 'console';
 export class InGameComponent implements OnInit  {
   constructor(){}
 
-  paddingDx         : number = 0
-  paddingSx         : number = 7;
-  marginSize        : number = 830;
-  marginSizeTop     : number = 30;
-
 //In battaglia
-  applyMargin       : boolean = false;
-  applyMarginEnemy  : boolean = false;
+  avatarColpisce          : boolean = false;
+  enemyCopito             : boolean = false;
+  enemyAttack             : boolean = false;
+  enemyDefense            : boolean = true;
+  bothDefense             : boolean = true;
+  versusConcentrazione    : boolean = true;
+  iCantDefense            : boolean = true;
+  avatarHitDefense        : boolean = false;
+  staminaPoints           : number = 10;
 
 //Avatar sprites
-  avatarStandards   : boolean = true;
-  avatarAttacco     : boolean = false;
+  avatarStandards         : boolean = true;
+  avatarAttacco           : boolean = false;
+  avatarDefense           : boolean = false;
+  avatarSkillStart        : boolean = false;
+  avatarSkillAtk          : boolean = false;
+  avatarDamage            : boolean = false;
 
-  isVisible         : boolean = true;
-  battleGround      : boolean = true;
-  charAndScenario   : boolean = false;
+//Azioni nemico
+  newEnemyAction          : string = '';
+  enemyActions            : string[] = ['ATTACCO', 'DIFESA', 'ATTACCO X2']; // 'ATTACCO', 'DIFESA', 'PENSO', 'ATTACCO X2', 'MI CURO', 'ATTACCO'
+
+//Gestione sezioni
+  disableButton           : boolean = false;
+  isVisible               : boolean = true;
+  battleGround            : boolean = true;
+  charAndScenario         : boolean = false;
+  playerVictory!          :boolean;
 
   ngOnInit(){
-    // setTimeout(() => {
-    //   this.isVisible = false;
-    // }, 5000);
+    this.enemyNewAction()
+  }
+
+  enemyNewAction() {
+    const indiceCasuale: number = Math.floor(Math.random()
+    * this.enemyActions.length);
+
+    return this.newEnemyAction = this.enemyActions[indiceCasuale];
   }
 
   toBattle(){
@@ -53,77 +71,270 @@ export class InGameComponent implements OnInit  {
   }
 
   attackMove(){
-    if(this.applyMargin == false){
+    if(this.avatarColpisce == false){
       this.avatarStandards = false;
       this.avatarAttacco = true;
       setTimeout(() => {
-        this.applyMarginEnemy = true;
+        this.enemyCopito = true;
       }, 150);
       setTimeout(() => {
         this.avatarStandards = true;
         this.avatarAttacco = false;
-        this.applyMargin = false;
+        this.avatarColpisce = false;
       }, 500);
       setTimeout(() => {
-        this.applyMarginEnemy = false;
+        this.enemyCopito = false;
       }, 200);
-      return this.applyMargin = true;
+      return this.avatarColpisce = true;
     }else{
       return console.log('fatti na sega');
     }
   }
+  attackMoveVSDefense(){
+    if(this.avatarColpisce == false){
+      this.enemyDefense = false;
+      this.avatarStandards = false;
+      this.avatarAttacco = true;
+      setTimeout(() => {
+        this.enemyCopito = true;
+      }, 150);
+      setTimeout(() => {
+        this.avatarStandards = true;
+        this.avatarAttacco = false;
+        this.avatarColpisce = false;
+      }, 500);
+      setTimeout(() => {
+        this.enemyCopito = false;
+      }, 200);
+      return this.avatarColpisce = true;
+    }else{
+      return console.log('fatti na sega');
+    }
+  }
+  defenseMove(){
+    this.avatarStandards = false;
+    this.avatarDefense = true;
+    setTimeout(() => {
+      this.enemyAttkVSDefense()
+      this.enemyNewAction()
+    }, 450);
+  }
 
   pgColpito(){
     setTimeout(() => {
-      this.applyMargin = false;
-    }, 500);
+      this.avatarColpisce = false;
+    }, 100);
     setTimeout(() => {
-      this.applyMargin = false;
-    }, 500);
+      this.avatarColpisce = true;
+    }, 200);
     setTimeout(() => {
-      this.applyMargin = false;
-    }, 500);
+      this.avatarColpisce = false;
+    }, 300);
     setTimeout(() => {
-      this.applyMargin = false;
-    }, 500);
+      this.avatarColpisce = true;
+    }, 400);
+  }
+  enemyAttkVSDefense(){
+    this.enemyAttack = true;
+    setTimeout(() => {
+      this.enemyAttack = false;
+      this.avatarHitDefense = true;
+    }, 250);
+    setTimeout(() => {
+      this.avatarHitDefense = false;
+    }, 350);
+    setTimeout(() => {
+      this.avatarStandards = true;
+      this.avatarDefense = false;
+    }, 750);
   }
 
-  moveSx(){
-    if(this.marginSize > 0){
-      if(this.paddingDx > this.paddingSx){
-        this.marginSize -= 30;
-        console.log('vado 40 a sinistra');
-      }else{
-        this.paddingSx = 0;
-        this.paddingDx += 7;
-        this.marginSize -= 30;
-        console.log('vado 40 a sinistra');
-      }
-    }
+  enemyAttkNoDefense(){
+    this.enemyAttack = true;
+    setTimeout(() => {
+      this.enemyAttack = false;
+       this.avatarStandards = false;
+      this.avatarDamage = true;
+    }, 250);
+    // setTimeout(() => {
+
+    // }, 280);
+    setTimeout(() => {
+      this.avatarStandards = true;
+      this.avatarDamage = false;
+    }, 700);
   }
-  moveUp(){
-    this.marginSizeTop += 30;
-    console.log('vado 30 in su');
+
+  avatarHitNoDefense(){
+    this.enemyAttkNoDefense();
   }
-  moveDown(){
-    if(this.marginSizeTop > 0){
-      this.marginSizeTop -= 30;
-      console.log('vado 30 in giù');
-    }
-  }
-  moveDx(){
-    if(this.paddingSx > this.paddingDx){
-      this.marginSize += 30;
-      console.log('vado 40 a sinistra');
+
+//Attacco dell'Avatar
+  toBattleAttack(){
+    if(this.staminaPoints > 0){
+      this.staminaPoints -= 2
+      this.toBattleAttack2()
     }else{
-      this.paddingDx = 0;
-      this.paddingSx += 7;
-      this.marginSize += 30;
-      console.log('vado 40 a sinistra');
+      this.iCantDefense = false;
+      setTimeout(() => {
+        this.iCantDefense = true;
+        }, 1500);
     }
   }
-  reset(){
-    this.marginSize = 30;
-    this.marginSizeTop = 30;
+  toBattleAttack2(){
+    if (this.newEnemyAction == 'ATTACCO' || this.newEnemyAction == 'ATTACCO X2' ){
+      this.disableButton = true;
+      this.attackMove()
+      if(this.newEnemyAction == 'ATTACCO X2'){
+        setTimeout(() => {
+        this.enemyAttkNoDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+        }, 1800);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 2800);
+      }else{
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 1800);
+      }
+    }else{
+      this.disableButton = true;
+      this.attackMoveVSDefense()
+          setTimeout(() => {
+          this.disableButton = false;
+          this.enemyDefense = true;
+          this.enemyNewAction()
+        }, 1500);
+    }
   }
+
+  enemyAttackAfterConcentrazione(){
+    if (this.newEnemyAction == 'ATTACCO' || this.newEnemyAction == 'ATTACCO X2' ){
+      this.disableButton = true;
+
+      if(this.newEnemyAction == 'ATTACCO X2'){
+        setTimeout(() => {
+        this.enemyAttkNoDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+        }, 1800);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 2800);
+      }else if(this.newEnemyAction == 'ATTACCO'){
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 1800);
+      }
+  }}
+
+  toBattleDefense(){
+    if (this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO'){
+      this.staminaPoints -= 4;
+      this.defenseMove()
+    } else if(this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO X2'){
+      if (this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO X2'){
+        this.staminaPoints -= 4;
+        this.avatarStandards = false;
+        this.avatarDefense = true;
+        this.disableButton = true;
+        setTimeout(() => {
+        this.enemyAttkVSDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.avatarStandards = true;
+          this.avatarDefense = false;
+        }, 1500);
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+        }, 1800);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 2800);
+        }else {
+          this.iCantDefenseMe()
+        }
+    } else if((this.staminaPoints > 4 && this.newEnemyAction == 'DIFESA')){
+      if (this.staminaPoints > 4 && this.newEnemyAction == 'DIFESA'){
+        this.staminaPoints -= 4;
+        this.disableButton = true;
+        this.avatarStandards = false;
+        this.avatarDefense = true;
+        this.bothDefense = false;
+        setTimeout(() => {
+        this.disableButton = false;
+        this.avatarStandards = true;
+        this.avatarDefense = false;
+        this.bothDefense = true;
+        this.enemyNewAction()
+        }, 1500);
+      }else {
+        this.iCantDefenseMe()
+      }
+    } else{
+      this.iCantDefenseMe()
+    }
+  }
+
+  concentrazione(){
+    this.staminaPoints += 4;
+    this.disableButton = true;
+    this.versusConcentrazione = false;
+
+    if(this.newEnemyAction == 'DIFESA'){
+      setTimeout(() => {
+        this.disableButton = false;
+        this.versusConcentrazione = true;
+        this.enemyNewAction()
+      }, 2000);
+    }else{
+      setTimeout(() => {
+        this.versusConcentrazione = true;
+        }, 1900);
+      this.enemyAttackAfterConcentrazione()
+    }
+  }
+
+  iCantDefenseMe(){
+
+    this.iCantDefense = false;
+    setTimeout(() => {
+    this.iCantDefense = true;
+    }, 1500);
+  }
+  // 'ATTACCO', 'DIFESA', 'PENSO', 'ATTACCO X2', 'MI CURO', 'ATTACCO'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

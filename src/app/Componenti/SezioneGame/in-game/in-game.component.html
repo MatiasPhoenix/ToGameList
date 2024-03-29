@@ -50,9 +50,9 @@
             Velocità:  <span class="pe-4">     4</span>
           </p>
         </div>
-        <div class="latoPersonaggio statistiche col-6 align-self-center ms-4">
+        <div class="latoPersonaggio statistiche col-6 align-self-center ms-4 pt-3">
           <p>PUNTI AZIONE: <span>5</span></p>
-          <p>ALTRA ROBA:<span>5</span></p>
+          <p>Soldoni: $<span>500</span></p>
         </div>
 
         <ng-template *ngIf="charAndScenario; then combattimento else torniamoACasa"></ng-template>
@@ -73,13 +73,15 @@
   </div>
 </div>
 
+<!-- SELEZIONE MISSIONE -->
+<div>
 
-
+</div>
 <!-- CAMPO DI BATTAGLIA -->
 
 <div *ngIf="battleGround" class="container d-flex battleGround py-3 ps-4">
 
-  <div class="menu"></div>
+  <div class="menu text-center"><p class="mt-4">Stamina: {{ staminaPoints }}</p></div>
 
   <div class="">
 
@@ -88,11 +90,20 @@
       <div class="align-self-center">
         <img *ngIf="avatarStandards"
           src="../../../../assets/AvatarSTANDARD.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'custom-margin': applyMargin }">
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
 
         <img *ngIf="avatarAttacco"
           src="../../../../assets/AvatarCOMBATATTACCO.png"
-        alt="" class="personaggioInBattaglia" [ngClass]="{ 'custom-margin': applyMargin }">
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
+
+        <img *ngIf="avatarDefense"
+          src="../../../../assets/AvatarCombatDIFESA.png"
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce, 'avatarHitDefense': avatarHitDefense }">
+
+        <img *ngIf="avatarDamage"
+          src="../../../../assets/AvatarCOMBATDANNO.png"
+        alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
+        <p class="avatarDefenseText" *ngIf="!iCantDefense">Non ho PA!!</p>
       </div>
 
       <div class="align-self-center">
@@ -103,18 +114,25 @@
       NrZXQiOiIzIiwiQ2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImhhaXJUb25lIjoiYmViZWJlIiwicGFudHNUb25
       lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
       MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
-        alt="" class="nemicoInBattaglia" [ngClass]="{ 'custom-enemy': applyMarginEnemy }">
+        alt="" class="nemicoInBattaglia" [ngClass]="{ 'enemyHit': enemyCopito, 'enemyAttack' : enemyAttack}">
+        <p class="enemyDefenseText" *ngIf="!enemyDefense">MI DIFENDOOO!!!</p>
+        <p class="enemyDefenseText" *ngIf="!bothDefense">Codardo, attaccami!!!</p>
+        <p class="enemyDefenseText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
       </div>
     </div>
     <div class="battleButtons d-flex justify-content-center">
-      <button (click)="attackMove()" class="mx-3 mt-3">Attacca</button>
-      <button class="mx-3 mt-3">Difendi</button>
+      <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
+      <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
+      <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
       <button class="mx-3 mt-3">FattiNaSega</button>
     </div>
+    <div>
 
+      <!-- <button (click)="enemyNewAction()">Scegli una parola casuale</button> -->
+    </div>
   </div>
 
-  <div class="menu"></div>
+  <div class="menu text-center"><p class="mt-4">Nemico-> {{ newEnemyAction }}</p></div>
 
 </div>
 
