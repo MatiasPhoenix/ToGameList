@@ -55,7 +55,8 @@
 }
 
 .menuOptions{
-  height: 800px;
+  height: 500px;
+  width: 750px;
   background-color: antiquewhite;
   border: 21px ridge #ffaf50;
 }
@@ -174,3 +175,25 @@
 }
 
 
+.cssPerScomparsa {
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+.scomparsa {
+  opacity: 0.0;
+}
+.victoryScreen{
+
+  border: 15px ridge #380d0d;
+  margin: 0 auto;
+  border-radius: 10% 10% 10% 10%;
+  height: 420px;
+  width: 440px;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../../assets/VictoryWallpaper2.jpg');
+  backdrop-filter: blur(10px); /* Aggiunge un effetto di sfocatura allo sfondo */
+}
+.victoryButton{
+  width: 150px;
+  margin-top: 10px;
+}

@@ -21,9 +21,11 @@ export class InGameComponent implements OnInit  {
   enemyMistery            : boolean = true;
   enemyGoblinStandard     : boolean = false;
   enemyGoblinSkirmisher   : boolean = false;
+  bothEnemyGoblins        : boolean = false;
   enemyMiniBoss           : boolean = false;
   iCantDefense            : boolean = true;
   avatarHitDefense        : boolean = false;
+  isTransparent           : boolean = false;
 
 //In battaglia "dialoghi"
   enemyDefenseGoblin      : boolean = true;
@@ -32,6 +34,8 @@ export class InGameComponent implements OnInit  {
   enemyDefense            : boolean = true;
   bothDefense             : boolean = true;
   versusConcentrazione    : boolean = true;
+  provokeBoss             : boolean = true;
+  provokeGoblin           : boolean = true;
 
 //Avatar sprites
   avatarStandards         : boolean = true;
@@ -69,13 +73,13 @@ export class InGameComponent implements OnInit  {
     }, 100);
   }
 
-  enemyNewAction() {
+  enemyNewAction() { //Calcola la mossa successiva del nemico
     const indiceCasuale: number = Math.floor(Math.random()
     * this.enemyActions.length);
     return this.newEnemyAction = this.enemyActions[indiceCasuale];
   }
 
-  chooseCamaign(){
+  chooseCamaign(){ //Button Adventure Time! avvia metodi per l'avventura
     if (this.menuCampaign == false) {
       return this.menuCampaign = true;
     }else {
@@ -83,8 +87,15 @@ export class InGameComponent implements OnInit  {
       return this.menuCampaign = false;
     }
   }
+  annullaCamaign(){ //Button Annulla Campagna, disattiva chooseCampaign senza intralciare
+    if (this.menuCampaign == false) {
+      return this.menuCampaign = true;
+    }else {
+    return this.menuCampaign = false;
+    }
+  }
 
-  toBattle(){
+  toBattle(){ //Fa comparire il campo di battaglia
     if(this.battleGround == false){
       this.pgToBattle()
       return this.battleGround = true;
@@ -94,7 +105,7 @@ export class InGameComponent implements OnInit  {
     }
   }
 
-  pgToBattle(){
+  pgToBattle(){ //Permette la comparsa di scenario campagna, stanza buia e avatar sul campo
     if(this.charAndScenario == true){
       return this.charAndScenario = false;
     }else{
@@ -134,7 +145,6 @@ export class InGameComponent implements OnInit  {
       this.avatarAttacco = true;
       setTimeout(() => {
         this.enemyColpito = true;
-        this.enemyTakeDamage()
       }, 150);
       setTimeout(() => {
         this.avatarStandards = true;
@@ -209,15 +219,22 @@ export class InGameComponent implements OnInit  {
 
 //Attacco dell'Avatar
   toBattleAttack(){
-    if(this.staminaPoints > 0){
-      this.staminaPoints -= 2
-      this.toBattleAttack2()
-    }else{
-      this.iCantDefense = false;
-      setTimeout(() => {
-        this.iCantDefense = true;
-        }, 1500);
+    if(this.enemyBattleLife > 1){
+      if(this.staminaPoints > 0){
+            this.staminaPoints -= 2
+            this.toBattleAttack2()
+          }else{
+            this.iCantDefense = false;
+            setTimeout(() => {
+              this.iCantDefense = true;
+              }, 1500);
+          }
+    } else if(this.enemyBattleLife == 1 && this.newEnemyAction != 'DIFESA'){
+      this.attackMove()
+      this.enemyTakeDamage()
+      this.avatarWin();
     }
+
   }
   toBattleAttack2(){
     if (this.newEnemyAction == 'ATTACCO' || this.newEnemyAction == 'ATTACCO X2' ){
@@ -390,55 +407,72 @@ export class InGameComponent implements OnInit  {
 
 //METODI DELLE CAMPAGNA
   enemyChooseGoblin(){
-    this.enemyMaxLife = 4;
-    this.enemyBattleLife = 4;
+    this.enemyMaxLife = 1;
+    this.enemyBattleLife = 1;
     this.lifeMetodEnemy()
-    this.chooseCamaign()
-    if (this.enemyGoblinStandard == false) {
-      return this.enemyGoblinStandard = true;
-    }else{
-      this.enemyGoblinStandard = false;
-      return this.enemyGoblinSkirmisher = true;
-    }
+
+      this.chooseCamaign()
+
+      this.enemyGoblinSkirmisher = true
+      this.provokeGoblin = false;
+      setTimeout(() => {
+        this.provokeGoblin = true;
+      }, 1000);
+
+  }
+  goblinChange(){
+      this.enemyMaxLife = 1;
+      this.enemyBattleLife = 1;
+      this.lifeMetodEnemy()
+      this.enemyGoblinSkirmisher = false;
+      this.enemyGoblinStandard = true;
+      this.isTransparent = false;
+      this.provokeGoblin = false;
+      setTimeout(() => {
+        this.bothEnemyGoblins = true;
+        this.provokeGoblin = true;
+      }, 1000);
   }
 
   enemyChooseMiniBoss(){
-    this.enemyMaxLife = 6;
-    this.enemyBattleLife = 6;
+    this.enemyMaxLife = 2;
+    this.enemyBattleLife = 2;
     this.lifeMetodEnemy()
     this.chooseCamaign()
-    if (this.enemyMiniBoss == false) {
-      return this.enemyMiniBoss = true;
-    }else{
-      return this.enemyMiniBoss = false;
-    }
+
+    this.enemyMiniBoss = true;
+
+    setTimeout(() => {
+      this.provokeBoss = false;
+    }, 500);
+    setTimeout(() => {
+      this.provokeBoss = true;
+    }, 2500);
   }
 
   svuotaBattleground(): void {
-    if (this.enemyGoblinStandard) {
-      this.enemyGoblinStandard = false;
-    } else if (this.enemyGoblinSkirmisher) {
-      this.enemyGoblinSkirmisher = false;
-    } else if (this.enemyMiniBoss) {
-      this.enemyMiniBoss = false;
-    }
+    this.enemyGoblinStandard = false;
+    this.enemyGoblinSkirmisher = false;
+    this.enemyMiniBoss = false;
   }
 
-  loseScreen : boolean = false;
-  victoryScreen : boolean = false;
 
-  avatarMaxLife :number = 10;
-  enemyMaxLife! :number;
+//SEZIONE PER IL CALCOLO DEI DANNI E LA PRESENTAZIONE A SCHERMO
+  loseScreen          : boolean = false;
+  victoryScreen       : boolean = false;
 
-  avatarBattleLife! :number;
-  enemyBattleLife! :number;
+  avatarMaxLife       :number = 10;
+  enemyMaxLife!       :number;
 
-  avatarLifeArray : string[] = [];
-  enemyLifeArray : string[] = [];
+  avatarBattleLife!   :number;
+  enemyBattleLife!    :number;
 
-  cuoreIntero = "../../../../assets/cuoreIntero.png";
-  cuoreFerito = "../../../../assets/cuoreFerito.png";
-  cuoreVuoto = "../../../../assets/cuoreVuoto.png";
+  avatarLifeArray     : string[] = [];
+  enemyLifeArray      : string[] = [];
+
+  cuoreVuoto          = "../../../../assets/cuoreVuoto.png";
+  cuoreFerito         = "../../../../assets/cuoreFerito.png";
+  cuoreIntero         = "../../../../assets/cuoreIntero.png";
 
   //CALCOLO DANNI AVATAR
   lifeMetod(){
@@ -455,8 +489,8 @@ export class InGameComponent implements OnInit  {
     }else{
       for (let index = 0; index < cuoriMancantiAvatar; index++) {
         this.avatarLifeArray.push(this.cuoreVuoto);
+        this.avatarLose()
       }
-      this.avatarLose()
     }
   }
   avatarTakeDamage(){
@@ -471,18 +505,40 @@ export class InGameComponent implements OnInit  {
       this.loseScreen = true;
     }, 2000);
   }
-  avatarWin(){
+
+  avatarWin() {
+    this.characterDead();
     setTimeout(() => {
-      this.victoryScreen = true;
+    if (this.bothEnemyGoblins) {
+      this.totalVictory();
+    }
+
+    if (this.enemyMiniBoss) {
+      this.enemyMiniBoss = false;
+      this.totalVictory();
+    }
+
+    if(this.enemyGoblinSkirmisher) {
+      this.goblinChange()
+    }
     }, 2000);
   }
+  totalVictory(){
+    setTimeout(() => {
+      this.toBattle();
+      this.svuotaBattleground();
+      this.victoryScreen = true;
+      this.isTransparent = false;
+    }, 1000);
+  }
+
 
    //CALCOLO DANNI NEMICO
    lifeMetodEnemy(){
     this.enemyLifeArray.splice(0, this.enemyLifeArray.length);
     let cuoriMancantiEnemy = (this.enemyMaxLife - this.enemyBattleLife);
 
-    if (this.enemyBattleLife != 0) {
+    if (this.enemyBattleLife > 0) {
       for (let index = 0; index < this.enemyBattleLife; index++) {
         this.enemyLifeArray.push(this.cuoreIntero);
       }
@@ -490,10 +546,10 @@ export class InGameComponent implements OnInit  {
         this.enemyLifeArray.push(this.cuoreVuoto);
       }
     }else{
-      for (let index = 0; index < cuoriMancantiEnemy; index++) {
+      for (let index = 0; index < this.enemyMaxLife; index++) {
         this.enemyLifeArray.push(this.cuoreVuoto);
+        this.avatarWin()
       }
-
     }
   }
   enemyTakeDamage(){
@@ -507,9 +563,14 @@ export class InGameComponent implements OnInit  {
 
 
 
+  characterDead(){
+    if (!this.isTransparent) {
+      this.isTransparent = true;
+    }else{
+      this.isTransparent = false;
+    }
 
-
-
+  }
 
 
 

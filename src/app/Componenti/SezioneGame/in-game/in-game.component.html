@@ -14,7 +14,7 @@
                lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
                0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
                iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
-        alt="" class="personaggio">
+        alt="" class="personaggio esperimento" [ngClass]="{'esperimentoTrasparenza': isTransparent}">
         </div>
       </ng-template>
       <ng-template #notte>
@@ -92,7 +92,7 @@
       iI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjM
       iLCJ3aW5nc1RvbmUyIjoiMDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0V
       G9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
-        alt="" class="chooseEnemyChoice">
+        alt="" class="chooseEnemyChoice" >
       </div>
 
     </div>
@@ -102,7 +102,7 @@
     </div>
   </div>
   <div>
-    <button (click)="chooseCamaign()" class="py-5 btn btn-danger">COMBATTIAMO!</button>
+    <button (click)="annullaCamaign()" class="py-3 btn btn-primary">Annulla campagna</button>
   </div>
 </div>
 
@@ -143,23 +143,22 @@
           </div>
 
 <!-- AREA NEMICO -->
-
           <div class="">
             <!-- AVVENTURA GOBLIN -->
             <img *ngIf="enemyGoblinStandard"
             src="../../../../assets/GoblinStandard.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
+            alt="" class="nemicoInBattaglia align-self-center cssPerScomparsa" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack, 'scomparsa': isTransparent}">
             <img *ngIf="enemyGoblinSkirmisher"
-            src="../../../../assets/GoblinStandard.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
-          <!-- MINI BOSS -->
+            src="../../../../assets/GoblinSkirmisher.png"
+            alt="" class="nemicoInBattaglia align-self-center cssPerScomparsa" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack, 'scomparsa': isTransparent}">
+            <!-- MINI BOSS -->
             <img *ngIf="enemyMiniBoss"
       src="http://www.avatarsinpixels.com/minipix/eyJXaW5ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
       CJFeWVzIjoiMjgiLCJNb3V0aCI6IjE3IiwiU2hvZXMiOiI1IiwiR2xvdmVzIjoiNyIsIlBhbnRzIjoiMyIsIlRvcCI6IjE2IiwiQmVsdCI6IjEiLCJKYW
       NrZXQiOiIzIiwiQ2FwZSI6IjQiLCJOZWNrIjoiMyIsIkhhaXIiOiIxNiIsIkdsYXNzZXMiOiIxMyIsImhhaXJUb25lIjoiYmViZWJlIiwicGFudHNUb25
       lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
       MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
-            alt="" class="nemicoInBattaglia align-self-center" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack}">
+            alt="" class="nemicoInBattaglia align-self-center cssPerScomparsa" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack, 'scomparsa': isTransparent}">
           </div>
         </div>
 
@@ -169,12 +168,16 @@
         </div>
         <!-- DIALOGHI NEMICI -->
         <div class="col-12 d-flex justify-content-end align-items-end">
+          <p class="enemyDefenseText enemyText" *ngIf="!provokeBoss">Questa sarà la tua tomba!</p>
           <p class="enemyDefenseText enemyText" *ngIf="!enemyDefense">MI DIFENDOOO!!!</p>
           <p class="enemyDefenseText enemyText" *ngIf="!bothDefense">Codardo, attaccami!!!</p>
           <p class="enemyDefenseText enemyText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
+
+
+          <p class="enemyDefenseText enemyText" *ngIf="!provokeGoblin">Io uccide te!!!</p>
           <p class="enemyDefenseText enemyText" *ngIf="!enemyDefenseGoblin">IO BLOCCA!!!</p>
           <p class="enemyDefenseText enemyText" *ngIf="!bothDefenseGoblin">Waaaagh!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!versusConcencGoblin">Che tu fai?!</p>
+          <p class="enemyDefenseText enemyText" *ngIf="!versusConcencGoblin">????</p>
         </div>
 
     </div>
@@ -183,6 +186,8 @@
         <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
         <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
         <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
+        <button [disabled]="disableButton" (click)="avatarWin()" class="mx-3 mt-3">AvatarWin</button>
+
 
 
       </div>
@@ -198,4 +203,11 @@
     </div>
   </div>
 
+</div>
+
+<div class="victoryScreen d-flex flex-column" *ngIf="!victoryScreen">
+  <img src="../../../../assets/Victory.png" alt="">
+    <button class="btn btn-success justify-content-start align-self-center victoryButton"
+      (click)="victoryScreen = false">Torna nella ToGameList
+    </button>
 </div>
