@@ -53,6 +53,12 @@
 .cuoreLife{
   max-height: 30px;
 }
+.batteryStamina{
+  max-height: 40px;
+}
+.enemyMove{
+  max-height: 80px;
+}
 
 .menuOptions{
   height: 500px;
@@ -196,4 +202,10 @@
 .victoryButton{
   width: 150px;
   margin-top: 10px;
+}
+
+.gif{
+  height: 250px;
+  width: 250px;
+  margin-right: 50px;
 }

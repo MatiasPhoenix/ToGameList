@@ -2,6 +2,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { log } from 'console';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-in-game',
@@ -12,7 +13,7 @@ export class InGameComponent implements OnInit  {
   constructor(){}
 
 //STATISTICHE AVATAR
-  staminaPoints           : number = 10;
+
 
 //In battaglia
   avatarColpisce          : boolean = false;
@@ -48,6 +49,7 @@ export class InGameComponent implements OnInit  {
 //Azioni nemico
   newEnemyAction          : string = '';
   enemyActions            : string[] = ['ATTACCO', 'DIFESA', 'ATTACCO X2']; // 'ATTACCO', 'DIFESA', 'PENSO', 'ATTACCO X2', 'MI CURO', 'ATTACCO'
+  imgEnemyAttack          : string[] = ['../../../../sword/.png', '../../../../swordX2/.png', '../../../../shield/.png'];
 
 //Gestione sezioni
   disableButton           : boolean = false;
@@ -66,6 +68,7 @@ export class InGameComponent implements OnInit  {
 /////////////
 
   ngOnInit(){
+    this.staminaMetod()
     this.enemyNewAction()
     this.setLifeAvatar()
     setTimeout(() => {
@@ -73,7 +76,7 @@ export class InGameComponent implements OnInit  {
     }, 100);
   }
 
-  enemyNewAction() { //Calcola la mossa successiva del nemico
+  enemyNewAction() { //Calcola random della mossa successiva del nemico
     const indiceCasuale: number = Math.floor(Math.random()
     * this.enemyActions.length);
     return this.newEnemyAction = this.enemyActions[indiceCasuale];
@@ -220,9 +223,9 @@ export class InGameComponent implements OnInit  {
 //Attacco dell'Avatar
   toBattleAttack(){
     if(this.enemyBattleLife > 1){
-      if(this.staminaPoints > 0){
-            this.staminaPoints -= 2
-            this.toBattleAttack2()
+      if(this.staminaBattleAvatar > 0){
+          this.useStaminaAvatar(1);
+          this.toBattleAttack2();
           }else{
             this.iCantDefense = false;
             setTimeout(() => {
@@ -308,12 +311,12 @@ export class InGameComponent implements OnInit  {
   }}
 
   toBattleDefense(){
-    if (this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO'){
-      this.staminaPoints -= 4;
+    if (this.staminaBattleAvatar >= 2 && this.newEnemyAction == 'ATTACCO'){
+      this.useStaminaAvatar(2);
       this.defenseMove()
-    } else if(this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO X2'){
-      if (this.staminaPoints > 4 && this.newEnemyAction == 'ATTACCO X2'){
-        this.staminaPoints -= 4;
+    } else if(this.staminaBattleAvatar >= 2 && this.newEnemyAction == 'ATTACCO X2'){
+      if (this.staminaBattleAvatar >= 2 && this.newEnemyAction == 'ATTACCO X2'){
+        this.useStaminaAvatar(2);
         this.avatarStandards = false;
         this.avatarDefense = true;
         this.disableButton = true;
@@ -335,9 +338,9 @@ export class InGameComponent implements OnInit  {
         }else {
           this.iCantDefenseMe()
         }
-    } else if((this.staminaPoints > 4 && this.newEnemyAction == 'DIFESA')){
-      if (this.staminaPoints > 4 && this.newEnemyAction == 'DIFESA'){
-        this.staminaPoints -= 4;
+    } else if((this.staminaBattleAvatar >= 2 && this.newEnemyAction == 'DIFESA')){
+      if (this.staminaBattleAvatar >= 2 && this.newEnemyAction == 'DIFESA'){
+        this.useStaminaAvatar(2);
         this.disableButton = true;
         this.avatarStandards = false;
         this.avatarDefense = true;
@@ -364,9 +367,76 @@ export class InGameComponent implements OnInit  {
       this.iCantDefenseMe()
     }
   }
+  swordAndShield(){//Attacca e difende con lo scudo
+    if(this.enemyBattleLife != 1 && this.newEnemyAction != 'DIFESA'){
+      if (this.staminaBattleAvatar >= 3 && this.newEnemyAction == 'ATTACCO X2'){
+        this.useStaminaAvatar(3);
+        this.attackMove();
+        setTimeout(() => {
+        this.avatarStandards = false;
+        this.avatarDefense = true;
+        this.disableButton = true;
+        setTimeout(() => {
+        this.enemyAttkVSDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.avatarStandards = true;
+          this.avatarDefense = false;
+        }, 1500);
+        setTimeout(() => {
+          this.enemyAttkNoDefense()
+          this.avatarTakeDamage()
+        }, 1800);
+        setTimeout(() => {
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 2800);
+        }, 1000);
+      }else if(this.staminaBattleAvatar >= 3 && this.newEnemyAction == 'ATTACCO'){
+        this.useStaminaAvatar(3);
+        this.attackMove();
+        setTimeout(() => {
+        this.avatarStandards = false;
+        this.avatarDefense = true;
+        this.disableButton = true;
+        setTimeout(() => {
+        this.enemyAttkVSDefense()
+        }, 1000);
+        setTimeout(() => {
+          this.avatarStandards = true;
+          this.avatarDefense = false;
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 1500);
+        }, 1000);
+      }else{
+        this.iCantDefenseMe()
+      }
+
+    }else if(this.enemyBattleLife == 1 && this.newEnemyAction != 'DIFESA'){
+      if (this.staminaBattleAvatar >= 3) {
+        this.useStaminaAvatar(3);
+        this.attackMove();
+        setTimeout(() => {
+        this.avatarStandards = false;
+        this.avatarDefense = true;
+        this.disableButton = true;
+        this.avatarWin();
+        setTimeout(() => {
+          this.avatarStandards = true;
+          this.avatarDefense = false;
+          this.disableButton = false;
+          this.enemyNewAction()
+        }, 1200);
+        }, 1000);
+      }else{
+        this.iCantDefenseMe()
+      }
+      }
+  }
 
   concentrazione(){
-    this.staminaPoints += 4;
+    this.chargeStaminaAvatar(3);
     this.disableButton = true;
     if (this.enemyGoblinStandard == true || this.enemyGoblinSkirmisher == true) {
       this.versusConcencGoblin = false;
@@ -407,8 +477,8 @@ export class InGameComponent implements OnInit  {
 
 //METODI DELLE CAMPAGNA
   enemyChooseGoblin(){
-    this.enemyMaxLife = 1;
-    this.enemyBattleLife = 1;
+    this.enemyMaxLife = 2;
+    this.enemyBattleLife = 2;
     this.lifeMetodEnemy()
 
       this.chooseCamaign()
@@ -421,8 +491,8 @@ export class InGameComponent implements OnInit  {
 
   }
   goblinChange(){
-      this.enemyMaxLife = 1;
-      this.enemyBattleLife = 1;
+      this.enemyMaxLife = 4;
+      this.enemyBattleLife = 4;
       this.lifeMetodEnemy()
       this.enemyGoblinSkirmisher = false;
       this.enemyGoblinStandard = true;
@@ -435,8 +505,8 @@ export class InGameComponent implements OnInit  {
   }
 
   enemyChooseMiniBoss(){
-    this.enemyMaxLife = 2;
-    this.enemyBattleLife = 2;
+    this.enemyMaxLife = 6;
+    this.enemyBattleLife = 6;
     this.lifeMetodEnemy()
     this.chooseCamaign()
 
@@ -573,10 +643,75 @@ export class InGameComponent implements OnInit  {
   }
 
 
+  staminaMaxAvatar     : number = 7;
+  staminaBattleAvatar  : number = 7;
+  avatarStaminaArray   : string[] = [];
+
+  batteryFull          = "../../../../assets/BatteriaPiena.png";
+  batteryEmpty         = "../../../../assets/BatteriaVuota.png";
 
 
+  staminaMetod(){
+    this.avatarStaminaArray.splice(0, this.avatarStaminaArray.length);
+    let staminaMancanteAvatar = (this.staminaMaxAvatar - this.staminaBattleAvatar);
 
+    if (this.staminaBattleAvatar != 0) {
+      for (let index = 0; index < this.staminaBattleAvatar; index++) {
+        this.avatarStaminaArray.push(this.batteryFull);
+      }
+      for (let index = 0; index < staminaMancanteAvatar; index++) {
+        this.avatarStaminaArray.push(this.batteryEmpty);
+      }
+    }else{
+      for (let index = 0; index < staminaMancanteAvatar; index++) {
+        this.avatarStaminaArray.push(this.batteryEmpty);
+      }
+    }
+  }
+  useStaminaAvatar(staminaCostAvatar : number){
+    this.staminaBattleAvatar -= staminaCostAvatar;
+    this.staminaMetod()
+  }
+  chargeStaminaAvatar(staminaCostAvatar : number){
+    this.staminaBattleAvatar += staminaCostAvatar;
+    if(this.staminaBattleAvatar >= this.staminaMaxAvatar){
+      this.staminaBattleAvatar = this.staminaMaxAvatar;
+    }
+    this.staminaMetod()
+  }
 
+  useObject(){//Permette l'uso di oggetti(mossa gratuita)
 
+  }
+  secretSkill(){//Attacco speciale(molti danni)
 
+  }
+  gifExplosion : boolean = false;
+
+  bankaiExplosion(){
+    if(this.enemyGoblinStandard){
+      this.gifExplosion = true;
+      this.enemyGoblinStandard = false;
+      setTimeout(() => {
+        this.gifExplosion = false;
+        this.enemyGoblinStandard = true;
+      }, 500);
+    }else if(this.enemyGoblinSkirmisher){
+      this.gifExplosion = true;
+      this.enemyGoblinSkirmisher = false;
+      setTimeout(() => {
+        this.gifExplosion = false;
+        this.enemyGoblinSkirmisher = true;
+      }, 500);
+    }else if(this.enemyMiniBoss){
+      this.gifExplosion = true;
+      this.enemyMiniBoss = false;
+      setTimeout(() => {
+        this.gifExplosion = false;
+        this.enemyMiniBoss = true;
+      }, 500);
+    }
+  }
 }
+
+

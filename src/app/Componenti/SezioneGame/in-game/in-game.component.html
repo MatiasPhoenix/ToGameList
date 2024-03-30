@@ -40,8 +40,12 @@
               <img class="cuoreLife" [src]="avatarLife" alt="">
             </div>
           </div>
-          <p class="">Barra della stanchezza</p>
-          <p class="">Barra del mana</p>
+          <div class=" d-flex justify-content-center">
+            <div class="pb-3" *ngFor="let batteryStamina of avatarStaminaArray">
+              <img class="batteryStamina mx-2" [src]="batteryStamina" alt="">
+            </div>
+          </div>
+
           <p class="textos">
             Forza:     <span class="pe-4">     3</span>
             Armatura:  <span class="pe-4">     4</span>
@@ -109,8 +113,12 @@
 <!-- CAMPO DI BATTAGLIA -->
 <div *ngIf="!battleGround" class="container d-flex battleGround py-3 ps-4">
 
-  <div class="menu text-center">
-    <p class="mt-4">Stamina: {{ staminaPoints }}</p>
+  <div class="latoPersonaggio menu text-center">
+    <div class="d-flex justify-content-center align-items-start ms-3">
+      <div class="pb-3" *ngFor="let batteryStamina of avatarStaminaArray">
+        <img class="batteryStamina mt-2 me-1" [src]="batteryStamina" alt="">
+      </div>
+    </div>
     <div></div>
     <div class="d-flex flex-column justify-content-start align-items-start ms-3">
       <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
@@ -159,6 +167,7 @@
       lIjoiODMwNTA1IiwicGFudHNUb25lMiI6ImVmMDAwMCIsInRvcFRvbmUiOiI1NTU1NTUiLCJ3aW5nc1RvbmUiOiI5ZjBiMjMiLCJ3aW5nc1RvbmUyIjoi
       MDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0VG9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
             alt="" class="nemicoInBattaglia align-self-center cssPerScomparsa" [ngClass]="{ 'enemyHit': enemyColpito, 'enemyAttack' : enemyAttack, 'scomparsa': isTransparent}">
+            <img class="gif" *ngIf="gifExplosion" src="../../../../assets/gifExplosion.gif" alt="">
           </div>
         </div>
 
@@ -186,16 +195,26 @@
         <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
         <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
         <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
-        <button [disabled]="disableButton" (click)="avatarWin()" class="mx-3 mt-3">AvatarWin</button>
+        <button [disabled]="disableButton" (click)="swordAndShield()" class="mx-3 mt-3">Spada & Scudo</button>
+        <button [disabled]="disableButton" (click)="secretSkill()" class="mx-3 mt-3">Bankai!</button>
+        <button [disabled]="disableButton" (click)="useObject()" class="mx-3 mt-3">Usa oggetto</button>
+
 
 
 
       </div>
 
-  </div>
+    </div>
 
-  <div class="menu text-center">
-    <p class="mt-4">Nemico-> {{ newEnemyAction }}</p>
+
+  <div class="latoPersonaggio menu text-center">
+    <p class="">Mossa nemica</p>
+    <div [ngSwitch]="newEnemyAction">
+      <div *ngSwitchCase="'ATTACCO'"><img class="enemyMove mt-1" src="../../../../assets/sword.png" alt=""></div>
+      <div *ngSwitchCase="'DIFESA'"><img class="enemyMove mt-1" src="../../../../assets/shield.png" alt=""></div>
+      <div *ngSwitchCase="'ATTACCO X2'"><img class="enemyMove mt-1" src="../../../../assets/swordX2.png" alt=""></div>
+      <div *ngSwitchDefault>---</div>
+    </div>
     <div class="d-flex flex-column justify-content-end align-items-end me-3">
       <div class="pb-3" *ngFor="let enemyLife of enemyLifeArray">
         <img class="cuoreLife" [src]="enemyLife" alt="">
@@ -205,9 +224,13 @@
 
 </div>
 
-<div class="victoryScreen d-flex flex-column" *ngIf="!victoryScreen">
+<div class="victoryScreen d-flex flex-column" *ngIf="victoryScreen">
   <img src="../../../../assets/Victory.png" alt="">
     <button class="btn btn-success justify-content-start align-self-center victoryButton"
       (click)="victoryScreen = false">Torna nella ToGameList
     </button>
 </div>
+
+
+
+
