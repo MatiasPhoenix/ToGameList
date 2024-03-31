@@ -13,7 +13,16 @@ export class InGameComponent implements OnInit  {
   constructor(){}
 
 //STATISTICHE AVATAR
+  profileAvatarLevel!     : number;
+  profileAvatarExp!       : number;
 
+  profileAvatarStrength!  : number;
+  profileAvatarArmor!     : number;
+  profileAvatarSpeed!     : number;
+
+  profileAvatarGold!      : number;
+  profileAvatarLife!      : number;
+  profileAvatarStamina!   : number;
 
 //In battaglia
   avatarColpisce          : boolean = false;
@@ -57,7 +66,7 @@ export class InGameComponent implements OnInit  {
   battleGround            : boolean = true;
   charAndScenario         : boolean = true;
   menuCampaign            : boolean = false;
-  playerVictory!          : boolean;
+  toGameListTutorials     : boolean = false;
 
 /////////////
 /////////////
@@ -524,6 +533,7 @@ export class InGameComponent implements OnInit  {
     this.enemyGoblinStandard = false;
     this.enemyGoblinSkirmisher = false;
     this.enemyMiniBoss = false;
+    this.battleGround = true
   }
 
 
@@ -599,9 +609,9 @@ export class InGameComponent implements OnInit  {
       this.svuotaBattleground();
       this.victoryScreen = true;
       this.isTransparent = false;
+      this.bothEnemyGoblins = false;
     }, 1000);
   }
-
 
    //CALCOLO DANNI NEMICO
    lifeMetodEnemy(){
@@ -712,6 +722,49 @@ export class InGameComponent implements OnInit  {
       }, 500);
     }
   }
+
+  superAura1 : boolean = false;
+  superAura2 : boolean = false;
+
+  superAura(){
+    setTimeout(() => {
+      this.superAura1 = true;
+    }, 100);
+    setTimeout(() => {
+      this.superAura1 = false;
+      this.superAura2 = true
+    }, 150);
+    setTimeout(() => {
+      this.superAura1 = true
+      this.superAura2 = false;
+    }, 200);
+    setTimeout(() => {
+      this.superAura1 = false;
+      this.superAura2 = true
+    }, 250);
+    setTimeout(() => {
+      this.superAura1 = true
+      this.superAura2 = false;
+    }, 300);
+    setTimeout(() => {
+      this.superAura1 = false;
+      this.superAura2 = true
+    }, 350);
+    setTimeout(() => {
+      this.superAura1 = true
+      this.superAura2 = false;
+    }, 400);
+    setTimeout(() => {
+      this.superAura1 = false;
+      this.superAura2 = true
+    }, 450);
+    setTimeout(() => {
+      this.superAura1 = true
+      this.superAura2 = false;
+    }, 500);
+    setTimeout(() => {
+      this.superAura1 = false;
+      this.superAura2 = true
+    }, 550);
+  }
 }
-
-

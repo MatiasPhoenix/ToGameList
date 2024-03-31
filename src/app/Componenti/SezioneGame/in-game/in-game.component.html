@@ -34,7 +34,7 @@
 
      <div class="latoPersonaggio d-flex justify-content-between col-12 align-self-center">
        <div class="barrePersonaggio col-12">
-          <p class="">Livello personaggio</p>
+          <p class="">Livello personaggio {{profileAvatarLevel}}</p>
           <div class=" d-flex justify-content-center">
             <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
               <img class="cuoreLife" [src]="avatarLife" alt="">
@@ -47,15 +47,20 @@
           </div>
 
           <p class="textos">
-            Forza:     <span class="pe-4">     3</span>
-            Armatura:  <span class="pe-4">     4</span>
-            Velocità:  <span class="pe-4">     4</span>
+            Forza:     <span class="pe-4">     {{profileAvatarStrength}}</span>
+            Armatura:  <span class="pe-4">     {{profileAvatarArmor}}</span>
+            Velocità:  <span class="pe-4">     {{profileAvatarSpeed}}</span>
           </p>
         </div>
-        <div class="latoPersonaggio statistiche col-6 align-self-center ms-4 pt-3">
-          <p>PUNTI AZIONE: <span>5</span></p>
-          <p>Soldoni: $<span>500</span></p>
+        <div class="col-6 align-self-center ms-4">
+          <div class="latoPersonaggio statistiche  pt-2">
+            <p>EXP: {{profileAvatarExp}}</p>
+            <p>Soldoni: ${{profileAvatarGold}}</p>
+          </div>
+          <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button>
+          <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button>
         </div>
+
 
         <ng-template *ngIf="charAndScenario; then combattimento else torniamoACasa"></ng-template>
         <ng-template #combattimento>
@@ -135,7 +140,7 @@
           <div class="">
             <img *ngIf="avatarStandards"
               src="../../../../assets/AvatarSTANDARD.png"
-            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce }">
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce, 'superAura1' : superAura1, 'superAura2' : superAura2 }">
 
             <img *ngIf="avatarAttacco"
               src="../../../../assets/AvatarCOMBATATTACCO.png"
@@ -231,6 +236,17 @@
     </button>
 </div>
 
-
-
-
+<div class="latoPersonaggio statistiche d-flex flex-column text-center" *ngIf="toGameListTutorials">
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+<p>Tutorial che ti insegna roba figa, lalala</p>
+</div>
