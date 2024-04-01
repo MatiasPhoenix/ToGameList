@@ -208,54 +208,56 @@ export class TodoListComponent implements OnInit {
 ////////////////////////////////////////////////////////////
 //      SEZIONE INTERAZIONE TRA COMPONENTE, DATABASE E GAME
 
-  caricaProfiloAvatar() {
-    this.firebase.caricaProfiloAvatar(this.urlAvatar + '.json')
-      .subscribe((data: any) => {
-        const profileKey = Object.keys(data)[0];
-        const dataProfiloAvatar = data[profileKey];
+caricaProfiloAvatar() {
+  this.firebase.caricaProfiloAvatar(this.urlAvatar + '.json')
+    .subscribe((data: any) => {
+      const profileKey = Object.keys(data)[0];
+      const dataProfiloAvatar = data[profileKey];
 
-        let newLvl     = dataProfiloAvatar.profileAvatarLevel;
+      let newLvl     = dataProfiloAvatar.profileAvatarLevel;
 
-        let newGold    = dataProfiloAvatar.profileAvatarGold + 100;
-        let newExp     = dataProfiloAvatar.profileAvatarExp + 50;
+      let newGold    = dataProfiloAvatar.profileAvatarGold + 100;
+      let newExp     = dataProfiloAvatar.profileAvatarExp + 50;
 
-        let newStr     = dataProfiloAvatar.profileAvatarStrength;
-        let newDef     = dataProfiloAvatar.profileAvatarArmor;
-        let newSpd     = dataProfiloAvatar.profileAvatarSpeed;
+      let newStr     = dataProfiloAvatar.profileAvatarStrength;
+      let newDef     = dataProfiloAvatar.profileAvatarArmor;
+      let newSpd     = dataProfiloAvatar.profileAvatarSpeed;
 
-        let newLife    = dataProfiloAvatar.profileAvatarLife;
-        let newStamina = dataProfiloAvatar.profileAvatarStamina;
+      let newLife    = dataProfiloAvatar.profileAvatarLife;
+      let newStamina = dataProfiloAvatar.profileAvatarStamina;
 
-        if (newExp >= 100) {
-          newExp -= 100;
-          newLvl++;
+      if (newExp >= 100) {
+        newExp -= 100;
+        newLvl++;
+        if (newLvl === 2){
+        newLife +=2;
+        newStamina +=2;
         }
-        if (newLvl == 2){
-          newLife +=2;
-          newStamina +=2;
+        if (newLvl === 4){
+        newLife +=2;
+        newStamina +=2;
         }
-        if (newLvl == 4){
-          newLife +=2;
-          newStamina +=2;
+        if (newLvl === 6){
+        newLife +=2;
+        newStamina +=2;
         }
-        if (newLvl == 6){
-          newLife +=2;
-          newStamina +=2;
-        }
+      }
 
-        this.firebase.aggiornaProfiloAvatar(this.urlAvatar, profileKey, newExp, newGold,
-          newLvl, newStr, newDef, newSpd, newLife, newStamina )
-                  .subscribe(() => {
 
-                    window.location.reload();
-                    console.log('Stato completato aggiornato con successo per il task:');
-                  }, (error) => {
-                    console.error('Errore durante l\'aggiornamento dello stato completato per il task');
-                  });
-      }, (error) => {
-        console.error('Errore durante il caricamento dei dati dal database:', error);
-      });
-  }
+
+      this.firebase.aggiornaProfiloAvatar(this.urlAvatar, profileKey, newExp, newGold,
+        newLvl, newStr, newDef, newSpd, newLife, newStamina )
+                .subscribe(() => {
+
+                  window.location.reload();
+                  console.log('Stato completato aggiornato con successo per il task:');
+                }, (error) => {
+                  console.error('Errore durante l\'aggiornamento dello stato completato per il task');
+                });
+    }, (error) => {
+      console.error('Errore durante il caricamento dei dati dal database:', error);
+    });
+}
 
 
 ////////////////////////////////////////////////////////////
