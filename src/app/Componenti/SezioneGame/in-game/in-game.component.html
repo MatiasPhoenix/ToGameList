@@ -79,16 +79,17 @@
 
 <!-- SELEZIONE MISSIONE -->
 <div *ngIf="menuCampaign" class="container d-flex flex-column text-center menuOptions py-3 ps-4">
-  <h1 class="mt-2 mb-5">SCEGLI LA TUA AVVENTURA</h1>
+  <h1 class="col-6 cartelloBackground align-self-center mt-2 mb-5">TAGLIE</h1>
   <div class="d-flex container flex-column ">
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-start">
 
-      <div class="chooseEnemy me-3">
+      <div class="chooseEnemy enemyTaglie me-3 d-flex flex-column">
         <img (click)="enemyChooseGoblin()" src="../../../../assets/GoblinStandard.png"
         alt="" class="chooseEnemyChoice">
+        <p class="testoMissioni text-center text-dark">Piccola avventura con 2 combattimenti facili.</p>
       </div>
-      <div class="chooseEnemy me-3">
+      <div class="chooseEnemy enemyTaglie me-3 d-flex flex-column">
         <img (click)="enemyChooseMiniBoss()" src="http://www.avatarsinpixels.com/minipix/eyJXaW5
       ncyI6IjYiLCJIYWlyTG93ZXIiOiI1IiwiQ2FwZUJhY2siOiIzIiwiQm9keSI6IjMiL
       CJFeWVzIjoiMjgiLCJNb3V0aCI6IjE3IiwiU2hvZXMiOiI1IiwiR2xvdmVzIjoiNyI
@@ -99,16 +100,15 @@
       iLCJ3aW5nc1RvbmUyIjoiMDUwMjM3IiwiY2FwZVRvbmUiOiIyYTQ0MTAiLCJiZWx0V
       G9uZSI6IjlmMGIyMyIsImphY2tldFRvbmUiOiI4MzA1MDUifQ==/1/show.png"
         alt="" class="chooseEnemyChoice" >
+        <p class="testoMissioni text-center text-dark">Battaglia contro nemico più forte.</p>
       </div>
 
     </div>
-    <div class="d-flex justify-content-center">
-      <p class="testoMissioni me-4">Piccola avventura con 2 combattimenti facili.</p>
-      <p class="testoMissioni">Battaglia contro nemico più forte.</p>
-    </div>
+
+
   </div>
-  <div>
-    <button (click)="annullaCamaign()" class="py-3 btn btn-primary">Annulla campagna</button>
+  <div class="justify-content-center align-self-center">
+    <div (click)="annullaCamaign()" class="cartelloTaglie text-center text-dark">ESCI</div>
   </div>
 </div>
 
@@ -301,6 +301,12 @@
       (click)="victoryScreen = false">Torna nella ToGameList
     </button>
 </div>
+<div class="defeatedScreen d-flex flex-column" *ngIf="!loseScreen">
+  <img src="../../../../assets/rip.png" alt="">
+    <button class="btn btn-success justify-content-start align-self-center victoryButton"
+      (click)="victoryScreen = false">Torna nella ToGameList
+    </button>
+</div>
 
 <div class="latoPersonaggio statistiche d-flex flex-column text-center" *ngIf="toGameListTutorials">
 <p>Tutorial che ti insegna roba figa, lalala</p>
@@ -316,4 +322,5 @@
 <p>Tutorial che ti insegna roba figa, lalala</p>
 <p>Tutorial che ti insegna roba figa, lalala</p>
 </div>
+
 

@@ -29,7 +29,6 @@ export class InGameComponent implements OnInit  {
 
 //STATISTICHE AVATAR
 
-
   profileAvatarLevel!     : number;
   profileAvatarExp!       : number;
 

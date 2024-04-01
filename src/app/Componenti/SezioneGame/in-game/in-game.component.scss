@@ -63,9 +63,27 @@
 .menuOptions{
   height: 500px;
   width: 750px;
-  background-color: antiquewhite;
+  background-image: url('../../../../assets/missionBoard.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border: 21px ridge #ffaf50;
 }
+.cartelloBackground{
+  background-image: url('../../../../assets/cartello1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  height: 60px;
+  width: 270px;
+  color:aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+// .enemyTaglie{
+
+// }
 
 .battleGround{
   height: 800px;
@@ -119,16 +137,24 @@
 
 //Alla battaglia!
 .chooseEnemy{
-  background-image: url(../../../../assets/EsternoNotte.png);
-  border: 15px ridge #380d0d;
-  width: 150px;
+  width: 200px;
+  height: 250px;
+  background-image: url('../../../../assets/tagliaEnemy.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  color:aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .chooseEnemyChoice{
   cursor: pointer;
   width: 120px;
+
 }
 .testoMissioni{
-  margin-right: 20px;
+
   width: 140px;
   font-size: 0.9rem;
   font-style: italic;
@@ -204,6 +230,21 @@
   height: 420px;
   width: 440px;
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../../assets/VictoryWallpaper2.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  backdrop-filter: blur(10px); /* Aggiunge un effetto di sfocatura allo sfondo */
+}
+.defeatedScreen{
+  border: 15px ridge #380d0d;
+  margin: 0 auto;
+  border-radius: 10% 10% 10% 10%;
+  height: 420px;
+  width: 440px;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../../assets/VictoryWallpaper.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
   backdrop-filter: blur(10px); /* Aggiunge un effetto di sfocatura allo sfondo */
 }
 .victoryButton{
@@ -317,5 +358,16 @@
 .potionsOff{
   height: 40px;
   opacity: 0.5;
+}
+.cartelloTaglie{
+  background-image: url('../../../../assets/cartello4.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  height: 70px;
+  width: 100px;
+  padding-top: 20px;
+  font-weight: bolder;
+  cursor: pointer;
 }
 
