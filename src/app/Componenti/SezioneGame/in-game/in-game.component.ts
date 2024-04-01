@@ -207,7 +207,7 @@ caricaProfiloAvatar() {
       this.avatarAttacco = true;
       setTimeout(() => {
         this.enemyColpito = true;
-        this.enemyTakeDamage()
+        this.enemyTakeDamage(1)
       }, 150);
       setTimeout(() => {
         this.avatarStandards = true;
@@ -319,7 +319,7 @@ caricaProfiloAvatar() {
           }
     } else if(this.enemyBattleLife == 1 && this.newEnemyAction != 'DIFESA'){
       this.attackMove()
-      this.enemyTakeDamage()
+      this.enemyTakeDamage(1)
       this.avatarWin();
     }
 
@@ -709,8 +709,8 @@ caricaProfiloAvatar() {
       }
     }
   }
-  enemyTakeDamage(){
-    this.enemyBattleLife -= 1;
+  enemyTakeDamage(numero : number){
+    this.enemyBattleLife -= numero;
     this.lifeMetodEnemy();
   }
 
@@ -761,12 +761,54 @@ caricaProfiloAvatar() {
     this.staminaMetod()
   }
 
-  useObject(){//Permette l'uso di oggetti(mossa gratuita)
+  inventario   : boolean = false;
 
+  potionH1     : boolean = true;
+  potionH2     : boolean = true;
+  potionH3     : boolean = true;
+
+  potionS1     : boolean = true;
+  potionS2     : boolean = true;
+  potionS3     : boolean = true;
+
+  useObject(){//Permette l'uso di oggetti(mossa gratuita)
+    if (this.inventario == false) {
+      this.inventario = true;
+    }else{
+      this.inventario = false;
+    }
+  }
+  usePotion(potion : boolean, tipo : string){
+    if (potion == true && tipo === 'H') {
+      if (this.avatarBattleLife != this.profileAvatarLife) {
+        this.avatarBattleLife +=1;
+        this.lifeMetod();
+      }
+    }
+    if (potion == true && tipo === 'S') {
+      if (this.staminaBattleAvatar != this.profileAvatarStamina){
+        this.staminaBattleAvatar += 1;
+        this.staminaMetod()
+      }
+
+    }
   }
   secretSkill(){//Attacco speciale(molti danni)
+    this.avatarStandards = false;
+    this.avatarSkillStart = true;
+    setTimeout(() => {
+      this.avatarSkillStart = false;
+      this.avatarSkillAtk = true;
+      this.enemyTakeDamage(4)
+      this.bankaiExplosion()
+    }, 600);
+    setTimeout(() => {
+      this.avatarSkillAtk = false;
+      this.avatarStandards = true
 
+    }, 1200);
   }
+
   gifExplosion : boolean = false;
 
   bankaiExplosion(){
@@ -775,6 +817,9 @@ caricaProfiloAvatar() {
       this.enemyGoblinStandard = false;
       setTimeout(() => {
         this.gifExplosion = false;
+        if(this.enemyBattleLife <= 0){
+          this.avatarWin()
+        }
         this.enemyGoblinStandard = true;
       }, 500);
     }else if(this.enemyGoblinSkirmisher){
@@ -782,6 +827,9 @@ caricaProfiloAvatar() {
       this.enemyGoblinSkirmisher = false;
       setTimeout(() => {
         this.gifExplosion = false;
+        if(this.enemyBattleLife <= 0){
+          this.avatarWin()
+        }
         this.enemyGoblinSkirmisher = true;
       }, 500);
     }else if(this.enemyMiniBoss){
@@ -789,53 +837,87 @@ caricaProfiloAvatar() {
       this.enemyMiniBoss = false;
       setTimeout(() => {
         this.gifExplosion = false;
+        if(this.enemyBattleLife <= 0){
+          this.avatarWin()
+        }
         this.enemyMiniBoss = true;
       }, 500);
     }
   }
 
   superAura1 : boolean = false;
-  superAura2 : boolean = false;
+  superAuraBankai : boolean = false;
 
+  superAuraBankaiMetod(){
+    setTimeout(() => {
+    }, 100);
+    setTimeout(() => {
+      this.superAuraBankai = true
+    }, 150);
+    setTimeout(() => {
+      this.superAuraBankai = false;
+    }, 200);
+    setTimeout(() => {
+      this.superAuraBankai = true
+    }, 250);
+    setTimeout(() => {
+      this.superAuraBankai = false;
+    }, 300);
+    setTimeout(() => {
+      this.superAuraBankai = true
+    }, 350);
+    setTimeout(() => {
+      this.superAuraBankai = false;
+    }, 400);
+    setTimeout(() => {
+      this.superAuraBankai = true
+    }, 450);
+    setTimeout(() => {
+      this.superAuraBankai = false;
+    }, 500);
+    setTimeout(() => {
+      this.superAuraBankai = true
+    }, 550);
+  }
   superAura(){
     setTimeout(() => {
       this.superAura1 = true;
     }, 100);
     setTimeout(() => {
       this.superAura1 = false;
-      this.superAura2 = true
+
     }, 150);
     setTimeout(() => {
       this.superAura1 = true
-      this.superAura2 = false;
+
     }, 200);
     setTimeout(() => {
       this.superAura1 = false;
-      this.superAura2 = true
+
     }, 250);
     setTimeout(() => {
       this.superAura1 = true
-      this.superAura2 = false;
+
     }, 300);
     setTimeout(() => {
       this.superAura1 = false;
-      this.superAura2 = true
+
     }, 350);
     setTimeout(() => {
       this.superAura1 = true
-      this.superAura2 = false;
+
     }, 400);
     setTimeout(() => {
       this.superAura1 = false;
-      this.superAura2 = true
+
     }, 450);
     setTimeout(() => {
       this.superAura1 = true
-      this.superAura2 = false;
+
     }, 500);
     setTimeout(() => {
       this.superAura1 = false;
-      this.superAura2 = true
+
     }, 550);
   }
 }

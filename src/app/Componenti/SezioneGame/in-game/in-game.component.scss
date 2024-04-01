@@ -1,6 +1,6 @@
 .contenitorePG {
   position: relative;
-  background-image: url(../../../../assets/SfondoCampo.jpg);
+  background-image: url('../../../../assets/SfondoCampo.jpg');
   background-size:contain;
   height: 310px;
 }
@@ -86,10 +86,17 @@
 }
 .personaggioInBattaglia{
   margin-top: 100px;
-  margin-left: 100px;
+  margin-left: 60px;
   width: 150px;
   height: 150px;
 }
+.personaggioInBattagliaBankai{
+
+  margin-left: 40px;
+  width: 300px;
+  height: 300px;
+}
+
 .nemicoInBattaglia{
   margin-top: 100px;
   margin-right: 100px;
@@ -103,7 +110,7 @@
   height: 150px;
 }
 .battleButtons{
-  margin: auto;
+  // margin: auto;
 }
 .menu{
   border: 15px ridge #380d0d;
@@ -144,13 +151,13 @@
   transition: margin 0.05s ease;
 }
 .avatarHitDefense{
-  margin-left: 105px;
+  margin-left: 65px;
   margin-top: 100px;
   transition: margin 0.10s ease;
 }
 
 .avatarHit{
-  margin-left: 70px;
+  margin-left: 35px;
   margin-top: 90px;
   transition: margin 0.16s ease;
 }
@@ -209,11 +216,106 @@
   width: 250px;
   margin-right: 50px;
 }
-.superAura1{
-  height: 200px;
-  background-image: url("../../../../assets/superAura1.jpg");
+
+.backpackDiv{
+  position: absolute;
 }
-.superAura1{
-  height: 200px;
-  background-image: url("../../../../assets/superAura2.jpg");
+.backpackInventory{
+  left: 220px;
+  bottom: 20px;
+  height: 120px;
+  width: 250px;
+  position: relative;
+  border: 10px ridge #ffaf50;
+  background-color: rgb(219, 199, 160);
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 5% 5% 5% 5%;
 }
+
+////////
+//Comandi personaggio
+.buttonDiv{
+  height: 100px;
+  width: 100px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-image: url("../../../../assets/cartello5.png");
+  opacity: 1.5;
+  background-size:cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonDivDisable{
+  height: 100px;
+  width: 100px;
+  margin-left: 15px;
+  margin-right: 15px;
+  opacity: 0.4;
+  background-image: url("../../../../assets/cartello5.png");
+  background-size:cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonAvatar{
+  cursor: pointer;
+  height: 50px;
+}
+
+////////
+//Png vari
+.expPng{
+  height: 20px;
+}
+.gold{
+  height: 25px;
+}
+.littleObj{
+  height: 45px;
+}
+.statisticIcon{
+  height: 45px;
+}
+.concentrazione{
+  background-image: url('../../../../assets/superAura.png');
+}
+.buttonAdventureTime{
+  background-image: url("../../../../assets/cartello3.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  color: white;
+  width: 160px;
+  margin-left: 100px;
+  padding-right: 10px;
+}
+.buttonTorniamoCasa{
+  background-image: url("../../../../assets/cartello2.png");
+  background-size:contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  color: black;
+  width: 170px;
+  height: 75px;
+  margin-left: 100px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.potionsOn{
+ height: 40px;
+}
+.potionsOff{
+  height: 40px;
+  opacity: 0.5;
+}
+

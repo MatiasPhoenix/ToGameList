@@ -46,16 +46,11 @@
             </div>
           </div>
 
-          <p class="textos">
-            Forza:     <span class="pe-4">     {{profileAvatarStrength}}</span>
-            Armatura:  <span class="pe-4">     {{profileAvatarArmor}}</span>
-            Velocità:  <span class="pe-4">     {{profileAvatarSpeed}}</span>
-          </p>
         </div>
         <div class="col-6 align-self-center ms-4">
           <div class="latoPersonaggio statistiche  pt-2">
-            <p>EXP: {{profileAvatarExp}}</p>
-            <p>Soldoni: ${{profileAvatarGold}}</p>
+            <p><span><img class="expPng" src="../../../../assets/EXP.png" alt=""></span> {{profileAvatarExp}}</p>
+            <p><span><img class="gold" src="../../../../assets/moneta.png" alt=""></span> {{profileAvatarGold}}</p>
           </div>
           <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button>
           <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button>
@@ -67,12 +62,12 @@
         <ng-template *ngIf="charAndScenario; then combattimento else torniamoACasa"></ng-template>
         <ng-template #combattimento>
           <div class="align-self-center col-12">
-            <button (click)="chooseCamaign()" class="py-3 btn btn-danger">Adventure Time!</button>
+            <div (click)="chooseCamaign()" class="py-3 buttonAdventureTime">Adventure Time!</div>
           </div>
         </ng-template>
         <ng-template #torniamoACasa>
-          <div class="align-self-center col-12">
-            <button (click)="toBattle(); svuotaBattleground()" class="py-5 btn btn-success">Torniamo a casa</button>
+          <div class="align-self-center align-self-center col-12">
+            <div (click)="toBattle(); svuotaBattleground()" class="buttonTorniamoCasa  align-self-center">Torniamo a casa</div>
           </div>
         </ng-template>
 
@@ -123,14 +118,21 @@
   <div class="latoPersonaggio menu text-center">
     <div class="d-flex justify-content-center align-items-start ms-3">
       <div class="pb-3" *ngFor="let batteryStamina of avatarStaminaArray">
-        <img class="batteryStamina mt-2 me-1" [src]="batteryStamina" alt="">
+        <img class="batteryStamina mt-2 me-2" [src]="batteryStamina" alt="">
       </div>
     </div>
-    <div></div>
-    <div class="d-flex flex-column justify-content-start align-items-start ms-3">
-      <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
-        <img class="cuoreLife" [src]="avatarLife" alt="">
+
+    <div class="d-flex ">
+      <div class="d-flex flex-column justify-content-start align-items-start ms-3">
+        <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
+          <img class="cuoreLife" [src]="avatarLife" alt="">
+        </div>
       </div>
+        <div class="textos">
+          <p><img class="ms-5 statisticIcon" src="../../../../assets/strenghtAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarStrength}}</span></p>
+          <p><img class="ms-5 statisticIcon" src="../../../../assets/armorAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarArmor}}</span></p>
+          <p><img class="ms-5 statisticIcon" src="../../../../assets/runAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarSpeed}}</span></p>
+        </div>
     </div>
   </div>
 
@@ -140,9 +142,11 @@
         <div class="d-flex text-center justify-content-between">
 <!-- AREA PERSONAGGIO -->
           <div class="">
-            <img *ngIf="avatarStandards"
+            <div *ngIf="avatarStandards" [ngClass]="{ 'concentrazione' : superAura1 }">
+              <img
               src="../../../../assets/AvatarSTANDARD.png"
-            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce, 'superAura1' : superAura1, 'superAura2' : superAura2 }">
+              alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarAttack': avatarColpisce}">
+            </div>
 
             <img *ngIf="avatarAttacco"
               src="../../../../assets/AvatarCOMBATATTACCO.png"
@@ -155,7 +159,17 @@
             <img *ngIf="avatarDamage"
               src="../../../../assets/AvatarCOMBATDANNO.png"
             alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
-          </div>
+
+            <div *ngIf="avatarSkillStart" [ngClass]="{ 'concentrazione' : superAuraBankai }">
+              <img
+              src="../../../../assets/AvatarSkillINIZIO.png"
+              alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
+            </div>
+
+            <img *ngIf="avatarSkillAtk"
+              src="../../../../assets/AvatarSkillFINE.png"
+            alt="" class="personaggioInBattaglia" [ngClass]="{ 'avatarHit': avatarDamage, 'avatarHitDefense': avatarHitDefense }">
+            </div>
 
 <!-- AREA NEMICO -->
           <div class="">
@@ -180,7 +194,8 @@
 
         <!-- DIALOGHI AVATAR -->
         <div class="col-12 d-flex justify-content-start align-items-start">
-          <p class="avatarDefenseText " *ngIf="!iCantDefense">Mi servono PA!!</p>
+          <p class="avatarDefenseText " *ngIf="!iCantDefense">Serve Stamina!!</p>
+          <p class="avatarDefenseText " *ngIf="avatarSkillAtk">BANKAI!!</p>
         </div>
         <!-- DIALOGHI NEMICI -->
         <div class="col-12 d-flex justify-content-end align-items-end">
@@ -198,15 +213,64 @@
 
     </div>
 
-      <div class="battleButtons d-flex justify-content-center">
-        <button [disabled]="disableButton" (click)="toBattleAttack()" class="mx-3 mt-3">Attacca</button>
-        <button [disabled]="disableButton" (click)="toBattleDefense()" class="mx-3 mt-3">Difendi</button>
-        <button [disabled]="disableButton" (click)="concentrazione()" class="mx-3 mt-3">Concentrazione</button>
-        <button [disabled]="disableButton" (click)="swordAndShield()" class="mx-3 mt-3">Spada & Scudo</button>
-        <button [disabled]="disableButton" (click)="secretSkill()" class="mx-3 mt-3">Bankai!</button>
-        <button [disabled]="disableButton" (click)="useObject()" class="mx-3 mt-3">Usa oggetto</button>
+      <div class="battleButtons d-flex flex-column justify-content-center text-center">
+        <div class="d-flex col-12 justify-content-center text-center">
 
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" (click)="toBattleAttack()" src="../../../../assets/spadaAvatar.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/spadaAvatar.png" alt=""></div>
 
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton }"
+          class="buttonDiv"><img class="buttonAvatar mt-3" (click)="toBattleDefense()" src="../../../../assets/scudoAvatar.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/scudoAvatar.png" alt=""></div>
+
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" (click)="concentrazione(); superAura()" src="../../../../assets/meditationAvatar.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/meditationAvatar.png" alt=""></div>
+        </div>
+        <div class="d-flex col-12 justify-content-center text-center">
+
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" (click)="swordAndShield()" src="../../../../assets/spadaScudoAvatar.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/spadaScudoAvatar.png" alt=""></div>
+
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3 littleObj" (click)="secretSkill(); superAuraBankaiMetod()" src="../../../../assets/secretSkill.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3 littleObj" src="../../../../assets/secretSkill.png" alt=""></div>
+
+          <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" (click)="useObject()" src="../../../../assets/backpack.png" alt=""></div>
+          <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
+          class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/backpack.png" alt=""></div>
+
+          <div class="backpackDiv" *ngIf="inventario">
+            <div class="backpackInventory"  >
+              <div class="d-flex">
+                <div class="d-flex justify-content-end align-items-end ms-2 pt-2">
+                  <img class="buttonAvatar" (click)="inventario = false" src="../../../../assets/backpack.png" alt="">
+                </div>
+                <div>
+                  <div>
+                    <img (click)="usePotion(potionH1,'H'); potionH1 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH1 , 'potionsOff' : !potionH1}">
+                    <img (click)="usePotion(potionH2,'H'); potionH2 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH2 , 'potionsOff' : !potionH2}">
+                    <img (click)="usePotion(potionH3,'H'); potionH3 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH3 , 'potionsOff' : !potionH3}">
+                  </div>
+                  <div>
+                    <img (click)="usePotion(potionS1, 'S'); potionS1 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS1 , 'potionsOff' : !potionS1}">
+                    <img (click)="usePotion(potionS2, 'S'); potionS2 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS2 , 'potionsOff' : !potionS2}">
+                    <img (click)="usePotion(potionS3, 'S'); potionS3 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS3 , 'potionsOff' : !potionS3}">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
 
       </div>
