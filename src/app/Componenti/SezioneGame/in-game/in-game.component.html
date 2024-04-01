@@ -301,10 +301,12 @@
       (click)="victoryScreen = false">Torna nella ToGameList
     </button>
 </div>
-<div class="defeatedScreen d-flex flex-column" *ngIf="!loseScreen">
-  <img src="../../../../assets/rip.png" alt="">
-    <button class="btn btn-success justify-content-start align-self-center victoryButton"
-      (click)="victoryScreen = false">Torna nella ToGameList
+<div class="defeatedScreen d-flex flex-column justify-content-center" *ngIf="loseScreen">
+  <p class="text-center allBoldText">Dovrai prepararti meglio</p>
+  <p class="text-center allBoldText">la prossima volta.</p>
+  <img class="deafetedImg align-self-center" src="../../../../assets/rip.png" alt="">
+    <button class="btn btn-success justify-content-start align-self-center allBoldText"
+      (click)="!loseScreen = false">Torna nella ToGameList
     </button>
 </div>
 

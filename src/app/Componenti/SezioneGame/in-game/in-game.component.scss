@@ -1,3 +1,6 @@
+.allBoldText{
+  font-weight: bolder;
+}
 .contenitorePG {
   position: relative;
   background-image: url('../../../../assets/SfondoCampo.jpg');
@@ -235,6 +238,10 @@
   background-size:cover;
   backdrop-filter: blur(10px); /* Aggiunge un effetto di sfocatura allo sfondo */
 }
+.victoryButton{
+  width: 150px;
+  margin-top: 10px;
+}
 .defeatedScreen{
   border: 15px ridge #380d0d;
   margin: 0 auto;
@@ -247,10 +254,12 @@
   background-size:cover;
   backdrop-filter: blur(10px); /* Aggiunge un effetto di sfocatura allo sfondo */
 }
-.victoryButton{
+.deafetedImg{
+  height: 150px;
   width: 150px;
-  margin-top: 10px;
+
 }
+
 
 .gif{
   height: 250px;

@@ -330,11 +330,11 @@ caricaProfiloAvatar() {
       if(this.newEnemyAction == 'ATTACCO X2'){
         setTimeout(() => {
         this.enemyAttkNoDefense()
-        this.avatarTakeDamage()
+        this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -343,7 +343,7 @@ caricaProfiloAvatar() {
       }else{
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
           this.disableButton = false;
@@ -372,11 +372,11 @@ caricaProfiloAvatar() {
       if(this.newEnemyAction == 'ATTACCO X2'){
         setTimeout(() => {
         this.enemyAttkNoDefense()
-        this.avatarTakeDamage()
+        this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -385,7 +385,7 @@ caricaProfiloAvatar() {
       }else if(this.newEnemyAction == 'ATTACCO'){
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
           this.disableButton = false;
@@ -413,7 +413,7 @@ caricaProfiloAvatar() {
         }, 1500);
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -469,7 +469,7 @@ caricaProfiloAvatar() {
         }, 1500);
         setTimeout(() => {
           this.enemyAttkNoDefense()
-          this.avatarTakeDamage()
+          this.avatarTakeDamage(1)
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -648,9 +648,12 @@ caricaProfiloAvatar() {
       }
     }
   }
-  avatarTakeDamage(){
-    this.avatarBattleLife -= 1;
+  avatarTakeDamage(numero : number){
+    this.avatarBattleLife -= numero;
     this.lifeMetod();
+    if(this.avatarBattleLife === 0){
+      this.avatarLose();
+    }
   }
   setLifeAvatar(){
     this.staminaBattleAvatar = this.profileAvatarStamina;
@@ -658,7 +661,13 @@ caricaProfiloAvatar() {
   }
   avatarLose(){
     setTimeout(() => {
+      this.toBattle();
+      this.svuotaBattleground();
       this.loseScreen = true;
+      this.enemyGoblinSkirmisher = false;
+      this.enemyGoblinStandard = false;
+      this.enemyMiniBoss = false;
+      this.isTransparent = false;
     }, 2000);
   }
 
