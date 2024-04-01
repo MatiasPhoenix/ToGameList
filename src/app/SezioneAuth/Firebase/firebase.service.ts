@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../AuthUser/auth.service';
+import firebase from 'firebase/app';
+import { Observable } from 'rxjs/internal/Observable';
+import { InGameComponent } from '../../Componenti/SezioneGame/in-game/in-game.component';
 
 interface DataToUpdate {
   [key: string]: any;
@@ -12,8 +15,9 @@ interface DataToUpdate {
 export class FirebaseService {
 
   constructor(
-    private http              : HttpClient,
+    private http         : HttpClient,
     private authService  : AuthService
+
     ){}
 
 
@@ -77,6 +81,39 @@ ripristinaAttivitaFirebase(url: string, id: string) {
     aggiornaTodoList(url: string, id: string, testo: string){ {
       return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, { task: testo });
     }}
+
+//Sezione interazione con in-game.component
+
+    //Aggiunge elemento todoList
+    creaProfiloAvatar(url : string, body : {}){
+      return this.http.post(`${url}?auth=${this.authService.user.token}`, body);
+    }
+
+    //Carica elementi todoList dal DB
+
+    creaCodiceIdentificativo(url : string, body : {}){
+      return this.http.post(`${url}?auth=${this.authService.user.token}`, body);
+    }
+
+    caricaProfiloAvatar(url : string){
+        return this.http.get(`${url}?auth=${this.authService.user.token}`);
+    }
+    aggiornaProfiloAvatar(url: string, id : string, exp: number, gold: number,
+      lvl: number, str: number, def: number, spd: number, life: number, stamina: number) {
+      return this.http.patch(`${url}/${id}.json?auth=${this.authService.user.token}`, {
+
+        profileAvatarLevel      : lvl,
+        profileAvatarExp        : exp,
+        profileAvatarGold       : gold,
+
+        profileAvatarStrength   : str,
+        profileAvatarArmor      : def,
+        profileAvatarSpeed      : spd,
+
+        profileAvatarLife       : life,
+        profileAvatarStamina    : stamina,
+      });
+    }
 
 
 }

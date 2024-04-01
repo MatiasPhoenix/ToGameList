@@ -4,6 +4,7 @@ import { IUser } from './../../../Models/i-user';
 import { IToDoItem } from '../../../Models/i-to-do-item';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import firebase from 'firebase/app';
 
 import Swal from 'sweetalert2';
 import { FactoryTarget } from '@angular/compiler';
@@ -28,22 +29,13 @@ export class TodoListComponent implements OnInit {
   currentUser! : IUser;
   newTodoList! : IToDoItem;
   toDoList     : IToDoItem[] = [];
-  // userIdLogIn! : string;
   url          : string = `https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/todoList`;
+  urlAvatar    : string = `https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/profiloAvatar`;
 
   ngOnInit() {
   this.getTodoList()
-  // this.userId()
+
   }
-
-  // userId() {
-  //   const thisUserId = this.authService.takeUser();
-  //   return this.userIdLogIn = thisUserId.id;
-  // }
-  // curioso() {
-  //   console.log(this.userIdLogIn);
-
-  // }
 
   //Metodo crea oggetto todoList con POST -> DB
   todoFactory() {
@@ -150,7 +142,7 @@ export class TodoListComponent implements OnInit {
 
 
 //Metodi per modificare testo del elemento
-   modificaAttivitaButton(id: string) {
+  modificaAttivitaButton(id: string) {
     Swal.fire({
       title: 'Modifica questo elemento',
       input: 'text',
@@ -211,4 +203,61 @@ export class TodoListComponent implements OnInit {
       });
   }
 
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//      SEZIONE INTERAZIONE TRA COMPONENTE, DATABASE E GAME
+
+  caricaProfiloAvatar() {
+    this.firebase.caricaProfiloAvatar(this.urlAvatar + '.json')
+      .subscribe((data: any) => {
+        const profileKey = Object.keys(data)[0];
+        const dataProfiloAvatar = data[profileKey];
+
+        let newLvl     = dataProfiloAvatar.profileAvatarLevel;
+
+        let newGold    = dataProfiloAvatar.profileAvatarGold + 100;
+        let newExp     = dataProfiloAvatar.profileAvatarExp + 50;
+
+        let newStr     = dataProfiloAvatar.profileAvatarStrength;
+        let newDef     = dataProfiloAvatar.profileAvatarArmor;
+        let newSpd     = dataProfiloAvatar.profileAvatarSpeed;
+
+        let newLife    = dataProfiloAvatar.profileAvatarLife;
+        let newStamina = dataProfiloAvatar.profileAvatarStamina;
+
+        if (newExp >= 100) {
+          newExp -= 100;
+          newLvl++;
+        }
+        if (newLvl == 2){
+          newLife +=2;
+          newStamina +=2;
+        }
+        if (newLvl == 4){
+          newLife +=2;
+          newStamina +=2;
+        }
+        if (newLvl == 6){
+          newLife +=2;
+          newStamina +=2;
+        }
+
+        this.firebase.aggiornaProfiloAvatar(this.urlAvatar, profileKey, newExp, newGold,
+          newLvl, newStr, newDef, newSpd, newLife, newStamina )
+                  .subscribe(() => {
+
+                    window.location.reload();
+                    console.log('Stato completato aggiornato con successo per il task:');
+                  }, (error) => {
+                    console.error('Errore durante l\'aggiornamento dello stato completato per il task');
+                  });
+      }, (error) => {
+        console.error('Errore durante il caricamento dei dati dal database:', error);
+      });
+  }
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 }

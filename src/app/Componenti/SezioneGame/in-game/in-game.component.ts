@@ -1,18 +1,35 @@
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { log } from 'console';
 import { timeout } from 'rxjs';
+import { FirebaseService } from '../../../SezioneAuth/Firebase/firebase.service';
+import { AuthService } from '../../../SezioneAuth/AuthUser/auth.service';
+
 
 @Component({
   selector: 'app-in-game',
   templateUrl: './in-game.component.html',
   styleUrl: './in-game.component.scss'
 })
+
 export class InGameComponent implements OnInit  {
-  constructor(){}
+  constructor(
+    private http        : HttpClient,
+    private firebase    : FirebaseService,
+    private authService : AuthService,
+    ){}
+
+
+
+  codiceIdentificativo!   : string;
+  urlAvatar               : string = `https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/profiloAvatar`;
+  urlIdentificativo       : string = `https://togamelist-e79bb-default-rtdb.europe-west1.firebasedatabase.app/codiceIdentificativo`;
 
 //STATISTICHE AVATAR
+
+
   profileAvatarLevel!     : number;
   profileAvatarExp!       : number;
 
@@ -21,8 +38,8 @@ export class InGameComponent implements OnInit  {
   profileAvatarSpeed!     : number;
 
   profileAvatarGold!      : number;
-  profileAvatarLife!      : number;
-  profileAvatarStamina!   : number;
+  profileAvatarLife       : number = 3;
+  profileAvatarStamina    : number = 3;
 
 //In battaglia
   avatarColpisce          : boolean = false;
@@ -77,14 +94,73 @@ export class InGameComponent implements OnInit  {
 /////////////
 
   ngOnInit(){
-    this.staminaMetod()
+
+    this.caricaProfiloAvatar()
     this.enemyNewAction()
-    this.setLifeAvatar()
     setTimeout(() => {
-      this.lifeMetod()
+
+      this.setLifeAvatar()
     }, 100);
+    setTimeout(() => {
+      this.staminaMetod()
+      this.lifeMetod()
+
+    }, 200);
   }
 
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//SEZIONE DI COLLEGAMENTO CON DATABASE
+
+creazioneProfilo(){
+  this.firebase.creaProfiloAvatar(
+    this.urlAvatar + '.json',
+    {
+      profileAvatarLevel     : 1,
+      profileAvatarExp       : 0,
+
+      profileAvatarStrength  : 1,
+      profileAvatarArmor     : 0,
+      profileAvatarSpeed     : 0,
+
+      profileAvatarGold      : 0,
+      profileAvatarLife      : 3,
+      profileAvatarStamina   : 3,
+    })
+    .subscribe(data => {
+
+      console.log(data);
+    })
+}
+
+
+caricaProfiloAvatar() {
+
+  this.firebase.caricaProfiloAvatar(this.urlAvatar + '.json')
+    .subscribe(
+      (data: any) => {
+        const profileKey = Object.keys(data)[0];
+        const dataProfiloAvatar = data[profileKey];
+
+
+        this.profileAvatarLevel     = dataProfiloAvatar.profileAvatarLevel;
+        this.profileAvatarExp       = dataProfiloAvatar.profileAvatarExp;
+        this.profileAvatarStrength  = dataProfiloAvatar.profileAvatarStrength;
+        this.profileAvatarArmor     = dataProfiloAvatar.profileAvatarArmor;
+        this.profileAvatarSpeed     = dataProfiloAvatar.profileAvatarSpeed;
+        this.profileAvatarGold      = dataProfiloAvatar.profileAvatarGold;
+        this.profileAvatarLife      = dataProfiloAvatar.profileAvatarLife;
+        this.profileAvatarStamina   = dataProfiloAvatar.profileAvatarStamina;
+      },
+      (error) => {
+        console.error('Errore nel caricare il profilo avatar:', error);
+      }
+    );
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
   enemyNewAction() { //Calcola random della mossa successiva del nemico
     const indiceCasuale: number = Math.floor(Math.random()
     * this.enemyActions.length);
@@ -541,7 +617,7 @@ export class InGameComponent implements OnInit  {
   loseScreen          : boolean = false;
   victoryScreen       : boolean = false;
 
-  avatarMaxLife       :number = 10;
+
   enemyMaxLife!       :number;
 
   avatarBattleLife!   :number;
@@ -557,7 +633,7 @@ export class InGameComponent implements OnInit  {
   //CALCOLO DANNI AVATAR
   lifeMetod(){
     this.avatarLifeArray.splice(0, this.avatarLifeArray.length);
-    let cuoriMancantiAvatar = (this.avatarMaxLife - this.avatarBattleLife);
+    let cuoriMancantiAvatar = (this.profileAvatarLife - this.avatarBattleLife);
 
     if (this.avatarBattleLife != 0) {
       for (let index = 0; index < this.avatarBattleLife; index++) {
@@ -578,7 +654,8 @@ export class InGameComponent implements OnInit  {
     this.lifeMetod();
   }
   setLifeAvatar(){
-    this.avatarBattleLife = this.avatarMaxLife;
+    this.staminaBattleAvatar = this.profileAvatarStamina;
+    this.avatarBattleLife = this.profileAvatarLife;
   }
   avatarLose(){
     setTimeout(() => {
@@ -636,12 +713,6 @@ export class InGameComponent implements OnInit  {
     this.enemyBattleLife -= 1;
     this.lifeMetodEnemy();
   }
-  setLifeEnemy(){
-    this.avatarBattleLife = this.avatarMaxLife;
-  }
-
-
-
 
   characterDead(){
     if (!this.isTransparent) {
@@ -653,8 +724,8 @@ export class InGameComponent implements OnInit  {
   }
 
 
-  staminaMaxAvatar     : number = 7;
-  staminaBattleAvatar  : number = 7;
+
+  staminaBattleAvatar!  : number;
   avatarStaminaArray   : string[] = [];
 
   batteryFull          = "../../../../assets/BatteriaPiena.png";
@@ -663,7 +734,7 @@ export class InGameComponent implements OnInit  {
 
   staminaMetod(){
     this.avatarStaminaArray.splice(0, this.avatarStaminaArray.length);
-    let staminaMancanteAvatar = (this.staminaMaxAvatar - this.staminaBattleAvatar);
+    let staminaMancanteAvatar = (this.profileAvatarStamina - this.staminaBattleAvatar);
 
     if (this.staminaBattleAvatar != 0) {
       for (let index = 0; index < this.staminaBattleAvatar; index++) {
@@ -684,8 +755,8 @@ export class InGameComponent implements OnInit  {
   }
   chargeStaminaAvatar(staminaCostAvatar : number){
     this.staminaBattleAvatar += staminaCostAvatar;
-    if(this.staminaBattleAvatar >= this.staminaMaxAvatar){
-      this.staminaBattleAvatar = this.staminaMaxAvatar;
+    if(this.staminaBattleAvatar >= this.profileAvatarStamina){
+      this.staminaBattleAvatar = this.profileAvatarStamina;
     }
     this.staminaMetod()
   }
