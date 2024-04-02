@@ -1,9 +1,16 @@
-<main class="container">
+<main class="container ">
 
-  <div class="text-center pt-3">
+  <div class="infoRicompense" *ngIf="ricompensa">
+    <div class="text-center d-flex justify-content-center" >
+      <p *ngIf="lvlUp">Sei salito di Livello!!</p>
+      <img class="pngRicompense" src="../../../../assets/EXP.png" alt="">+50
+      <img class="pngRicompense" src="../../../../assets/moneta.png" alt="">+100
+    </div>
+  </div>
+  <div class="divSeparatore" *ngIf="!ricompensa"></div>
+  <div class="text-center pt-3 mx-5 px-5">
 
     <div class="d-flex justify-content-center">
-
       <p class="align-self-baseline">Cose da fare</p>
       <button class="bg-warning ms-2 align-self-baseline" (click)="openSwal()">+</button>
     </div>

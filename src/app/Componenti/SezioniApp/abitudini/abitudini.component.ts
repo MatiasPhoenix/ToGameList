@@ -422,6 +422,7 @@ caricaProfiloAvatar() {
       if (newExp >= 100) {
         newExp -= 100;
         newLvl++;
+        this.lvlUp = true;
         if (newLvl === 2){
         newLife +=2;
         newStamina +=2;
@@ -432,7 +433,6 @@ caricaProfiloAvatar() {
         }
         if (newLvl === 6){
         newLife +=2;
-        newStamina +=2;
         }
       }
 
@@ -442,7 +442,7 @@ caricaProfiloAvatar() {
         newLvl, newStr, newDef, newSpd, newLife, newStamina )
                 .subscribe(() => {
 
-                  window.location.reload();
+                  this.ricompensaMetod()
                   console.log('Stato completato aggiornato con successo per il task:');
                 }, (error) => {
                   console.error('Errore durante l\'aggiornamento dello stato completato per il task');
@@ -451,7 +451,16 @@ caricaProfiloAvatar() {
       console.error('Errore durante il caricamento dei dati dal database:', error);
     });
 }
-
+lvlUp      : boolean = false;
+ricompensa : boolean = false;
+ricompensaMetod(){
+  this.ricompensa = true;
+  setTimeout(() => {
+    this.ricompensa = false;
+    this.lvlUp = false;
+    window.location.reload();
+  }, 1700);
+}
 
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
