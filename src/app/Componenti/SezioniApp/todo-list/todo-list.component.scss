@@ -1,6 +1,15 @@
 .puntatoreLoco {
   cursor: pointer;
 }
+.thisComponent{
+  // background-image: url(../../../../assets/backgroundApp.png);
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  background-color: rgb(26, 24, 24);
+  height: 100vh;
+}
+
 .questoDiv {
   display: flex;
   flex-direction: column;

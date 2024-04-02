@@ -1,6 +1,11 @@
 .puntatoreLoco {
   cursor: pointer;
 }
+.thisComponent{
+  background-color: rgb(26, 24, 24);
+
+  height: 100vh;
+}
 .questoDiv {
   display: flex;
   flex-direction: column;

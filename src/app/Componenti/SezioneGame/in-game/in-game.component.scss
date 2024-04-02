@@ -1,11 +1,14 @@
 .allBoldText{
   font-weight: bolder;
 }
+.infoAvatarInGame{
+  border: 10px ridge #ffaf50;
+}
 .contenitorePG {
   position: relative;
-  background-image: url('../../../../assets/SfondoCampo.jpg');
+  background-image: url(../../../../assets/villageBackground.jpg);
   background-size:contain;
-  height: 310px;
+  height: 330px;
 }
 .latoPersonaggio{
   border: 10px ridge #ffaf50;
@@ -41,6 +44,7 @@
 }
 
 .blackBG{
+
   background-color: black;
   width: 400px;
   background-position: center;

@@ -1,18 +1,21 @@
-<div class="m-1">
+<div class="esperimento">
 
-  <div *ngIf="isLoggedIn()" class="game">
-    <app-in-game>
-    </app-in-game>
+  <div class="m-1">
+
+    <div *ngIf="isLoggedIn()" class="game">
+      <app-in-game>
+      </app-in-game>
+    </div>
+
+    <div class="content">
+      <router-outlet>
+      </router-outlet>
+    </div>
+
+    <div *ngIf="isLoggedIn()" class="footer bg-primary">
+      <app-barra-inferiore>
+      </app-barra-inferiore>
+    </div>
+
   </div>
-
-  <div class="content">
-    <router-outlet>
-    </router-outlet>
-  </div>
-
-  <div *ngIf="isLoggedIn()" class="footer bg-primary">
-    <app-barra-inferiore>
-    </app-barra-inferiore>
-  </div>
-
 </div>

@@ -122,11 +122,7 @@ export class TodoListComponent implements OnInit {
         no-repeat
         `,
 
-      customClass: {
-      popup: 'myPopupSweetAlert',
-      confirmButton: 'confirmButton',
-      cancelButton: 'custom-btn-class'
-    },
+
       preConfirm: (val) => {
           const newToDoItem: IToDoItem = {
           id         : this.generateRandomId(),
