@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { log } from 'console';
 import { timeout } from 'rxjs';
@@ -83,7 +83,7 @@ export class InGameComponent implements OnInit  {
   charAndScenario         : boolean = true;
   menuCampaign            : boolean = false;
   toGameListTutorials     : boolean = false;
-
+  tutorialAvatar          : boolean = false;
 /////////////
 /////////////
 /////////////
@@ -938,4 +938,6 @@ caricaProfiloAvatar() {
 
     }, 550);
   }
+
+
 }

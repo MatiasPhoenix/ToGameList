@@ -122,18 +122,39 @@
       </div>
     </div>
 
-    <div class="d-flex ">
-      <div class="d-flex flex-column justify-content-start align-items-start ms-3">
-        <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
-          <img class="cuoreLife" [src]="avatarLife" alt="">
+    <div class="boxFlexAvatar d-flex ">
+
+
+        <div class="d-flex flex-column justify-content-start align-items-start ms-3">
+          <div class="pb-3" *ngFor="let avatarLife of avatarLifeArray">
+            <img class="cuoreLife" [src]="avatarLife" alt="">
+          </div>
         </div>
+        <div>
+          <div class="textos textosAvatar">
+            <p><img class="ms-5 statisticIcon" src="../../../../assets/strenghtAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarStrength}}</span></p>
+            <p><img class="ms-5 statisticIcon" src="../../../../assets/armorAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarArmor}}</span></p>
+            <p><img class="ms-5 statisticIcon" src="../../../../assets/runAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarSpeed}}</span></p>
+
+          </div>
+        </div>
+
       </div>
-        <div class="textos">
-          <p><img class="ms-5 statisticIcon" src="../../../../assets/strenghtAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarStrength}}</span></p>
-          <p><img class="ms-5 statisticIcon" src="../../../../assets/armorAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarArmor}}</span></p>
-          <p><img class="ms-5 statisticIcon" src="../../../../assets/runAvatar.png" alt="">  <span class="pe-4">     {{profileAvatarSpeed}}</span></p>
-        </div>
-    </div>
+      <div *ngIf="!tutorialAvatar" class="mt-4">
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/spadaAvatar.png" alt=""><p class="textTutorialAvatar ms-2">Costo: 1 Stamnia. <br> Infligge un danno al nemico</p></div>
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/scudoAvatar.png" alt=""><p class="textTutorialAvatar ms-2">Costo: 2 Stamnia. <br> Blocca un attacco nemico.</p></div>
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/meditationAvatar.png" alt=""><p class="textTutorialAvatar ms-2"> Recupera 3 Stamina</p></div>
+      </div>
+      <div *ngIf="tutorialAvatar" class="mt-4">
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/spadaScudoAvatar.png" alt=""><p class="textTutorialAvatar ms-2"> Costo: 3 Stamnia. <br> Blocca e attacca.</p></div>
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/secretSkill.png" alt=""><p class="textTutorialAvatar ms-2"> Una volta al giorno. <br> Attacco devastante.</p></div>
+        <div class="d-flex ms-3"><img class="buttonAvatarTutorial" src="../../../../assets/backpack.png" alt=""><p class="textTutorialAvatar ms-2"> Apre l'inventario</p></div>
+      </div>
+      <div class="mt-4">
+        <div *ngIf="!tutorialAvatar" class="cursorLoco" (click)="tutorialAvatar = true" >Tutorial-></div>
+        <div *ngIf="tutorialAvatar" class="cursorLoco" (click)="tutorialAvatar = false" >Tutorial-></div>
+      </div>
+
   </div>
 
   <div class="">
@@ -221,6 +242,7 @@
           <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
           class="buttonDiv"><img class="buttonAvatar mt-3" src="../../../../assets/spadaAvatar.png" alt=""></div>
 
+
           <div *ngIf="!disableButton" [ngClass]="{ 'buttonDiv': !disableButton }"
           class="buttonDiv"><img class="buttonAvatar mt-3" (click)="toBattleDefense()" src="../../../../assets/scudoAvatar.png" alt=""></div>
           <div *ngIf="disableButton" [ngClass]="{ 'buttonDivDisable' : disableButton}"
@@ -252,18 +274,18 @@
             <div class="backpackInventory"  >
               <div class="d-flex">
                 <div class="d-flex justify-content-end align-items-end ms-2 pt-2">
-                  <img class="buttonAvatar" (click)="inventario = false" src="../../../../assets/backpack.png" alt="">
+                  <img class="buttonAvatar mb-4 ms-2" (click)="inventario = false" src="../../../../assets/backpack.png" alt="">
                 </div>
                 <div>
                   <div>
-                    <img (click)="usePotion(potionH1,'H'); potionH1 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH1 , 'potionsOff' : !potionH1}">
-                    <img (click)="usePotion(potionH2,'H'); potionH2 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH2 , 'potionsOff' : !potionH2}">
-                    <img (click)="usePotion(potionH3,'H'); potionH3 = false" class=" mt-2  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH3 , 'potionsOff' : !potionH3}">
+                    <img (click)="usePotion(potionH1,'H'); potionH1 = false" class=" mt-4  ms-4" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH1 , 'potionsOff' : !potionH1}">
+                    <img (click)="usePotion(potionH2,'H'); potionH2 = false" class=" mt-4  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH2 , 'potionsOff' : !potionH2}">
+                    <img (click)="usePotion(potionH3,'H'); potionH3 = false" class=" mt-4  ms-3" src="../../../../assets/pozioneCuore.png" alt="" [ngClass]="{ 'potionsOn' : potionH3 , 'potionsOff' : !potionH3}">
                   </div>
                   <div>
-                    <img (click)="usePotion(potionS1, 'S'); potionS1 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS1 , 'potionsOff' : !potionS1}">
-                    <img (click)="usePotion(potionS2, 'S'); potionS2 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS2 , 'potionsOff' : !potionS2}">
-                    <img (click)="usePotion(potionS3, 'S'); potionS3 = false" class="potionsOn mt-2 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS3 , 'potionsOff' : !potionS3}">
+                    <img (click)="usePotion(potionS1, 'S'); potionS1 = false" class="potionsOn mt-4 ms-4" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS1 , 'potionsOff' : !potionS1}">
+                    <img (click)="usePotion(potionS2, 'S'); potionS2 = false" class="potionsOn mt-4 ms-3" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS2 , 'potionsOff' : !potionS2}">
+                    <img (click)="usePotion(potionS3, 'S'); potionS3 = false" class="potionsOn mt-4 ms-3" src="../../../../assets/pozioneStamina.png" alt="" [ngClass]="{ 'potionsOn' : potionS3 , 'potionsOff' : !potionS3}">
                   </div>
                 </div>
 
@@ -279,17 +301,31 @@
 
 
   <div class="latoPersonaggio menu text-center">
-    <p class="">Mossa nemica</p>
-    <div [ngSwitch]="newEnemyAction">
-      <div *ngSwitchCase="'ATTACCO'"><img class="enemyMove mt-1" src="../../../../assets/sword.png" alt=""></div>
-      <div *ngSwitchCase="'DIFESA'"><img class="enemyMove mt-1" src="../../../../assets/shield.png" alt=""></div>
-      <div *ngSwitchCase="'ATTACCO X2'"><img class="enemyMove mt-1" src="../../../../assets/swordX2.png" alt=""></div>
-      <div *ngSwitchDefault>---</div>
-    </div>
-    <div class="d-flex flex-column justify-content-end align-items-end me-3">
-      <div class="pb-3" *ngFor="let enemyLife of enemyLifeArray">
-        <img class="cuoreLife" [src]="enemyLife" alt="">
+    <div class="d-flex justify-content-between flexMoveEnemy">
+      <div [ngSwitch]="newEnemyAction">
+        <p class="ms-4">Azione nemica</p>
+        <div class="ms-3" *ngSwitchCase="'ATTACCO'"><img class="enemyMove mt-1" src="../../../../assets/sword.png" alt=""></div>
+        <div class="ms-3" *ngSwitchCase="'DIFESA'"><img class="enemyMove mt-1" src="../../../../assets/shield.png" alt=""></div>
+        <div class="ms-3" *ngSwitchCase="'ATTACCO X2'"><img class="enemyMove mt-1" src="../../../../assets/swordX2.png" alt=""></div>
+        <div *ngSwitchDefault>---</div>
+        <div class="textos mt-4">
+          <p> {{profileAvatarStrength}}<img class="ms-1 statisticIcon" src="../../../../assets/strenghtAvatar.png" alt="">  <span class="pe-4">     </span></p>
+          <p> {{profileAvatarArmor}}   <img class="ms-1 statisticIcon" src="../../../../assets/armorAvatar.png" alt="">  <span class="pe-4">        </span></p>
+          <p> {{profileAvatarSpeed}}   <img class="ms-1 statisticIcon" src="../../../../assets/runAvatar.png" alt="">  <span class="pe-4">          </span></p>
+
+        </div>
       </div>
+      <div class="d-flex flex-column mt-5 me-3">
+        <div class="pb-3" *ngFor="let enemyLife of enemyLifeArray">
+          <img class="cuoreLife" [src]="enemyLife" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column ">
+      <div class="enemyTutorial align-self-start ms-2"><img class="enemyMoveSmall mt-1" src="../../../../assets/sword.png" alt="">   Nemico attacca.</div>
+      <div class="enemyTutorial align-self-start ms-2"><img class="enemyMoveSmall mt-1" src="../../../../assets/shield.png" alt="">   Nemico si difende.</div>
+      <div class="enemyTutorial align-self-start ms-2"><img class="enemyMoveSmall mt-1" src="../../../../assets/swordX2.png" alt="">   Nemico attacca 2 volte</div>
+      <p class="mt-4">Tutorial</p>
     </div>
   </div>
 
