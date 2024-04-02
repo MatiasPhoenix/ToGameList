@@ -193,22 +193,22 @@
         </div>
 
         <!-- DIALOGHI AVATAR -->
-        <div class="col-12 d-flex justify-content-start align-items-start">
-          <p class="avatarDefenseText " *ngIf="!iCantDefense">Serve Stamina!!</p>
+        <div class="divDefenseText col-12 d-flex justify-content-start align-items-start">
+          <p class="avatarDefenseText " *ngIf="!iCantDefense">Stamina!!</p>
           <p class="avatarDefenseText " *ngIf="avatarSkillAtk">BANKAI!!</p>
         </div>
         <!-- DIALOGHI NEMICI -->
-        <div class="col-12 d-flex justify-content-end align-items-end">
-          <p class="enemyDefenseText enemyText" *ngIf="!provokeBoss">Questa sarà la tua tomba!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!enemyDefense">MI DIFENDOOO!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!bothDefense">Codardo, attaccami!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
+        <div class="divDefenseText col-12 d-flex justify-content-end align-items-end">
+          <p class="enemyDefenseText" *ngIf="!provokeBoss">Morirai qui...</p>
+          <p class="enemyDefenseText" *ngIf="!enemyDefense">Seriamente?</p>
+          <p class="enemyDefenseText" *ngIf="!bothDefense">Codardo...</p>
+          <p class="enemyDefenseText" *ngIf="!versusConcentrazione">Non ti servirà!!!</p>
 
 
-          <p class="enemyDefenseText enemyText" *ngIf="!provokeGoblin">Io uccide te!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!enemyDefenseGoblin">IO BLOCCA!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!bothDefenseGoblin">Waaaagh!!!</p>
-          <p class="enemyDefenseText enemyText" *ngIf="!versusConcencGoblin">????</p>
+          <p class="enemyDefenseText" *ngIf="!provokeGoblin">Io uccide te!!!</p>
+          <p class="enemyDefenseText" *ngIf="!enemyDefenseGoblin">IO BLOCCA!!!</p>
+          <p class="enemyDefenseText" *ngIf="!bothDefenseGoblin">Waaaagh!!!</p>
+          <p class="enemyDefenseText" *ngIf="!versusConcencGoblin">????</p>
         </div>
 
     </div>

@@ -196,24 +196,45 @@
   margin-top: 100px;
   transition: margin 0.04s ease;
 }
-
+.divDefenseText{
+  position: absolute;
+}
 .enemyDefenseText{
-  // margin-right: 90px;
-  color: rgb(197, 97, 97);
-  text-shadow: 4px 4px 2px rgba(123,10,10,0.6);
+  background-image: url(../../../../assets/dialogoBaloon.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
+  position: relative;
+  height: 80px;
+  width: 150px;
+  right: 1950px;
+  top: 40px;
+  padding-top: 25px;
+  padding-left: 20px;
+  color: rgb(20, 10, 10);
+  text-shadow: 4px 4px 2px rgba(133, 129, 179, 0.6);
   font-weight: bolder;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
-.enemyText{
-  margin-right: 95px;
-}
+
 .avatarDefenseText{
-  margin-left: 100px;
-  margin-top: 0px;
-  color: rgb(197, 97, 97);
-  text-shadow: 4px 4px 2px rgba(123,10,10,0.6);
+  background-image: url(../../../../assets/dialogoBaloon.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
+  position: relative;
+  left: 40px;
+  top: 40px;
+  padding-left: 40px;
+  padding-top: 20px;
+  height: 80px;
+  width: 150px;
+  // margin-left: 100px;
+  // margin-top: 0px;
+  color: rgb(0, 0, 0);
+  text-shadow: 4px 4px 2px rgba(245, 5, 5, 0.6);
   font-weight: bolder;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 

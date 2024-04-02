@@ -79,7 +79,7 @@ export class InGameComponent implements OnInit  {
 //Gestione sezioni
   disableButton           : boolean = false;
   isVisible               : boolean = true;
-  battleGround            : boolean = true;
+  battleGround            : boolean = true
   charAndScenario         : boolean = true;
   menuCampaign            : boolean = false;
   toGameListTutorials     : boolean = false;
