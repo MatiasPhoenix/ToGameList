@@ -1,10 +1,15 @@
 <main class="container ">
 
   <div class="infoRicompense" *ngIf="ricompensa">
-    <div class="text-center d-flex justify-content-center" >
-      <p *ngIf="lvlUp">Sei salito di Livello!!</p>
-      <img class="pngRicompense" src="../../../../assets/EXP.png" alt="">+50
-      <img class="pngRicompense" src="../../../../assets/moneta.png" alt="">+100
+    <div class="d-flex justify-content-between pb-2 pt-1 me-5 ms-5" >
+
+      <p>To-do-List completata -- </p>
+      <div>
+        <img class="pngRicompense align-self-center" src="../../../../assets/EXP.png" alt="">+50
+        <img class="pngRicompense align-self-center" src="../../../../assets/moneta.png" alt="">+100
+      </div>
+      <div *ngIf="!lvlUp" class="pngRicompense"></div>
+      <img *ngIf="lvlUp" class="pngRicompense" src="../../../../assets/lvlUp.png" alt="">
     </div>
   </div>
   <div class="divSeparatore" *ngIf="!ricompensa"></div>
