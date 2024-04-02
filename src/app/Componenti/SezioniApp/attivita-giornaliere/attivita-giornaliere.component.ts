@@ -102,14 +102,30 @@ export class AttivitaGiornaliereComponent implements OnInit {
   //Metodo per l'utente, SweetAlert che permette aggiungere elemento ad Attività giornaliere
   openSwal() {
     Swal.fire({
-      title: 'Aggiungi elemento',
+      title: 'Aggiungi attività giornaliera',
       input: 'text',
       inputPlaceholder: 'Inserisci qualcosa...',
+
       showCancelButton: true,
-      confirmButtonText: 'OK',
-      cancelButtonText: 'Annulla',
+      confirmButtonText: '✔',
+      cancelButtonText: '✖',
       showLoaderOnConfirm: true,
 
+      confirmButtonColor: 'rgba(0, 0, 0, 0)',
+      cancelButtonColor: 'rgba(0, 0, 0, 0)',
+      background: 'rgba(0, 0, 0, 0)',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url('../../../../assets/schermataAddTodoList.png')
+        center
+        no-repeat
+        `,
+
+      customClass: {
+      popup: 'myPopupSweetAlert',
+      confirmButton: 'confirmButton',
+      cancelButton: 'custom-btn-class'
+    },
       preConfirm: (val) => {
           const newAttivitaTemp: IToDoItem = {
           id         : this.generateRandomId(),
@@ -307,14 +323,30 @@ export class AttivitaGiornaliereComponent implements OnInit {
 //Metodi per modificare testo del elemento
   modificaAttivitaButton(id: string) {
     Swal.fire({
-      title: 'Modifica questo elemento',
+      title: 'Modifica attività giornaliera',
       input: 'text',
-      inputPlaceholder: 'Modifica todo list',
+      inputPlaceholder: 'Inserisci qualcosa...',
+
       showCancelButton: true,
-      confirmButtonText: 'Modifica',
-      cancelButtonText: 'Annulla',
+      confirmButtonText: '✔',
+      cancelButtonText: '✖',
       showLoaderOnConfirm: true,
 
+      confirmButtonColor: 'rgba(0, 0, 0, 0)',
+      cancelButtonColor: 'rgba(0, 0, 0, 0)',
+      background: 'rgba(0, 0, 0, 0)',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url('../../../../assets/schermataAddTodoList.png')
+        center
+        no-repeat
+        `,
+
+      customClass: {
+      popup: 'myPopupSweetAlert',
+      confirmButton: 'confirmButton',
+      cancelButton: 'custom-btn-class'
+    },
       preConfirm: (val) => {
         this.modificaAttivita(id, val)
       }

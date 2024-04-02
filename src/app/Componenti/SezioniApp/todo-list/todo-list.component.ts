@@ -103,14 +103,30 @@ export class TodoListComponent implements OnInit {
  //Metodo per l'utente, SweetAlert che permette aggiungere elemento a todoList
   openSwal() {
     Swal.fire({
-      title: 'Aggiungi elemento',
+      title: 'Cosa vuoi ricordare?',
       input: 'text',
       inputPlaceholder: 'Inserisci qualcosa...',
+
       showCancelButton: true,
-      confirmButtonText: 'OK',
-      cancelButtonText: 'Annulla',
+      confirmButtonText: '✔',
+      cancelButtonText: '✖',
       showLoaderOnConfirm: true,
 
+      confirmButtonColor: 'rgba(0, 0, 0, 0)',
+      cancelButtonColor: 'rgba(0, 0, 0, 0)',
+      background: 'rgba(0, 0, 0, 0)',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url('../../../../assets/schermataAddTodoList.png')
+        center
+        no-repeat
+        `,
+
+      customClass: {
+      popup: 'myPopupSweetAlert',
+      confirmButton: 'confirmButton',
+      cancelButton: 'custom-btn-class'
+    },
       preConfirm: (val) => {
           const newToDoItem: IToDoItem = {
           id         : this.generateRandomId(),
@@ -144,13 +160,30 @@ export class TodoListComponent implements OnInit {
 //Metodi per modificare testo del elemento
   modificaAttivitaButton(id: string) {
     Swal.fire({
-      title: 'Modifica questo elemento',
+      title: 'Modifica To-Do-List',
       input: 'text',
-      inputPlaceholder: 'Modifica todo list',
+      inputPlaceholder: 'Inserisci qualcosa...',
+
       showCancelButton: true,
-      confirmButtonText: 'Modifica',
-      cancelButtonText: 'Annulla',
+      confirmButtonText: '✔',
+      cancelButtonText: '✖',
       showLoaderOnConfirm: true,
+
+      confirmButtonColor: 'rgba(0, 0, 0, 0)',
+      cancelButtonColor: 'rgba(0, 0, 0, 0)',
+      background: 'rgba(0, 0, 0, 0)',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url('../../../../assets/schermataAddTodoList.png')
+        center
+        no-repeat
+        `,
+
+      customClass: {
+      popup: 'myPopupSweetAlert',
+      confirmButton: 'confirmButton',
+      cancelButton: 'custom-btn-class'
+    },
 
       preConfirm: (val) => {
         this.modificaAttivita(id, val)
