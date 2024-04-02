@@ -144,8 +144,9 @@ export class AttivitaGiornaliereComponent implements OnInit {
 
               if (!item.completed) {
                 this.firebase.attivitaFinitaFirebase(this.url, key)
-                  .subscribe(() => {
-                    this.getTodoList()
+                .subscribe(() => {
+                  this.getTodoList()
+                  this.caricaProfiloAvatar()
                     console.log('Stato completato aggiornato con successo per il task:', item.task);
                   }, (error) => {
                     console.error('Errore durante l\'aggiornamento dello stato completato per il task:', item.task, error);
