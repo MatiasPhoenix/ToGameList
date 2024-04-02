@@ -333,8 +333,13 @@ caricaProfiloAvatar() {
         this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
-          this.enemyAttkNoDefense()
-          this.avatarTakeDamage(1)
+          if(this.avatarBattleLife != 0){
+
+            this.enemyAttkNoDefense()
+            this.avatarTakeDamage(1)
+          }else{
+            this.avatarLose()
+          }
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -375,8 +380,12 @@ caricaProfiloAvatar() {
         this.avatarTakeDamage(1)
         }, 1000);
         setTimeout(() => {
-          this.enemyAttkNoDefense()
-          this.avatarTakeDamage(1)
+          if (this.avatarBattleLife != 0) {
+            this.enemyAttkNoDefense()
+            this.avatarTakeDamage(1)
+          }else{
+            this.avatarLose()
+          }
         }, 1800);
         setTimeout(() => {
           this.disableButton = false;
@@ -643,8 +652,9 @@ caricaProfiloAvatar() {
       }
     }else{
       for (let index = 0; index < cuoriMancantiAvatar; index++) {
-        this.avatarLifeArray.push(this.cuoreVuoto);
-        this.avatarLose()
+          this.avatarLifeArray.push(this.cuoreVuoto);
+          this.avatarLose()
+
       }
     }
   }
