@@ -1,18 +1,36 @@
 .puntatoreLoco {
   cursor: pointer;
 }
+.questoDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .myTodoList{
-  font-size: 2rem;
-  background: #c97979;
-  border-radius: 10px 10px 10px 10px;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  height: 100%;
+  width: 600px;
+  background-image: url(../../../../assets/cartelliLungo1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 .myTodoListCompletata{
-  font-size: 2rem;
-  background: #350e0e;
+  font-size: 1.5rem;
+  font-weight: bolder;
   color: antiquewhite;
-  border-radius: 10px 10px 10px 10px;
+  height: 100%;
+  width: 600px;
+  background-image: url(../../../../assets/cartelliLungo2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 2.0;
 }
 .infoRicompense{
   border: 10px ridge #ffaf50;

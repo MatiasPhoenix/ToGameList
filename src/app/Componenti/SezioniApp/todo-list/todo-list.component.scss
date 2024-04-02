@@ -1,11 +1,21 @@
 .puntatoreLoco {
   cursor: pointer;
 }
-
+.questoDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .myTodoList{
-  font-size: 2rem;
-  background: #b3afaf;
-  border-radius: 10px 10px 10px 10px;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  height: 100%;
+  width: 580px;
+  background-image: url(../../../../assets/cartelliLungo3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .infoRicompense{
   border: 10px ridge #ffaf50;
