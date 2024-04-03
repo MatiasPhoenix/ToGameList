@@ -430,4 +430,24 @@
   cursor: pointer;
 }
 
-
+.marketGame{
+  border: 10px ridge #ffaf50;
+  // background-image: url(../../../../assets/marketGameBackground.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../../../assets/marketGameBackground.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  height: 760px;
+  width: 970px;
+  color:aliceblue;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.marketContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pozioneAcquistata{
+  height: 50px;
+}

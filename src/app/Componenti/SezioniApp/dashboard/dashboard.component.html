@@ -5,12 +5,12 @@
     <div class="dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/todoList'">
 
       <span class="fw-bold titoloSezione">
-        SEZIONE TODOLIST
+        SEZIONE TO-DO-LIST
       </span>
 
       <span *ngFor="let numero of [numeroTodo]; index as i">
         <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
-        elementi nella todo list, non dimenticarlo!</span>
+        elementi nella to-do list, non dimenticarlo!</span>
       </span>
 
     </div>

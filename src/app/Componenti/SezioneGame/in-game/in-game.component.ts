@@ -84,6 +84,8 @@ export class InGameComponent implements OnInit  {
   menuCampaign            : boolean = false;
   toGameListTutorials     : boolean = false;
   tutorialAvatar          : boolean = false;
+  marketArea              : boolean = false;
+
 /////////////
 /////////////
 /////////////
@@ -779,15 +781,18 @@ caricaProfiloAvatar() {
     this.staminaMetod()
   }
 
-  inventario   : boolean = false;
+  inventario        : boolean = false;
 
-  potionH1     : boolean = true;
-  potionH2     : boolean = true;
-  potionH3     : boolean = true;
+  potionH1          : boolean = false;
+  potionH2          : boolean = false;
+  potionH3          : boolean = false;
+  potionHSoldOut    : boolean = false;
 
-  potionS1     : boolean = true;
-  potionS2     : boolean = true;
-  potionS3     : boolean = true;
+  potionS1          : boolean = false;
+  potionS2          : boolean = false;
+  potionS3          : boolean = false;
+  potionSSoldOut    : boolean = false;
+  pozioneAcquistata : boolean = false;
 
   useObject(){//Permette l'uso di oggetti(mossa gratuita)
     if (this.inventario == false) {
@@ -811,6 +816,89 @@ caricaProfiloAvatar() {
 
     }
   }
+
+  buyPotionStamina(){
+    if (this.profileAvatarGold >= 180){
+      if(this.potionS2 == true && this.potionS3 == false){
+        this.potionS3 = true;
+        this.pozioneAcquistataMetod()
+        this.buyProduct(180);
+      }
+      if(this.potionS1 == true && this.potionS2 == false){
+        this.potionS2 = true;
+        this.buyProduct(180);
+        this.pozioneAcquistataMetod()
+      }
+      if(this.potionS1 == false){
+        this.potionS1 = true;
+        this.buyProduct(180);
+        this.pozioneAcquistataMetod()
+      }
+    }
+    if(this.potionS1 == true && this.potionS2 == true && this.potionS3 == true){
+      this.potionSSoldOut = true;
+    }
+  }
+  buyPotionLife(){
+    if (this.profileAvatarGold >= 150){
+      if(this.potionH2 == true && this.potionH3 == false){
+        this.potionH3 = true;
+        this.pozioneAcquistataMetod()
+        this.buyProduct(150);
+      }
+      if(this.potionH1 == true && this.potionH2 == false){
+        this.potionH2 = true;
+        this.buyProduct(150);
+        this.pozioneAcquistataMetod()
+      }
+      if(this.potionH1 == false){
+        this.potionH1 = true;
+        this.buyProduct(150);
+        this.pozioneAcquistataMetod()
+      }
+    }
+    if(this.potionH1 == true && this.potionH2 == true && this.potionH3 == true){
+      this.potionHSoldOut = true;
+    }
+  }
+  pozioneAcquistataMetod(){
+    this.pozioneAcquistata = true;
+    setTimeout(() => {
+      this.pozioneAcquistata = false;
+    }, 1000);
+  }
+
+  buyProduct(number : number){
+    this.firebase.caricaProfiloAvatar(this.urlAvatar + '.json')
+    .subscribe((data: any) => {
+      const profileKey = Object.keys(data)[0];
+      const dataProfiloAvatar = data[profileKey];
+
+      let newLvl     = dataProfiloAvatar.profileAvatarLevel;
+
+      let newGold    = dataProfiloAvatar.profileAvatarGold -= number;
+      let newExp     = dataProfiloAvatar.profileAvatarExp;
+
+      let newStr     = dataProfiloAvatar.profileAvatarStrength;
+      let newDef     = dataProfiloAvatar.profileAvatarArmor;
+      let newSpd     = dataProfiloAvatar.profileAvatarSpeed;
+
+      let newLife    = dataProfiloAvatar.profileAvatarLife;
+      let newStamina = dataProfiloAvatar.profileAvatarStamina;
+
+      this.firebase.aggiornaProfiloAvatar(this.urlAvatar, profileKey, newExp, newGold,
+        newLvl, newStr, newDef, newSpd, newLife, newStamina )
+                .subscribe(() => {
+                  this.caricaProfiloAvatar();
+                  console.log('Stato completato aggiornato con successo per il task:');
+                }, (error) => {
+                  console.error('Errore durante l\'aggiornamento dello stato completato per il task');
+                });
+    }, (error) => {
+      console.error('Errore durante il caricamento dei dati dal database:', error);
+    });
+  }
+
   secretSkill(){//Attacco speciale(molti danni)
     this.avatarStandards = false;
     this.avatarSkillStart = true;
