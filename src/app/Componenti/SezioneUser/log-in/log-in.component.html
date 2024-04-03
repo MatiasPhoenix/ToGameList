@@ -1,5 +1,5 @@
- <div class="pagLogIn">
-
+<div class="toGameListLogo container d-flex flex-column align-items-center"></div>
+<div class="pagLogIn">
   <h2 class="text-center mb-4">Login</h2>
   <form [formGroup]="userForm" class="container login" (ngSubmit)="onSubmit(userForm)">
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="text-center mt-3">
-      <button type="submit" class="btn btn-primary">Fai LogIn</button>
+      <button type="submit" class="btn btn-primary" (click)="scrollToTop()">Fai LogIn</button>
     </div>
   </form>
 

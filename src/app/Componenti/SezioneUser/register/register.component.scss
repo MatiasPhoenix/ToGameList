@@ -10,9 +10,19 @@ form {
 .pagLogIn{
   color: white;
   background-color: black;
-  padding-top: 150px;
-  padding-bottom: 150px;
-  max-width: 40%;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  max-width: 15%;
   margin: 0 auto;
   border-radius: 10% 10% 10% 10%;
   }
+.toGameListLogo{
+  background-image: url("../../../../assets/ToGameListLogo.png");
+  background-size:cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  height: 275px;
+  width: 400px;
+
+}

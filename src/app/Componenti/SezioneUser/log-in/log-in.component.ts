@@ -40,4 +40,7 @@ export class LogInComponent {
     })
 
   }
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

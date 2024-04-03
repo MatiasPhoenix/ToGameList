@@ -3,10 +3,11 @@
   <div class="bg-black container py-1 text-center text-danger infoAvatarInGame" >
     <div class="blackBG d-flex">
 
-      <ng-template *ngIf="charAndScenario; then giorno else notte"></ng-template>
-      <ng-template #giorno>
-        <div class="roomGiorno container col-12 me-3">
-        <img *ngIf="charAndScenario"
+
+        <ng-template *ngIf="charAndScenario; then giorno else notte"></ng-template>
+        <ng-template #giorno>
+          <div class="roomGiorno container col-12 me-3">
+          <img *ngIf="charAndScenario"
                src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
                sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
                Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
@@ -14,12 +15,12 @@
                lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
                0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
                iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
-        alt="" class="personaggio esperimento" [ngClass]="{'esperimentoTrasparenza': isTransparent}">
-        </div>
-      </ng-template>
-      <ng-template #notte>
-        <div class="roomNotte container col-12 me-3">
-        <img *ngIf="charAndScenario"
+          alt="" class="personaggio esperimento" [ngClass]="{'esperimentoTrasparenza': isTransparent}">
+          </div>
+        </ng-template>
+        <ng-template #notte>
+          <div class="roomNotte container col-12 me-3">
+          <img *ngIf="charAndScenario"
                src="http://www.avatarsinpixels.com/minipix/eyJCb2R5IjoiMSIsIkV5ZXMiOiIyIiwiTW91dGgiOiIzIiwiU29ja3MiOiIxMiIsIlNob2VzIjoiMSIsIlBhbnRzIjoiMSI
                sIlRvcCI6IjMiLCJIYWlyIjoiMSIsInNraW5Ub25lIjoiZTVhY2EyIiwiZXllc1RvbmUiOiJhZTU2YTEiLCJleWVzVG9uZTIiOiIwNjZhOWYiLCJtYXNrVG9uZSI6IjkzZTYwZCIsImhhaXJ
                Ub25lIjoiMTUxZjMyIiwiaGFpclRvbmUyIjoiYWNlYTI5IiwidW5kZXJ3ZWFyVG9uZSI6IjU4MTBlNiIsInVuZGVyd2VhclRvbmUyIjoiZTI5OGQ0IiwicGFudHNUb25lIjoiMDQ0OTZlIiw
@@ -27,9 +28,9 @@
                lc1RvbmUiOiIxNTFmMzIiLCJzb2Nrc1RvbmUiOiI4MzUyMTMiLCJzb2Nrc1RvbmUyIjoiNGZjYTUyIiwiZ2xvdmVzVG9uZSI6Ijc2MjMyOCIsImdsb3Zlc1RvbmUyIjoiMDhkOTNkIiwiaGF
                0VG9uZSI6IjUwMjdmMiIsImhhdFRvbmUyIjoiMGIzY2ExIiwiY2FwZVRvbmUiOiIyN2NkNDIiLCJjYXBlVG9uZTIiOiIzMDcxNmUiLCJiZWx0VG9uZSI6IjNkNzI5ZSIsImphY2tldFRvbmU
                iOiI0Y2U3MjUiLCJqYWNrZXRUb25lMiI6ImIyYzMxMCIsIm5lY2tUb25lIjoiMDJmOWEyIiwibmVja1RvbmUyIjoiMTU4Yzk0In0=/1/show.png"
-        alt="" class="personaggio">
-        </div>
-      </ng-template>
+          alt="" class="personaggio">
+          </div>
+        </ng-template>
 
 
      <div class="latoPersonaggio d-flex justify-content-between col-12 align-self-center">
@@ -45,15 +46,22 @@
               <img class="batteryStamina mx-2" [src]="batteryStamina" alt="">
             </div>
           </div>
+          <div class="d-flex justify-content-center mt-2">
 
+
+            <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button>
+            <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button>
+            <button (click)="siestaAvatar();" class="ms-3">Siesta</button>
+
+          </div>
         </div>
         <div class="col-6 align-self-center ms-4">
           <div class="latoPersonaggio statistiche  pt-2">
             <p><span><img class="expPng" src="../../../../assets/EXP.png" alt=""></span> {{profileAvatarExp}}</p>
             <p><span><img class="gold" src="../../../../assets/moneta.png" alt=""></span> {{profileAvatarGold}}</p>
           </div>
-          <!-- <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button> -->
-          <!-- <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button> -->
+
+
           <div (click)="marketArea = true" class="marketSign mt-2" *ngIf="!marketArea"></div>
           <div (click)="marketArea = false" class="marketSign  mt-2" *ngIf="marketArea"></div>
         </div>
@@ -347,19 +355,8 @@
     </button>
 </div>
 
-<div class="latoPersonaggio statistiche d-flex flex-column text-center" *ngIf="toGameListTutorials">
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
-<p>Tutorial che ti insegna roba figa, lalala</p>
+<div class="tutorialApp" *ngIf="toGameListTutorials">
+<div class="underConstruction"></div>
 </div>
 
 <div class="container marketContainer" *ngIf="marketArea">
@@ -428,4 +425,8 @@
     <h2>In attesa di aggiornamenti dai fornitori</h2>
 
   </div>
+
+</div>
+<div class="siestaAvatar" *ngIf="riposoAvatar">
+  <p class="siestaText text-center mt-2">La siesta ti fa recuperare <br> salute e stamina.</p>
 </div>

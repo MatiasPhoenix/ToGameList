@@ -75,7 +75,7 @@ export class InGameComponent implements OnInit  {
 
 //Azioni nemico
   newEnemyAction          : string = '';
-  enemyActions            : string[] = ['ATTACCO', 'DIFESA', 'ATTACCO X2']; // 'ATTACCO', 'DIFESA', 'PENSO', 'ATTACCO X2', 'MI CURO', 'ATTACCO'
+  enemyActions            : string[] = ['ATTACCO', 'ATTACCO X2', 'ATTACCO X2', 'DIFESA', 'ATTACCO X2','ATTACCO','ATTACCO','ATTACCO','ATTACCO', 'DIFESA']; // 'ATTACCO', 'DIFESA', 'PENSO', 'ATTACCO X2', 'MI CURO', 'ATTACCO'
   imgEnemyAttack          : string[] = ['../../../../sword/.png', '../../../../swordX2/.png', '../../../../shield/.png'];
 
 //Gestione sezioni
@@ -87,6 +87,8 @@ export class InGameComponent implements OnInit  {
   toGameListTutorials     : boolean = false;
   tutorialAvatar          : boolean = false;
   marketArea              : boolean = false;
+  riposoAvatar            : boolean = false;
+  contatoreRiposo         : number = 1;
 
 /////////////
 /////////////
@@ -1036,6 +1038,29 @@ caricaProfiloAvatar() {
 
     }, 550);
   }
+
+  siestaAvatar(){
+    if(this.contatoreRiposo == 1){
+
+      if(this.riposoAvatar == false){
+        this.charAndScenario = false;
+        this.riposoAvatar = true;
+        this.contatoreRiposo -= 1;
+        setTimeout(() => {
+          this.setLifeAvatar()
+          // setTimeout(() => {
+            this.staminaMetod()
+            this.lifeMetod()
+          // }, 1000);
+          this.charAndScenario = true;
+          this.riposoAvatar = false;
+        }, 3000);
+      }
+    }
+  }
+
+
+
 
 
 }

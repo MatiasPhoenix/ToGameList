@@ -463,3 +463,37 @@
   height: 75px;
   opacity: 0.7;
 }
+.tutorialApp{
+  border: 10px ridge #ffaf50;
+  background-color: rgb(219, 199, 160);
+  border-radius: 5% 5% 5% 5%;
+  height: 300px;
+  max-width: 25%;
+  margin: 0 auto;
+}
+.underConstruction{
+  background-image: url(../../../../assets/undeConstruction.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 260px;
+  width: 400;
+}
+.siestaAvatar{
+  background-image: url(../../../../assets/riposo.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 390px;
+  border: 10px ridge #ffaf50;
+  background-color: rgb(219, 199, 160);
+  border-radius: 5% 5% 5% 5%;
+  max-width: 19.5%;
+  margin: 0 auto;
+
+}
+.siestaText{
+  font-weight: bolder;
+  color: aliceblue;
+  font-size: 1.4rem;
+}
