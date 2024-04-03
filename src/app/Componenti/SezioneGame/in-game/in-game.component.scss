@@ -429,7 +429,15 @@
   font-weight: bolder;
   cursor: pointer;
 }
-
+.marketSign{
+  background-image: url(../../../../assets/shopSign.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
+  height: 80px;
+  width: 100px;
+  cursor: pointer;
+}
 .marketGame{
   border: 10px ridge #ffaf50;
   // background-image: url(../../../../assets/marketGameBackground.jpg);
@@ -450,4 +458,8 @@
 }
 .pozioneAcquistata{
   height: 50px;
+}
+.equipMarket{
+  height: 75px;
+  opacity: 0.7;
 }

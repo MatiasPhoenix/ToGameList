@@ -70,6 +70,8 @@ export class InGameComponent implements OnInit  {
   avatarSkillStart        : boolean = false;
   avatarSkillAtk          : boolean = false;
   avatarDamage            : boolean = false;
+  bankaiAttack            : boolean = true;
+  bankaiFrase             : boolean = true;
 
 //Azioni nemico
   newEnemyAction          : string = '';
@@ -900,19 +902,27 @@ caricaProfiloAvatar() {
   }
 
   secretSkill(){//Attacco speciale(molti danni)
-    this.avatarStandards = false;
-    this.avatarSkillStart = true;
-    setTimeout(() => {
-      this.avatarSkillStart = false;
-      this.avatarSkillAtk = true;
-      this.enemyTakeDamage(4)
-      this.bankaiExplosion()
-    }, 600);
-    setTimeout(() => {
-      this.avatarSkillAtk = false;
-      this.avatarStandards = true
+    if (this.bankaiAttack == true){
 
-    }, 1200);
+      this.bankaiAttack = false;
+      this.avatarStandards = false;
+      this.avatarSkillStart = true;
+      setTimeout(() => {
+        this.avatarSkillStart = false;
+        this.avatarSkillAtk = true;
+        this.enemyTakeDamage(4)
+        this.bankaiExplosion()
+      }, 600);
+      setTimeout(() => {
+        this.avatarSkillAtk = false;
+        this.avatarStandards = true
+      }, 1200);
+    }else{
+      this.bankaiFrase = false;
+      setTimeout(() => {
+        this.bankaiFrase = true;
+      }, 1300);
+    }
   }
 
   gifExplosion : boolean = false;

@@ -52,12 +52,10 @@
             <p><span><img class="expPng" src="../../../../assets/EXP.png" alt=""></span> {{profileAvatarExp}}</p>
             <p><span><img class="gold" src="../../../../assets/moneta.png" alt=""></span> {{profileAvatarGold}}</p>
           </div>
-          <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button>
-          <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button>
-          <button (click)="marketArea = true" class="btn btn-success mt-2" *ngIf="!marketArea">Market</button>
-          <button (click)="marketArea = false" class="btn btn-success mt-2" *ngIf="marketArea">Market</button>
-
-
+          <!-- <button (click)="toGameListTutorials = true" class="btn btn-primary mt-2" *ngIf="!toGameListTutorials">Tutorial</button> -->
+          <!-- <button (click)="toGameListTutorials = false" class="btn btn-primary mt-2" *ngIf="toGameListTutorials">Tutorial</button> -->
+          <div (click)="marketArea = true" class="marketSign mt-2" *ngIf="!marketArea"></div>
+          <div (click)="marketArea = false" class="marketSign  mt-2" *ngIf="marketArea"></div>
         </div>
 
 
@@ -219,6 +217,7 @@
         <div class="divDefenseText col-12 d-flex justify-content-start align-items-start">
           <p class="avatarDefenseText " *ngIf="!iCantDefense">Stamina!!</p>
           <p class="avatarDefenseText " *ngIf="avatarSkillAtk">BANKAI!!</p>
+          <p class="avatarDefenseText pe-3" *ngIf="!bankaiFrase">Non riesco</p>
         </div>
         <!-- DIALOGHI NEMICI -->
         <div class="divDefenseText col-12 d-flex justify-content-end align-items-end">
@@ -375,33 +374,58 @@
       </div>
       <div class="me-5" *ngIf="potionHSoldOut">
         <img class="potionsOff" src="../../../../assets/pozioneCuore.png" alt="">
-        <p>Sold Out</p>
+        <p>-Sold Out-</p>
         <p>Puoi usarla in battaglia. <br> Ripristina un punto salute</p>
       </div>
 
       <div class="" *ngIf="!potionSSoldOut" (click)="buyPotionStamina()">
         <img class="potionsOn" src="../../../../assets/pozioneStamina.png" alt="">
         <p><img class="gold" src="../../../../assets/moneta.png" alt="">180</p>
-        <p>Puoi usarla in battaglia. <br> Ripristina un punto stamina</p>
+        <p>Puoi usarla in battaglia. <br> Ripristina un punto stamina.</p>
         <p></p>
       </div>
       <div  *ngIf="potionSSoldOut">
         <img class="potionsOff" src="../../../../assets/pozioneStamina.png" alt="">
-        <p>Sold Out</p>
-        <p>Puoi usarla in battaglia. <br> Ripristina un punto stamina</p>
+        <p>-Sold Out-</p>
+        <p>Puoi usarla in battaglia. <br> Ripristina un punto stamina.</p>
         <p></p>
       </div>
     </div>
     <p class="pozioneAcquistata" *ngIf="pozioneAcquistata">-Pozione acquistata-</p>
     <p class="pozioneAcquistata" *ngIf="!pozioneAcquistata">--</p>
 
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
-    <div>Market Game here</div>
+    <h2>Armature e protezioni</h2>
+    <div class="d-flex justify-content-center ">
+      <div class="me-5">
+        <img class="equipMarket" src="../../../../assets/armaturaCottaDiMaglia.png" alt="">
+        <p>-Sold Out-</p>
+        <p>Cotta di maglia. <br> Aumento difesa basso.</p>
+        <p></p>
+      </div>
+      <div class="me-5">
+        <img class="equipMarket" src="../../../../assets/armaturaBase.png" alt="">
+        <p>-Sold Out-</p>
+        <p>Armatura media <br> Aumento difesa medio.</p>
+        <p></p>
+      </div>
+      <div class="me-5">
+        <img class="equipMarket" src="../../../../assets/armaturaCavaliere.png" alt="">
+        <p>-Sold Out-</p>
+        <p>Corazza da Cavaliere <br> Aumento difesa alto.</p>
+        <p></p>
+      </div>
+      <div >
+        <img class="equipMarket" src="../../../../assets/armaturaMistica.png" alt="">
+        <p>-Sold Out-</p>
+        <p>Corazza Mistica <br> Aumento difesa alto. <br> Potenzia forza e velocità.</p>
+        <p></p>
+      </div>
+    </div>
+    <p class="pozioneAcquistata" >--</p>
+
+    <h2>Armi</h2>
+    <p>Tutto -Non disponibile-</p>
+    <h2>In attesa di aggiornamenti dai fornitori</h2>
+
   </div>
 </div>
