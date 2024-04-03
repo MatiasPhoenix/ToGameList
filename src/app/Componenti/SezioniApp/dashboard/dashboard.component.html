@@ -1,28 +1,30 @@
-<div class="container thisComponent mt-5 d-flex flex-column align-items-center">
+<div class="superBackground">
 
-  <div class="dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/todoList'">
+  <div class="container thisComponent mt-5 d-flex flex-column align-items-center">
 
-    <span class="fw-bold titoloSezione">
-      SEZIONE TODOLIST
-    </span>
+    <div class="dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/todoList'">
 
-    <span *ngFor="let numero of [numeroTodo]; index as i">
-      <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
+      <span class="fw-bold titoloSezione">
+        SEZIONE TODOLIST
+      </span>
+
+      <span *ngFor="let numero of [numeroTodo]; index as i">
+        <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
         elementi nella todo list, non dimenticarlo!</span>
-    </span>
+      </span>
 
-  </div>
+    </div>
 
 
-  <div class="dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/abitudini'">
+    <div class="dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/abitudini'">
 
-    <span class="fw-bold titoloSezione">
+      <span class="fw-bold titoloSezione">
       SEZIONE ABITUDINI
     </span>
 
     <span *ngFor="let numero of [numeroAbitudini]; index as i">
       <span class="fst-italic sezioneTesto">Ricordati delle <span class="fw-bold">{{numero}}</span>
-        abitudini che vuoi nelle tue giornate!</span>
+      abitudini che vuoi nelle tue giornate!</span>
     </span>
 
   </div>
@@ -36,11 +38,12 @@
 
     <span *ngFor="let numero of [numeroAttGiornaliere]; index as i">
       <span class="fst-italic sezioneTesto">Oggi nuovo giorno! Ancora <span class="fw-bold">{{numero}}</span>
-        attività da svolgere, metticela tutta!</span>
+      attività da svolgere, metticela tutta!</span>
     </span>
 
   </div>
 
+</div>
 </div>
 
 

@@ -5,6 +5,12 @@
   background-color: rgb(26, 24, 24);
   height: 100vh;
 }
+.superBackground{
+  background-image: url(../../../../assets/backgroundApp.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .questoDiv {
   display: flex;
   flex-direction: column;

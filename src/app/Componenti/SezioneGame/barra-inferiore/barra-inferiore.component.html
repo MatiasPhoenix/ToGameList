@@ -2,7 +2,7 @@
 
   <div class="insideFooter">
 
-    <button type="button" (click)="scrollToTop()" class="btn btn-success mx-2"
+    <!-- <button type="button" (click)="scrollToTop()" class="btn btn-success mx-2"
     routerLink="">                    Dashboard</button>
 
     <button type="button" (click)="scrollToTop()"class="btn btn-success mx-2"
@@ -15,7 +15,28 @@
     routerLink="abitudini">           Abitudini</button>
 
     <button type="button" (click)="scrollToTop()"class="btn btn-success mx-2"
-    routerLink="profilo">             My Profilos</button>
+    routerLink="profilo">             My Profilos</button> -->
+
+    <button class="full-rounded mx-4" (click)="scrollToTop()" routerLink="">
+      <span>Dashboard</span>
+      <div class="border full-rounded"></div>
+    </button>
+    <button class="full-rounded mx-4" (click)="scrollToTop()" routerLink="todoList">
+      <span>Todo List</span>
+      <div class="border full-rounded"></div>
+    </button>
+    <button class="full-rounded mx-4" (click)="scrollToTop()" routerLink="attivitaGiornaliere">
+      <span>Giornaliere</span>
+      <div class="border full-rounded"></div>
+    </button>
+    <button class="full-rounded mx-4" (click)="scrollToTop()" routerLink="abitudini">
+      <span>Abitudini</span>
+      <div class="border full-rounded"></div>
+    </button>
+    <button class="full-rounded mx-4" (click)="scrollToTop()" routerLink="profilo">
+      <span>My Profilos</span>
+      <div class="border full-rounded"></div>
+    </button>
 
   </div>
 </div>
