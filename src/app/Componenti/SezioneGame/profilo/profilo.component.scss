@@ -10,10 +10,22 @@
 .infoPG{
   border-radius: 10px 10px 10px 10px;
   border: 5px solid rgb(201, 139, 68);
+  height: 400px;
 }
 .superBackground{
   background-image: url(../../../../assets/backgroundApp.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.icons{
+  height: 30px;
+  color: white;
+}
+.presentazione{
+  margin-top: 50px;
+}
+.fotoMia{
+  height: 300px;
+  margin-right: 40px;
 }

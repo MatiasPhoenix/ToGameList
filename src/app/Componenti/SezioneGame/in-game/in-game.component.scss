@@ -497,3 +497,25 @@
   color: aliceblue;
   font-size: 1.4rem;
 }
+.siestaButton{
+  background-image: url(../../../../assets/cartelloLegno.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 10px;
+  width: 100px;
+  cursor: pointer;
+  color: black;
+}
+.tutorialButton{
+  background-image: url(../../../../assets/cartelloLegno.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 40%;
+  cursor: pointer;
+  color: black;
+}
+
