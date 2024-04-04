@@ -16,12 +16,13 @@
     </div>
 
     <div class="text-center mt-3">
-      <button type="submit" class="btn btn-primary" (click)="scrollToTop()">Fai LogIn</button>
+      <button type="submit" class="buttonLogin myButton" [routerLink]="" (click)="scrollToTop()">Fai LogIn</button>
+
     </div>
   </form>
 
   <div class="text-center mt-3">
-    <button type="submit" [routerLink]="'/register'" class="btn btn-primary">Registrati</button>
+    <div type="submit" [routerLink]="'/register'" class="buttonLogin pt-2">Registrati</div>
   </div>
 
 </div>

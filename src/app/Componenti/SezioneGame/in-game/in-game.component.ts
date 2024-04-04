@@ -88,6 +88,7 @@ export class InGameComponent implements OnInit  {
   tutorialAvatar          : boolean = false;
   marketArea              : boolean = false;
   riposoAvatar            : boolean = false;
+  riposoAvatarButton      : boolean = false;
   contatoreRiposo         : number = 1;
 
 /////////////
@@ -683,6 +684,7 @@ caricaProfiloAvatar() {
       this.enemyGoblinSkirmisher = false;
       this.enemyGoblinStandard = false;
       this.enemyMiniBoss = false;
+      this.bothEnemyGoblins = false;
       this.isTransparent = false;
     }, 2000);
   }
@@ -786,6 +788,7 @@ caricaProfiloAvatar() {
   }
 
   inventario        : boolean = false;
+  noMoney           : boolean = false;
 
   potionH1          : boolean = false;
   potionH2          : boolean = false;
@@ -838,6 +841,10 @@ caricaProfiloAvatar() {
         this.buyProduct(180);
         this.pozioneAcquistataMetod()
       }
+    }else{
+      setTimeout(() => {
+        this.noMoney = false;
+      }, 1000);
     }
     if(this.potionS1 == true && this.potionS2 == true && this.potionS3 == true){
       this.potionSSoldOut = true;
@@ -860,6 +867,11 @@ caricaProfiloAvatar() {
         this.buyProduct(150);
         this.pozioneAcquistataMetod()
       }
+    }else{
+      this.noMoney = true;
+      setTimeout(() => {
+        this.noMoney = false;
+      }, 1000);
     }
     if(this.potionH1 == true && this.potionH2 == true && this.potionH3 == true){
       this.potionHSoldOut = true;
@@ -1045,6 +1057,7 @@ caricaProfiloAvatar() {
       if(this.riposoAvatar == false){
         this.charAndScenario = false;
         this.riposoAvatar = true;
+        this.riposoAvatarButton = true;
         this.contatoreRiposo -= 1;
         setTimeout(() => {
           this.setLifeAvatar()

@@ -20,3 +20,21 @@ border-radius: 10% 10% 10% 10%;
   width: 400px;
 
 }
+.buttonLogin{
+  background-image: url(../../../../assets/cartelloLegno.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  color: black;
+  font-weight: bolder;
+}
+.myButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

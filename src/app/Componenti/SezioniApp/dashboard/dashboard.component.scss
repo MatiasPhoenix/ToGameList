@@ -4,7 +4,7 @@
 .thisComponent{
   background-color: rgb(26, 24, 24);
   height: 100vh;
-  height: 100vh;
+
 }
 .superBackground{
   background-image: url(../../../../assets/backgroundApp.png);
@@ -12,7 +12,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.divSeparatore{
+  height: 40px;
+}
 .dashboard1{
   width: 600px;
   max-width: 1300px;
@@ -22,6 +24,7 @@
   border-radius: 10px 10px 10px 10px;
 }
 .dashboard2{
+
   width: 600px;
   max-width: 1300px;
   max-height: 1500px;
@@ -44,4 +47,14 @@
 .sezioneTesto{
   font-size: 1.2rem;
 }
-
+.spazioDedicato{
+  background-image: url(../../../../assets/cartelloLegno.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+  width: 640px;
+  cursor: pointer;
+  color: black;
+  font-weight: bolder;
+}

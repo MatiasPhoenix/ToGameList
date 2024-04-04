@@ -2,9 +2,9 @@
 
   <div class="container thisComponent mt-5 d-flex flex-column align-items-center">
 
-  <div class="dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/todoList'">
+  <div class="spazioDedicato dashboard1 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/todoList'">
     <span class="fw-bold titoloSezione">
-      SEZIONE TO-DO-LIST
+      <img class="divSeparatore" src="../../../../assets/todoList.png" alt="">  SEZIONE TO-DO-LIST
     </span>
     <span *ngFor="let numero of [numeroTodo]; index as i">
       <span class="fst-italic sezioneTesto">Ci sono ancora <span class="fw-bold">{{numero}}</span>
@@ -12,10 +12,10 @@
     </span>
   </div>
 
-  <div class="dashboard2 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/attivitaGiornaliere'">
+  <div class="spazioDedicato dashboard2 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/attivitaGiornaliere'">
 
     <span class="fw-bold titoloSezione">
-      SEZIONE ATTIVITA' GIORNALIERE
+      <img class="divSeparatore" src="../../../../assets/todoList.png" alt="">  SEZIONE ATTIVITA' GIORNALIERE
     </span>
 
     <span *ngFor="let numero of [numeroAttGiornaliere]; index as i">
@@ -24,10 +24,10 @@
     </span>
 
   </div>
-  <div class="dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/abitudini'">
+  <div class="spazioDedicato dashboard3 puntatoreLoco mt-5 d-flex flex-column py-3 text-center" [routerLink]="'/abitudini'">
 
     <span class="fw-bold titoloSezione">
-    SEZIONE ABITUDINI
+      <img class="divSeparatore" src="../../../../assets/todoList.png" alt="">  SEZIONE ABITUDINI
   </span>
 
   <span *ngFor="let numero of [numeroAbitudini]; index as i">
