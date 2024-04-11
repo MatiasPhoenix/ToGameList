@@ -1,27 +1,18 @@
 # togamelist
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+Progetto Capstone per il corso EPICODE.
 
-## Development server
+Il progetto è una to-do-list con elementi di Gamification.
+L'idea è quella di incentivare l'utilizzo dell'app con gli elementi ludici.
+Ogni volta che l'utente completerà le attività giornaliere o le proprie abitudini riceverà una ricompensa
+che migliorerà il proprio personaggio. Ottenendo punti esperienza aumenterà il proprio livello e con le 
+monete potrà fare acquisti nello shop, così da migliorare ulteriormente il proprio avatar.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Ogni giorno potrà cimentarsi in sfide (esplorazioni di Dungeons, combattimenti contro gruppi di nemici o 
+affrontare potenti Boss). 
+Il gioco si svolge a turni, il nemico effettuerà attacchi diversi ogni turno obbligando l'utente a usare
+la strategia migliore in base al comportamento dell'avversario.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Nella versione corrente ci sono solo due combattimenti da affrontare. Ho in programma di aggiungere maggiori 
+sfide, varietà di nemici, ricompense diverse, abilità per potenziare il proprio avatar, e in futuro anche la 
+possibilità di collegarsi con altri utenti e affrontare sfide in compagnia.
